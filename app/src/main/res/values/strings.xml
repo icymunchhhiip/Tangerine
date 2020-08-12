@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">KakaoLoginTest</string>
+    <string name="kakao_app_key">f01c4d1dbafb421a2f05d7ffac0ad198</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
