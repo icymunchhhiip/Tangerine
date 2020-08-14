@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="no_dp">0dp</dimen>
+
+    <dimen name="title_font">20sp</dimen>
+    <dimen name="normal_font">14sp</dimen>
+    <dimen name="form_font">16sp</dimen>
+
+    <dimen name="card_radius">3dp</dimen>
+    <dimen name="profile">24dp</dimen>
+</resources>

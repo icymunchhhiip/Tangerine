@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/main_home"
+        android:icon="@drawable/ic_home_24dp"
+        android:title="@string/home_ko" />
+    <item
+        android:id="@+id/main_refrigerator"
+        android:icon="@drawable/ic_refrigerator_24dp"
+        android:title="@string/refrigerator_ko" />
+    <item
+        android:id="@+id/main_community"
+        android:icon="@drawable/ic_community_24dp"
+        android:title="@string/community_ko" />
+    <item
+        android:id="@+id/main_setting"
+        android:icon="@drawable/ic_setting_24dp"
+        android:title="@string/setting_ko" />
+</menu>

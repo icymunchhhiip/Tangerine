@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        custom:auto_cycle="true"
+        custom:indicator_visibility="visible"
+        custom:pager_animation="Stack"
+        custom:pager_animation_span="1100" />
+
+    <com.sixsense.tangerine.main.home.util.ExpandableHeightGridView
+        android:id="@+id/grid_recipe"
+        android:layout_below="@id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="2"
+        android:listSelector="#e1ecef"
+        android:verticalSpacing="1dp"
+        android:horizontalSpacing="1dp"
+        android:layout_margin="1dp"
+        android:overScrollMode="never"
+        />
+
+
+
+</RelativeLayout>

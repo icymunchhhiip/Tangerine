@@ -2,6 +2,13 @@
     <string name="app_name">KakaoLoginTest</string>
     <string name="kakao_app_key">f01c4d1dbafb421a2f05d7ffac0ad198</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_ko">홈</string>
+    <string name="refrigerator_ko">나의 냉장고</string>
+    <string name="community_ko">커뮤니티</string>
+    <string name="setting_ko">나의 프로필</string>
+    
+    <string name="tmp_recipe_name">10분컷 팥빙수</string>
+    <string name="tmp_recipe_min">10분</string>
+    <string name="tmp_recipe_tags">간식*초간단</string>
+    <string name="tmp_usr_name">냠냠공주</string>
 </resources>
