@@ -8,52 +8,27 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.sixsense.tangerine.R;
+import com.sixsense.tangerine.network.HttpClient;
+import com.sixsense.tangerine.network.RecipeIntroList;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeGridAdapter extends BaseAdapter {
     private Context context;
-    //    private final String[] city_names;
-    private ArrayList<CityList.CityVO> city_info;
-    private ImageView imageView;
-    private TextView textView;
-    public RecipeGridAdapter(Context context, ArrayList<CityList.CityVO> city_info) {
+    private List<RecipeIntroList.RecipeIntro> recipeIntro;
+    private String recipeImageURL = HttpClient.BASE_URL+"recipe/imgs/";
+
+    public RecipeGridAdapter(Context context, List<RecipeIntroList.RecipeIntro> recipeIntro) {
         this.context = context;
-        this.city_info = city_info;
+        this.recipeIntro = recipeIntro;
     }
-
-//    public void getCityNames(){
-
-    //비동기
-//        httpInterface = HttpClient.getClient().create(HttpInterface.class);
-//        Call<CityList> call = httpInterface.getCitynames();
-//        call.enqueue(new Callback<CityList>() {
-//            @Override
-//            public void onResponse(Call<CityList> call, Response<CityList> response) {
-//                Log.d("TAG",response.code()+"");
-//                String displayResponse = "";
-//
-//                CityList resource = response.body();
-//                List<CityList.CityVO> cityVOList = resource.data;
-//                for (CityList.CityVO cityVO: cityVOList) {
-//                    city_names[0]=cityVO.city_names;
-//                    System.out.println(cityVO.city_names);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<CityList> call, Throwable t) {
-//
-//            }
-//        });
-//        new AsyncCall().execute();
-//
-//    }
 
     @Override
     public int getCount() {
-        return city_info.size();
+        return recipeIntro.size();
     }
 
     @Override
@@ -79,12 +54,33 @@ public class RecipeGridAdapter extends BaseAdapter {
             if (inflater != null) {
                 grid = inflater.inflate(R.layout.home_recipe_item, null);
             }
-            textView = grid.findViewById(R.id.city_name);
-            textView.setText(city_info.get(position).city_name);
-            imageView = grid.findViewById(R.id.city_img);
+            ImageView recipeImg = grid.findViewById(R.id.recipe_img);
             Glide.with(grid.getContext())
-                    .load(city_info.get(position).city_img)
-                    .into(imageView);
+                    .load(recipeImageURL+recipeIntro.get(position).recipe_img)
+                    .into(recipeImg);
+
+            TextView recipeName = grid.findViewById(R.id.recipe_name);
+            recipeName.setText(recipeIntro.get(position).recipe_name);
+
+            TextView recipeMin = grid.findViewById(R.id.recipe_min);
+            recipeMin.setText(recipeIntro.get(position).recipe_min);
+
+            TextView recipeTags = grid.findViewById(R.id.recipe_tags);
+            recipeTags.setText(recipeIntro.get(position).recipe_tags);
+
+            ImageView memProfile = grid.findViewById(R.id.mem_profile);
+            Glide.with(grid.getContext())
+                    .load(recipeIntro.get(position).mem_profile)
+                    .into(memProfile);
+
+            TextView memName = grid.findViewById(R.id.mem_name);
+            memName.setText(recipeIntro.get(position).mem_name);
+
+            ImageView recipeFav = grid.findViewById(R.id.recipe_fav);
+            Glide.with(grid.getContext())
+                    .load(recipeIntro.get(position).recipe_fav)
+                    .into(recipeFav);
+
         } else {
             grid = convertView;
         }

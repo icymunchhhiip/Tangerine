@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.slider.library.SliderLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/slider"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    custom:auto_cycle="true"
+    custom:indicator_visibility="visible"
+    custom:pager_animation="Stack"
+    custom:pager_animation_span="1100" />

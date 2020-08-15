@@ -1,76 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sixsense.tangerine.main.home.util.GridViewItem xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_recipe"
+    android:id="@+id/cardview_recipe"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/card_radius"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="@dimen/card_radius"
-        app:cardUseCompatPadding="true">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-        <com.sixsense.tangerine.main.home.util.SquareImageView
+        android:orientation="vertical">
+
+        <ImageView
             android:id="@+id/recipe_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
             android:layout_gravity="center"
-            tools:src="@tools:sample/avatars"/>
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars" />
+
         <TextView
             android:id="@+id/recipe_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="@string/tmp_recipe_name"
-            />
-            <LinearLayout
+            tools:text="@string/tmp_recipe_name" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_access_time_24dp"/>
-                <TextView
-                    android:id="@+id/recipe_min"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="@string/tmp_recipe_min"/>
-            </LinearLayout>
+                android:src="@drawable/ic_access_time_24dp" />
 
             <TextView
-                android:id="@+id/recipe_tags"
+                android:id="@+id/recipe_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="@string/tmp_recipe_tags"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/usr_profile"
-                    android:layout_width="@dimen/profile"
-                    android:layout_height="@dimen/profile"
-                    tools:src="@tools:sample/avatars"/>
-            <TextView
-                android:id="@+id/user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/usr_profile"
-                tools:text="@string/tmp_usr_name" />
-                <ImageView
-                    android:id="@+id/recipe_fav"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_favorite_24dp"
-                    />
-            </RelativeLayout>
+                tools:text="@string/tmp_recipe_min" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
-</com.sixsense.tangerine.main.home.util.GridViewItem>
+        <TextView
+            android:id="@+id/recipe_tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/tmp_recipe_tags" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/mem_profile"
+                android:layout_width="@dimen/profile"
+                android:layout_height="@dimen/profile"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/mem_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/mem_profile"
+                tools:text="@string/tmp_usr_name" />
+
+            <ImageView
+                android:id="@+id/recipe_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_favorite_24dp" />
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

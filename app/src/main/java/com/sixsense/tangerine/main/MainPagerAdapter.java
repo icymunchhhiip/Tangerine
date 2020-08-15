@@ -33,7 +33,7 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
 //            case FRAGMENT_SETTING:
 //                return new SettingFragment();
         }
-        return null;
+        return new HomeFragment();
     }
 
     @Override

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import com.sixsense.tangerine.MainActivity;
 import com.sixsense.tangerine.R;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -53,6 +54,7 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onSuccess(MeV2Response result) {
+                MainActivity.MY_ACCOUNT = result;
                 NavDirections action = LoginFragmentDirections.actionLoginFragmentToMainPagerFragment();
                 Navigation.findNavController(mView).navigate(action);
             }

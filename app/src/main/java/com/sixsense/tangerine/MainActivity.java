@@ -23,11 +23,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toolbar;
 
+import com.kakao.usermgmt.response.MeV2Response;
 import com.sixsense.tangerine.kakao_login.LoginFragment;
 
 import java.security.MessageDigest;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static MeV2Response MY_ACCOUNT;
 
     private void getKeyHash() {
         try {
