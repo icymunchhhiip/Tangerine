@@ -9,11 +9,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavAction;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-
-import com.sixsense.tangerine.kakao_login.LoginFragment;
 
 public class SplashFragment extends Fragment {
 

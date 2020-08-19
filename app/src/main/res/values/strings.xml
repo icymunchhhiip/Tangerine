@@ -2,10 +2,37 @@
     <string name="app_name">KakaoLoginTest</string>
     <string name="kakao_app_key">f01c4d1dbafb421a2f05d7ffac0ad198</string>
 
-    <string name="home_ko">홈</string>
-    <string name="refrigerator_ko">나의 냉장고</string>
-    <string name="community_ko">커뮤니티</string>
-    <string name="setting_ko">나의 프로필</string>
+    <string name="home">홈</string>
+    <string name="search_title">검색어를 입력해주세요</string>
+
+    <string name="kinds">종류</string>
+    <string name="kinds_all">종류 전체</string>
+    <string name="kinds_meal">한끼</string>
+    <string name="kinds_snack">간식</string>
+    <string name="level">난이도</string>
+    <string name="level_all">난이도 전체</string>
+    <string name="level_very_easy">초간단</string>
+    <string name="level_easy">초급</string>
+    <string name="level_middle">중급</string>
+    <string name="level_hard">고급</string>
+    <string name="tool">조리도구</string>
+    <string name="tool_all">도구 전체</string>
+    <string name="tool_fire">불</string>
+    <string name="tool_microwave">전자레인지</string>
+    <string name="tool_oven">오븐</string>
+    <string name="tool_air">에어프라이어</string>
+    <string name="time">조리시간</string>
+    <string name="time_all">시간 전체</string>
+    <string name="time_until_30m">0-30분</string>
+    <string name="time_until_1h">30분-1시간</string>
+    <string name="time_until_2h">1-2시간</string>
+    <string name="time_over_2h">2시간 이상</string>
+    <string name="ok">확인</string>
+
+    <string name="write_recipe">레시피 작성</string>
+    <string name="refrigerator">나의 냉장고</string>
+    <string name="community">커뮤니티</string>
+    <string name="setting">나의 프로필</string>
     
     <string name="tmp_recipe_name">10분컷 팥빙수</string>
     <string name="tmp_recipe_min">10분</string>

@@ -4,17 +4,17 @@
     <item
         android:id="@+id/main_home"
         android:icon="@drawable/ic_home_24dp"
-        android:title="@string/home_ko" />
+        android:title="@string/home" />
     <item
         android:id="@+id/main_refrigerator"
         android:icon="@drawable/ic_refrigerator_24dp"
-        android:title="@string/refrigerator_ko" />
+        android:title="@string/refrigerator" />
     <item
         android:id="@+id/main_community"
         android:icon="@drawable/ic_community_24dp"
-        android:title="@string/community_ko" />
+        android:title="@string/community" />
     <item
         android:id="@+id/main_setting"
         android:icon="@drawable/ic_setting_24dp"
-        android:title="@string/setting_ko" />
+        android:title="@string/setting" />
 </menu>

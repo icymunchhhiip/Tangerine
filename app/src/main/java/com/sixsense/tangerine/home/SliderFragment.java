@@ -1,4 +1,4 @@
-package com.sixsense.tangerine.main.home;
+package com.sixsense.tangerine.home;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;

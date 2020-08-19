@@ -1,4 +1,4 @@
-package com.sixsense.tangerine.kakao_login;
+package com.sixsense.tangerine.login;
 
 import android.app.Application;
 

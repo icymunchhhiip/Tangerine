@@ -1,4 +1,4 @@
-package com.sixsense.tangerine.main.home;
+package com.sixsense.tangerine.home;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.sixsense.tangerine.R;
-import com.sixsense.tangerine.main.home.util.ExpandableHeightGridView;
-import com.sixsense.tangerine.main.home.util.RecipeGridAdapter;
 import com.sixsense.tangerine.network.HttpClient;
 import com.sixsense.tangerine.network.HttpInterface;
 import com.sixsense.tangerine.network.RecipeIntroList;
@@ -26,14 +26,15 @@ import retrofit2.Call;
 
 import static com.sixsense.tangerine.MainActivity.MY_ACCOUNT;
 
-public class RecipeGridFragment extends Fragment {
+public class RecipeListFragment extends Fragment {
 
-    private ExpandableHeightGridView mGridView;
+    private RecyclerView recyclerView;
+    private GridLayoutManager layoutManager;
     private List<RecipeIntroList.RecipeIntro> recipeIntroList;
     private int page_no;
     private int has_more;
 
-    public RecipeGridFragment(){
+    public RecipeListFragment(){
         this.page_no = 1;
         this.has_more = 0;
         this.recipeIntroList = new ArrayList<>(0);
@@ -43,8 +44,11 @@ public class RecipeGridFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_recipe_recycler, container, false);
+        recyclerView = view.findViewById(R.id.recipe_recycler);
 
-        mGridView = view.findViewById(R.id.grid_recipe);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new GridLayoutManager(getContext(),2);
+        recyclerView.setLayoutManager(layoutManager);
 
         if (recipeIntroList.isEmpty()){
             new RecentRecipeCall().execute();
@@ -52,10 +56,8 @@ public class RecipeGridFragment extends Fragment {
             ++page_no;
             new RecentRecipeCall().execute();
         }
-
         return view;
     }
-
 
     @SuppressLint("StaticFieldLeak")
     private class RecentRecipeCall extends AsyncTask<Void, Void, Void> {
@@ -82,26 +84,22 @@ public class RecipeGridFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            RecipeGridAdapter recipeGridAdapter = new RecipeGridAdapter(getContext(), recipeIntroList);
-            mGridView.setExpanded(true);
-
-            mGridView.setAdapter(recipeGridAdapter);
-//            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view,
-//                                        int position, long id) {
-////                Toast.makeText(getActivity(), "You Clicked at " + city_names[position], Toast.LENGTH_SHORT).show();
-//                    assert getFragmentManager() != null;
-//                    transaction=getFragmentManager().beginTransaction();
-//                    city_no=position+1;
-////                    PlaceListInCity.page_no=1;
-////                    PlaceListInCity.has_more=1;
-////                    PlaceListInCity.placesList=new ArrayList<>();
-//                    placesInCity=new PlaceListInCity();
-//                    transaction.replace(R.id.content,placesInCity).addToBackStack(null).commit();
-//                }
-//            });
+            RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+//                    assert layoutManager != null;
+                    int totalItemCount = layoutManager.getItemCount();
+                    int lastVisible = layoutManager.findLastCompletelyVisibleItemPosition();
+                    if ((lastVisible >= totalItemCount - 1) && has_more == 1) {
+                        ++page_no;
+                        new RecentRecipeCall().execute();
+                    }
+                }
+            };
+            recyclerView.addOnScrollListener(onScrollListener);
+            recyclerView.setAdapter(new RecipeListAdapter(recipeIntroList));
+            setHasOptionsMenu(true);
         }
 
     }

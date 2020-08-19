@@ -1,4 +1,4 @@
-package com.sixsense.tangerine.kakao_login;
+package com.sixsense.tangerine.login;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

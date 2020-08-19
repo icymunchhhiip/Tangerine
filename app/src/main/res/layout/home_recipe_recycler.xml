@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sixsense.tangerine.main.home.util.ExpandableHeightGridView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/grid_recipe"
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/recipe_recycler"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="1dp"
-    android:horizontalSpacing="1dp"
-    android:listSelector="#e1ecef"
-    android:numColumns="2"
-    android:overScrollMode="never"
-    android:verticalSpacing="1dp" />
+    android:layout_height="match_parent"
+    android:scrollbars="vertical" />
