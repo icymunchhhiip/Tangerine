@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KakaoLoginTest</string>
+    <string name="app_name">Tangerine</string>
     <string name="kakao_app_key">f01c4d1dbafb421a2f05d7ffac0ad198</string>
 
     <string name="home">홈</string>

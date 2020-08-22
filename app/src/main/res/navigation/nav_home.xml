@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_home"
-    app:startDestination="@id/splashFragment"
-    tools:ignore="UnusedNavigation">
+    app:startDestination="@id/splashFragment">
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.sixsense.tangerine.SplashFragment"
@@ -37,5 +36,36 @@
         android:id="@+id/searchFragment"
         android:name="com.sixsense.tangerine.home.SearchFragment"
         android:label="home_search"
-        tools:layout="@layout/home_search" />
+        tools:layout="@layout/home_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.sixsense.tangerine.home.ResultFragment"
+        android:label="home_result"
+        tools:layout="@layout/home_result">
+        <argument
+            android:name="recipe_name"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="kind_byte"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="level_byte"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="tool_byte"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="time_byte"
+            app:argType="string"
+            app:nullable="true" />
+
+    </fragment>
 </navigation>

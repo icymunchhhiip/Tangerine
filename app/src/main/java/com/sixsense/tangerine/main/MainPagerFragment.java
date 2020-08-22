@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
+//import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -14,10 +14,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sixsense.tangerine.R;
+import com.sixsense.tangerine.home.SearchFragment;
 
 public class MainPagerFragment extends Fragment {
     private View mView;
@@ -32,7 +34,9 @@ public class MainPagerFragment extends Fragment {
     private Toolbar mToolbarCommunity;
     private Toolbar mToolbarSetting;
     private ImageButton buttonWriting;
-    private SearchView mSearchView;
+//    private SearchView mSearchView;
+    private EditText mSearchView;
+    private SearchFragment mSearchFragment;
 
     @Nullable
     @Override
@@ -48,7 +52,7 @@ public class MainPagerFragment extends Fragment {
         mToolbarSetting = mLayout.findViewById(R.id.toolbar_setting);
         mToolbarHome.setVisibility(View.VISIBLE);
         buttonWriting = mToolbarHome.findViewById(R.id.recipe_write);
-        mSearchView = mToolbarHome.findViewById(R.id.recipe_search);
+        mSearchView = mToolbarHome.findViewById(R.id.recipe_name);
 
         mViewPager = mView.findViewById(R.id.main_view_pager);
         mBottomBar = mView.findViewById(R.id.main_bottom_bar);

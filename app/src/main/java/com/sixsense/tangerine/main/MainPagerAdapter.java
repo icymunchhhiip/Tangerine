@@ -28,7 +28,6 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case FRAGMENT_HOME:
-
                 return new HomeFragment();
             case FRAGMENT_REF:
                 return new RefrigeratorFragment();

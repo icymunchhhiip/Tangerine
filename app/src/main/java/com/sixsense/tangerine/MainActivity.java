@@ -10,7 +10,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 
-import androidx.appcompat.widget.SearchView;
+//import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
