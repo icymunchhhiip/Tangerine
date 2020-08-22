@@ -26,7 +26,7 @@ import retrofit2.Call;
 
 import static com.sixsense.tangerine.MainActivity.MY_ACCOUNT;
 
-public class SearchRecipeListFragment extends Fragment {
+public class RecentRecipeListFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private GridLayoutManager layoutManager;
@@ -34,7 +34,7 @@ public class SearchRecipeListFragment extends Fragment {
     private int page_no;
     private int has_more;
 
-    public SearchRecipeListFragment(){
+    public RecentRecipeListFragment(){
         this.page_no = 1;
         this.has_more = 0;
         this.recipeIntroList = new ArrayList<>(0);
@@ -93,7 +93,7 @@ public class SearchRecipeListFragment extends Fragment {
                     int lastVisible = layoutManager.findLastCompletelyVisibleItemPosition();
                     if ((lastVisible >= totalItemCount - 1) && has_more == 1) {
                         ++page_no;
-                        new SearchRecipeListFragment.RecentRecipeCall().execute();
+                        new RecentRecipeCall().execute();
                     }
                 }
             };

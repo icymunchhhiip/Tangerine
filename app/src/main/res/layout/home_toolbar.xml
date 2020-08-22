@@ -9,13 +9,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/recipe_name"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/recipe_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@id/recipe_write"
-            android:autofillHints="@string/search_title"/>
+            android:hint="@string/search_title"/>
         <ImageButton
             android:id="@+id/recipe_write"
             android:layout_width="@dimen/icon"

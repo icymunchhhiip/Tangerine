@@ -13,8 +13,11 @@ import android.view.View;
 //import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 
 import com.kakao.usermgmt.response.MeV2Response;
+import com.sixsense.tangerine.home.HomeFragment;
+import com.sixsense.tangerine.home.SearchFragment;
 
 import java.security.MessageDigest;
 

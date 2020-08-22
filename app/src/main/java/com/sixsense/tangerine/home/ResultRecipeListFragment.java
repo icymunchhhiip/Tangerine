@@ -26,7 +26,7 @@ import retrofit2.Call;
 
 import static com.sixsense.tangerine.MainActivity.MY_ACCOUNT;
 
-public class RecipeListFragment extends Fragment {
+public class ResultRecipeListFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private GridLayoutManager layoutManager;
@@ -34,7 +34,19 @@ public class RecipeListFragment extends Fragment {
     private int page_no;
     private int has_more;
 
-    public RecipeListFragment(){
+    private String recipeName;
+    private Byte kindByte;
+    private Byte levelByte;
+    private Byte toolByte;
+    private Byte timeByte;
+
+    public ResultRecipeListFragment(String recipeName, Byte kindByte, Byte levelByte, Byte toolByte, Byte timeByte){
+        this.recipeName = recipeName;
+        this.kindByte = kindByte;
+        this.levelByte = levelByte;
+        this.toolByte = toolByte;
+        this.timeByte = timeByte;
+
         this.page_no = 1;
         this.has_more = 0;
         this.recipeIntroList = new ArrayList<>(0);
@@ -51,22 +63,23 @@ public class RecipeListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         if (recipeIntroList.isEmpty()){
-            new RecentRecipeCall().execute();
+            new ConditionRecipeCall().execute();
         } else if (has_more == 1){
             ++page_no;
-            new RecentRecipeCall().execute();
+            new ConditionRecipeCall().execute();
         }
+
         return view;
     }
 
     @SuppressLint("StaticFieldLeak")
-    private class RecentRecipeCall extends AsyncTask<Void, Void, Void> {
+    private class ConditionRecipeCall extends AsyncTask<Void, Void, Void> {
         private  final int PAGE_SIZE = 10;
 
         @Override
         protected Void doInBackground(Void... voids) {
             HttpInterface httpInterface = HttpClient.getClient().create(HttpInterface.class);
-            Call<RecipeIntroList> call = httpInterface.getRecentRecipe((int)MY_ACCOUNT.getId(), page_no, PAGE_SIZE);
+            Call<RecipeIntroList> call = httpInterface.getRecipeCondition(recipeName,kindByte,levelByte,toolByte,timeByte,page_no,PAGE_SIZE);
             RecipeIntroList resource = null;
             try {
                 resource = call.execute().body();
@@ -79,8 +92,7 @@ public class RecipeListFragment extends Fragment {
         }
 
         @Override
-        protected void onPreExecute() {
-        }
+        protected void onPreExecute() { }
 
         @Override
         protected void onPostExecute(Void aVoid) {
@@ -93,7 +105,7 @@ public class RecipeListFragment extends Fragment {
                     int lastVisible = layoutManager.findLastCompletelyVisibleItemPosition();
                     if ((lastVisible >= totalItemCount - 1) && has_more == 1) {
                         ++page_no;
-                        new RecentRecipeCall().execute();
+                        new ConditionRecipeCall().execute();
                     }
                 }
             };
@@ -103,4 +115,5 @@ public class RecipeListFragment extends Fragment {
         }
 
     }
+
 }

@@ -9,11 +9,16 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-//import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.sixsense.tangerine.R;
 
@@ -153,11 +158,10 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d("testtestest","in");
-                EditText searchView = view.findViewById(R.id.recipe_name);
+                SearchView searchView = getActivity().findViewById(R.id.recipe_search);
                 String recipeName="";
                 try {
-//                    recipeName = searchView.getQuery().toString();
-                    recipeName = searchView.getText().toString();
+                    recipeName = searchView.getQuery().toString();
                 }catch (Exception e){
                     e.printStackTrace();
                     Log.d("testtestest","err");
@@ -255,14 +259,12 @@ public class SearchFragment extends Fragment {
                 }
                 Log.d("testtestest",recipeName);
 //                resultFragment = new ResultFragment(recipeName, kindByte,levelByte,toolByte,timeByte);
-//                NavDirections action = SearchFragmentDirections.actionSearchFragmentToResultFragment(recipeName, kindCondition,levelCondition,toolCondition,timeCondition);
-//                Navigation.findNavController(getActivity(),R.id.main_frame).navigate(action);
+                NavDirections action = SearchFragmentDirections.actionSearchFragmentToResultFragment(recipeName, kindCondition,levelCondition,toolCondition,timeCondition);
+                Navigation.findNavController(getActivity(),R.id.main_frame).navigate(action);
 
             }
         });
         return view;
     }
-
-
 
 }
