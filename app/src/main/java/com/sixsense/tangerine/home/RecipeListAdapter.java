@@ -1,9 +1,12 @@
 package com.sixsense.tangerine.home;
 
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,16 +14,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.sixsense.tangerine.MainActivity;
 import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.network.HttpClient;
+import com.sixsense.tangerine.network.HttpInterface;
 import com.sixsense.tangerine.network.RecipeIntroList;
 
+import java.io.IOException;
 import java.util.List;
+
+import retrofit2.Call;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder> {
     private View view;
     private List<RecipeIntroList.RecipeIntro> recipeIntro;
     private String recipeImageURL = HttpClient.BASE_URL + "recipe/imgs/";
+    private RecipeViewHolder recipeViewHolder;
+    private String checkedState;
+
 
     public RecipeListAdapter(List<RecipeIntroList.RecipeIntro> recipeIntro) {
         this.recipeIntro = recipeIntro;
@@ -35,31 +46,105 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     }
 
     @Override
-    public void onBindViewHolder(RecipeViewHolder holder, int position) {
-
+    public void onBindViewHolder(RecipeViewHolder holder, final int position) {
+        recipeViewHolder = holder;
         Glide.with(view.getContext())
                 .load(recipeImageURL + recipeIntro.get(position).recipe_img)
-                .into(holder.recipeImg);
+                .into(recipeViewHolder.recipeImg);
 
-        holder.recipeName.setText(recipeIntro.get(position).recipe_name);
+        recipeViewHolder.recipeName.setText(recipeIntro.get(position).recipe_name);
 
-        holder.recipeMin.setText(recipeIntro.get(position).recipe_min);
+        recipeViewHolder.recipeMin.setText(recipeIntro.get(position).recipe_min);
 
-        holder.recipeTags.setText(recipeIntro.get(position).recipe_tags);
+        recipeViewHolder.recipeTags.setText(recipeIntro.get(position).recipe_tags);
 
         Glide.with(view.getContext())
                 .load(recipeIntro.get(position).mem_profile)
-                .into(holder.memProfile);
+                .into(recipeViewHolder.memProfile);
 
-        holder.memName.setText(recipeIntro.get(position).mem_name);
+        recipeViewHolder.memName.setText(recipeIntro.get(position).mem_name);
 
         if(recipeIntro.get(position).recipe_fav==1){
-            holder.recipeFav.setChecked(true);
+            recipeViewHolder.recipeFav.setChecked(true);
         }else {
-            holder.recipeFav.setChecked(false);
+            recipeViewHolder.recipeFav.setChecked(false);
+        }
+
+        recipeViewHolder.recipeFav.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if (recipeIntro.get(position).recipe_fav==1) {
+                    checkedState = "save";
+                    new LikeCall().execute(recipeIntro.get(position).recipe_id);
+                    if (checkedState.equals("saved")||checkedState.equals("deleted_fail")||checkedState.equals("already_save")) {
+                        recipeIntro.get(position).recipe_fav=1;
+                        recipeViewHolder.recipeFav.setChecked(true);
+                    }
+                } else {
+                    checkedState = "del";
+                    new LikeCall().execute(recipeIntro.get(position).recipe_id);
+                    if (checkedState.equals("deleted")||checkedState.equals("saved_fail")||checkedState.equals("already_del")) {
+                        recipeIntro.get(position).recipe_fav=0;
+                        recipeViewHolder.recipeFav.setChecked(false);
+                    }
+                }
+            }
+        });
+
+        recipeViewHolder.recipeFav.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    recipeIntro.get(position).recipe_fav=1;
+                }else{
+                    recipeIntro.get(position).recipe_fav=0;
+                }
+            }
+        });
+
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class LikeCall extends AsyncTask<Integer, Void, String> {
+
+        @Override
+        protected String doInBackground(Integer... integers) {
+            //progressbar
+            HttpInterface httpInterface = HttpClient.getClient().create(HttpInterface.class);
+            Call<String> call = httpInterface.setRecipeLike((int)MainActivity.MY_ACCOUNT.getId(), integers[0], checkedState);
+            String response = null;
+            try {
+                response = call.execute().body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected void onPostExecute(String string) {
+            switch (string) {
+                case "saved":
+                case "deleted_fail":
+                case "already_save":
+                    break;
+                case "deleted":
+                case "saved_fail":
+                case "already_del":
+                    break;
+                default:
+
+            }
+
         }
 
     }
+
 
     public class RecipeViewHolder extends RecyclerView.ViewHolder {
         ImageView recipeImg;

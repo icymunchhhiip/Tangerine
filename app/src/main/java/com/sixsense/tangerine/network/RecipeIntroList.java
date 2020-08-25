@@ -12,6 +12,8 @@ public class RecipeIntroList {
     public List<RecipeIntro> data=new ArrayList<>();
 
     public class RecipeIntro{
+        @SerializedName("recipe_id")
+        public Integer recipe_id;
         @SerializedName("recipe_img")
         public String recipe_img;
         @SerializedName("recipe_name")

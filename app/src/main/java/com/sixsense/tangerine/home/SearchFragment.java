@@ -42,7 +42,6 @@ public class SearchFragment extends Fragment {
     private CheckBox mTimeUntil2h;
     private CheckBox mTimeOver2h;
 
-    private ResultFragment resultFragment;
     private View view;
 
     @Nullable
@@ -163,8 +162,6 @@ public class SearchFragment extends Fragment {
                 try {
                     recipeName = searchView.getQuery().toString();
                 }catch (Exception e){
-                    e.printStackTrace();
-                    Log.d("testtestest","err");
                 }
                 String kindCondition = "000000";
                 String levelCondition = "0000";
@@ -260,7 +257,7 @@ public class SearchFragment extends Fragment {
                 Log.d("testtestest",recipeName);
 //                resultFragment = new ResultFragment(recipeName, kindByte,levelByte,toolByte,timeByte);
                 NavDirections action = SearchFragmentDirections.actionSearchFragmentToResultFragment(recipeName, kindCondition,levelCondition,toolCondition,timeCondition);
-                Navigation.findNavController(getActivity(),R.id.main_frame).navigate(action);
+                Navigation.findNavController(view).navigate(action);
 
             }
         });

@@ -14,8 +14,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
+            app:iconifiedByDefault="false"
             android:layout_toStartOf="@id/recipe_write"
-            android:hint="@string/search_title"/>
+            android:autofillHints="@string/search_title"/>
         <ImageButton
             android:id="@+id/recipe_write"
             android:layout_width="@dimen/icon"

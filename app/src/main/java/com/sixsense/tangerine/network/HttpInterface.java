@@ -13,9 +13,6 @@ public interface HttpInterface {
     @POST("/member.php")
     Call<Member> setMember(@Body Member member);
 
-    @GET("/member.php")
-    Call<Member> getMember();
-
     @GET("/main-event/main-event.php")
     Call<MainEventList> getMainEvent();
 
@@ -35,5 +32,12 @@ public interface HttpInterface {
             @Query("r_time") byte r_time,
             @Query("page") int page,
             @Query("page_size") int page_size
+    );
+
+    @GET("/recipe/like.php")
+    Call<String> setRecipeLike(
+            @Query("m_id") int m_id,
+            @Query("recipe_id") int recipe_id,
+            @Query("action") String action
     );
 }
