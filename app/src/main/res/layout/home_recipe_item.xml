@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="0dp">
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.cardview.widget.CardView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/cardview_recipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,53 +30,66 @@
                 android:id="@+id/recipe_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/card_content_margin"
+                android:layout_marginTop="@dimen/card_content_margin"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/colorFontDark"
+                android:textSize="@dimen/font_big"
                 tools:text="@string/tmp_recipe_name" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/recipe_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_access_time_24dp" />
-
-                <TextView
-                    android:id="@+id/recipe_min"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="@string/tmp_recipe_min" />
-            </LinearLayout>
+                android:textColor="@color/colorFontDark"
+                android:layout_marginHorizontal="@dimen/card_content_margin"
+                android:drawableStart="@drawable/ic_access_time_24dp"
+                android:drawablePadding="@dimen/tv_drawable_padding"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center_vertical"
+                android:text="@string/tmp_recipe_min"
+                android:textSize="@dimen/font_middle" />
 
             <TextView
                 android:id="@+id/recipe_tags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/card_content_margin"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/colorFontLight"
+                android:textSize="@dimen/font_middle"
                 tools:text="@string/tmp_recipe_tags" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_content_margin">
 
                 <ImageView
                     android:id="@+id/mem_profile"
                     android:layout_width="@dimen/profile"
                     android:layout_height="@dimen/profile"
+                    android:layout_centerVertical="true"
                     tools:src="@tools:sample/avatars" />
 
                 <TextView
                     android:id="@+id/mem_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorFontLight"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/card_content_margin"
                     android:layout_toEndOf="@id/mem_profile"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="@dimen/font_small"
                     tools:text="@string/tmp_usr_name" />
 
                 <CheckBox
                     android:id="@+id/recipe_fav"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/icon"
+                    android:layout_height="@dimen/icon"
                     android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
                     android:button="@drawable/favorite" />
             </RelativeLayout>
         </LinearLayout>

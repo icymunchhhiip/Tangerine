@@ -3,4 +3,6 @@
     android:id="@+id/recipe_recycler"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="vertical" />
+    android:clipToPadding="false"
+    android:padding="@dimen/card_offset"
+    />

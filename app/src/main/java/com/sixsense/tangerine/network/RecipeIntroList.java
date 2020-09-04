@@ -1,7 +1,10 @@
 package com.sixsense.tangerine.network;
 
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +14,7 @@ public class RecipeIntroList {
     @SerializedName("data")
     public List<RecipeIntro> data=new ArrayList<>();
 
-    public class RecipeIntro{
+    public class RecipeIntro implements Serializable {
         @SerializedName("recipe_id")
         public Integer recipe_id;
         @SerializedName("recipe_img")

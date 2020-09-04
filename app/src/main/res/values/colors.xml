@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorTangerine">#EEBB4D</color>
+    <color name="colorFontDark">#DE000000</color>
+    <color name="colorFontLight">#99000000</color>
 </resources>

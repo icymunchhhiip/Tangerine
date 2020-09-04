@@ -10,6 +10,12 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <include
+        android:id="@+id/toolbar_home"
+        layout="@layout/home_toolbar_inner"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <include
         android:id="@+id/toolbar_ref"
         layout="@layout/ref_toolbar"
         android:visibility="invisible"

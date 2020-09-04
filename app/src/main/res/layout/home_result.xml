@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+    <com.sixsense.tangerine.home.FlowLayout
         android:id="@+id/search_tag_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"/>
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/card_content_margin" >
+    </com.sixsense.tangerine.home.FlowLayout>
     <FrameLayout
         android:id="@+id/grid_search_recipe_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 </LinearLayout>

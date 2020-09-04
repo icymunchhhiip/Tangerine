@@ -2,166 +2,426 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/condition_start_margin"
+    android:background="@color/colorBackground"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/kinds" />
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/kinds"
+        android:textColor="@color/colorFontLight"
+        android:textSize="@dimen/font_middle" />
 
-    <LinearLayout
+    <com.sixsense.tangerine.home.FlowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/conditions_top_margin"
+        android:layout_marginBottom="@dimen/conditions_bottom_margin"
         android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/kinds_all"
+        <LinearLayout
+            android:id="@+id/kinds_all_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/kinds_all" />
+            android:layout_height="wrap_content">
 
-        <CheckBox
-            android:id="@+id/kinds_meal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/kinds_meal" />
+            <CheckBox
+                android:id="@+id/kinds_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/kinds_all"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/kinds_snack"
+        <LinearLayout
+            android:id="@+id/kinds_meal_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/kinds_snack" />
-    </LinearLayout>
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/kinds_meal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/kinds_meal"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/kinds_snack_lay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/kinds_snack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/kinds_snack"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
+    </com.sixsense.tangerine.home.FlowLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/level" />
+        android:button="@android:color/transparent"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/level"
+        android:textColor="@color/colorFontLight"
+        android:textSize="@dimen/font_middle" />
 
-    <LinearLayout
+    <com.sixsense.tangerine.home.FlowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/conditions_top_margin"
+        android:layout_marginBottom="@dimen/conditions_bottom_margin"
         android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/level_all"
+        <LinearLayout
+            android:id="@+id/level_all_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/level_all" />
+            android:layout_height="wrap_content">
 
-        <CheckBox
-            android:id="@+id/level_very_easy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/level_very_easy" />
+            <CheckBox
+                android:id="@+id/level_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/level_all"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/level_easy"
+        <LinearLayout
+            android:id="@+id/level_very_easy_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/level_easy" />
+            android:layout_height="wrap_content">
 
-        <CheckBox
-            android:id="@+id/level_middle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/level_middle" />
+            <CheckBox
+                android:id="@+id/level_very_easy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/level_very_easy"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/level_hard"
+        <LinearLayout
+            android:id="@+id/level_easy_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/level_hard" />
-    </LinearLayout>
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/level_easy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/level_easy"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/level_middle_lay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/level_middle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/level_middle"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/level_hard_lay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/level_hard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/level_hard"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
+    </com.sixsense.tangerine.home.FlowLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tool" />
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/tool"
+        android:textColor="@color/colorFontLight"
+        android:textSize="@dimen/font_middle" />
 
-    <LinearLayout
+    <com.sixsense.tangerine.home.FlowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/conditions_top_margin"
+        android:layout_marginBottom="@dimen/conditions_bottom_margin"
         android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/tool_all"
+        <LinearLayout
+            android:id="@+id/tool_all_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tool_all" />
+            android:layout_height="wrap_content">
 
-        <CheckBox
-            android:id="@+id/tool_fire"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tool_fire" />
+            <CheckBox
+                android:id="@+id/tool_all"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/tool_all"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/tool_microwave"
+        <LinearLayout
+            android:id="@+id/tool_fire_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tool_microwave" />
+            android:layout_height="wrap_content">
 
-        <CheckBox
-            android:id="@+id/tool_oven"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tool_oven" />
+            <CheckBox
+                android:id="@+id/tool_fire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/tool_fire"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/tool_air"
+        <LinearLayout
+            android:id="@+id/tool_microwave_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tool_air" />
-    </LinearLayout>
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/tool_microwave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/tool_microwave"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tool_oven_lay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/tool_oven"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/tool_oven"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tool_air_lay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/tool_air"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/tool_air"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
+    </com.sixsense.tangerine.home.FlowLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/time" />
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/time"
+        android:textColor="@color/colorFontLight"
+        android:textSize="@dimen/font_middle" />
 
-    <LinearLayout
+    <com.sixsense.tangerine.home.FlowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/conditions_top_margin"
+        android:layout_marginBottom="@dimen/condition_button_margin"
         android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/time_all"
+        <LinearLayout
+            android:id="@+id/time_all_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/time_all" />
+            android:layout_height="wrap_content">
 
-        <CheckBox
-            android:id="@+id/time_until_30m"
+            <CheckBox
+                android:id="@+id/time_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/time_all"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/time_until_30m_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/time_until_30m" />
+            android:layout_height="wrap_content">
 
-        <CheckBox
-            android:id="@+id/time_until_1h"
+            <CheckBox
+                android:id="@+id/time_until_30m"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/time_until_30m"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/time_until_1h_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/time_until_1h" />
+            android:layout_height="wrap_content">
 
-        <CheckBox
-            android:id="@+id/time_until_2h"
+            <CheckBox
+                android:id="@+id/time_until_1h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/time_until_1h"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/time_until_2h_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/time_until_2h" />
+            android:layout_height="wrap_content">
 
-        <CheckBox
-            android:id="@+id/time_over_2h"
+            <CheckBox
+                android:id="@+id/time_until_2h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/time_until_2h"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/time_over_2h_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/time_over_2h" />
+            android:layout_height="wrap_content">
 
-    </LinearLayout>
+            <CheckBox
+                android:id="@+id/time_over_2h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/condition"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:minWidth="@dimen/checkbox_min_width"
+                android:text="@string/time_over_2h"
+                android:textColor="@color/condition"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
+    </com.sixsense.tangerine.home.FlowLayout>
 
     <Button
         android:id="@+id/search_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/ok" />
+        android:background="@drawable/condition_button"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/ok"
+        android:textColor="@color/condition"
+        android:textSize="@dimen/font_middle" />
 
 </LinearLayout>

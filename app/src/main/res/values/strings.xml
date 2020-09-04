@@ -4,6 +4,7 @@
 
     <string name="home">홈</string>
     <string name="search_title">검색어를 입력해주세요</string>
+    <string name="recent_recipe">최신 레시피</string>
 
     <string name="kinds">종류</string>
     <string name="kinds_all">종류 전체</string>
@@ -28,6 +29,7 @@
     <string name="time_until_2h">1-2시간</string>
     <string name="time_over_2h">2시간 이상</string>
     <string name="ok">확인</string>
+    <string name="searched_tag">검색된 태그</string>
 
     <string name="write_recipe">레시피 작성</string>
     <string name="refrigerator">나의 냉장고</string>

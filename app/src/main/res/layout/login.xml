@@ -14,7 +14,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorFontDark"
+        android:text="뭐머귤래"/>
 
     <com.kakao.usermgmt.LoginButton
         android:id="@+id/btn_kakao_login"

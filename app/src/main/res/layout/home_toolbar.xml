@@ -16,11 +16,15 @@
             android:layout_alignParentStart="true"
             app:iconifiedByDefault="false"
             android:layout_toStartOf="@id/recipe_write"
+            app:queryBackground="@android:color/transparent"
+            android:background="@drawable/search_bg"
+            android:layout_centerInParent="true"
             android:autofillHints="@string/search_title"/>
         <ImageButton
             android:id="@+id/recipe_write"
             android:layout_width="@dimen/icon"
             android:layout_height="@dimen/icon"
+            android:layout_marginHorizontal="@dimen/write_horizontal_margin"
             android:src="@drawable/ic_pencil_24dp"
             android:background="@color/colorBackground"
             android:layout_alignParentEnd="true"

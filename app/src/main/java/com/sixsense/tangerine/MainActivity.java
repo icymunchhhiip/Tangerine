@@ -10,6 +10,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 
 //import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -17,6 +18,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -29,6 +31,7 @@ import java.security.MessageDigest;
 public class MainActivity extends AppCompatActivity {
 
     public static MeV2Response MY_ACCOUNT;
+    long backKeyPressedTime;
 
     private void getKeyHash() {
         try {
@@ -83,4 +86,53 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //
 //    }
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() > backKeyPressedTime + 500) {
+            backKeyPressedTime = System.currentTimeMillis();
+//            for (Fragment fragment: getSupportFragmentManager().getFragments()) {
+//                if (fragment.isVisible()) {
+//                    //할일
+//
+//                }
+//            }
+            NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.main_frame);
+            Fragment current = navHostFragment.getChildFragmentManager().getFragments().get(0);
+            if (current instanceof SearchFragment) {
+                ConstraintLayout layout = findViewById(R.id.main_layout);
+                Toolbar toolbar = layout.findViewById(R.id.toolbar_home);
+                toolbar.setNavigationIcon(null);
+                ImageButton buttonWriting = toolbar.findViewById(R.id.recipe_write);
+                if(buttonWriting.getVisibility()!=View.VISIBLE) {
+                    buttonWriting.setVisibility(View.VISIBLE);
+                }
+                Log.d("yo","yes");
+            } else{
+                Log.d("yo","no");
+                Log.d("yo", String.valueOf(current.getClass()));
+            }
+            super.onBackPressed();
+        } else {
+            AppFinish();
+        }
+    }
+
+    public void AppFinish() {
+        finish();
+        System.exit(0);
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                onBackPressed();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

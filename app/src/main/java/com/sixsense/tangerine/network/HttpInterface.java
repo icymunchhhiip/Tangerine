@@ -40,4 +40,9 @@ public interface HttpInterface {
             @Query("recipe_id") int recipe_id,
             @Query("action") String action
     );
+
+    @GET("/recipe/in-recipe.php")
+    Call<InRecipe> getInRecipe(
+            @Query("recipe_id") int recipe_id
+    );
 }

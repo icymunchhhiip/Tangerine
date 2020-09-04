@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavDirections;
@@ -31,6 +32,7 @@ public class HomeFragment extends Fragment {
     private SearchView mSearchView;
     private FragmentTransaction mFragmentTransaction;
     private SearchFragment mSearchFragment;
+    private RecentRecipeListFragment recentRecipeListFragment;
 //    private ImageButton
 
 
@@ -40,7 +42,7 @@ public class HomeFragment extends Fragment {
         mView = inflater.inflate(R.layout.home_, container, false);
 
         SliderFragment sliderFragment = new SliderFragment();
-        final RecentRecipeListFragment recentRecipeListFragment = new RecentRecipeListFragment();
+        recentRecipeListFragment = new RecentRecipeListFragment();
 
         mFragmentTransaction = getChildFragmentManager().beginTransaction();
         mFragmentTransaction.add(R.id.slider_frame, sliderFragment);
@@ -57,19 +59,12 @@ public class HomeFragment extends Fragment {
         mSearchView.setFocusable(false);
 //        mSearchView.setIconified(false);
         mSearchView.clearFocus();
+
         mSearchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View a_view, boolean a_hasFocus) {
                 if (a_hasFocus) {
-                    mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
-                    mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            buttonWriting.setVisibility(View.VISIBLE);
-                            mSearchView.clearFocus();
-                            getActivity().onBackPressed();
-                        }
-                    });
+
 
 //                    OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
 //                        @Override
@@ -79,14 +74,21 @@ public class HomeFragment extends Fragment {
 //                        }
 //                    };
 //                    requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
-
-                    buttonWriting.setVisibility(View.GONE);
-                    mSearchFragment = new SearchFragment();
-                    NavDirections action = MainPagerFragmentDirections.actionMainPagerFragmentToSearchFragment();
-                    Navigation.findNavController(mView).navigate(action);
-                } else {
-                    mToolbar.setNavigationIcon(null);
+                    Fragment current = getChildFragmentManager().findFragmentById(R.id.main_frame);
+                    if(!(current instanceof SearchFragment)) {
+                        ConstraintLayout layout = getActivity().findViewById(R.id.main_layout);
+                        Toolbar toolbar = layout.findViewById(R.id.toolbar_home);
+                        ImageButton buttonWriting = toolbar.findViewById(R.id.recipe_write);
+                        buttonWriting.setVisibility(View.GONE);
+                        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
+                        mSearchFragment = new SearchFragment();
+                        NavDirections action = MainPagerFragmentDirections.actionMainPagerFragmentToSearchFragment();
+                        Navigation.findNavController(mView).navigate(action);
+                    }
                 }
+//                else {
+//                    mToolbar.setNavigationIcon(null);
+//                }
 //                else {
 //                    buttonWriting.setVisibility(View.VISIBLE);
 //                    mSearchView.clearFocus();
@@ -95,15 +97,15 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        mSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                mToolbar.setNavigationIcon(null);
-                buttonWriting.setVisibility(View.VISIBLE);
-                getActivity().onBackPressed();
-                return false;
-            }
-        });
+//        mSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+//            @Override
+//            public boolean onClose() {
+//                mToolbar.setNavigationIcon(null);
+//                buttonWriting.setVisibility(View.VISIBLE);
+//                getActivity().onBackPressed();
+//                return false;
+//            }
+//        });
 
         return mView;
     }

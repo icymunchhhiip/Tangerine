@@ -1,7 +1,11 @@
 package com.sixsense.tangerine.home;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +15,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.sixsense.tangerine.MainActivity;
 import com.sixsense.tangerine.R;
+import com.sixsense.tangerine.main.MainPagerFragmentDirections;
 import com.sixsense.tangerine.network.HttpClient;
 import com.sixsense.tangerine.network.HttpInterface;
 import com.sixsense.tangerine.network.RecipeIntroList;
@@ -31,10 +40,12 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     private String recipeImageURL = HttpClient.BASE_URL + "recipe/imgs/";
     private RecipeViewHolder recipeViewHolder;
     private String checkedState;
+    private Fragment fragment;
 
 
-    public RecipeListAdapter(List<RecipeIntroList.RecipeIntro> recipeIntro) {
+    public RecipeListAdapter(List<RecipeIntroList.RecipeIntro> recipeIntro, Fragment fragment) {
         this.recipeIntro = recipeIntro;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -42,6 +53,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     public RecipeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.home_recipe_item, parent, false);
+
         return new RecipeViewHolder(view);
     }
 
@@ -52,15 +64,35 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
                 .load(recipeImageURL + recipeIntro.get(position).recipe_img)
                 .into(recipeViewHolder.recipeImg);
 
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(position!=RecyclerView.NO_POSITION){
+                    NavDirections navDirections;
+                    if(fragment instanceof RecentRecipeListFragment) {
+                        navDirections = MainPagerFragmentDirections.actionMainPagerFragmentToInRecipeFragment(recipeIntro.get(position));
+                    } else {
+                        navDirections = ResultFragmentDirections.actionResultFragmentToInRecipeFragment(recipeIntro.get(position));
+                    }
+                    Navigation.findNavController(fragment.getView()).navigate(navDirections);
+
+                }
+            }
+        });
+
         recipeViewHolder.recipeName.setText(recipeIntro.get(position).recipe_name);
 
-        recipeViewHolder.recipeMin.setText(recipeIntro.get(position).recipe_min);
+        String subMin = recipeIntro.get(position).recipe_min.substring(0,recipeIntro.get(position).recipe_min.length()-3);
+        recipeViewHolder.recipeMin.setText(subMin);
 
-        recipeViewHolder.recipeTags.setText(recipeIntro.get(position).recipe_tags);
+        String subTags = recipeIntro.get(position).recipe_tags.substring(0,recipeIntro.get(position).recipe_tags.length()-3);
+        recipeViewHolder.recipeTags.setText(subTags);
 
         Glide.with(view.getContext())
                 .load(recipeIntro.get(position).mem_profile)
                 .into(recipeViewHolder.memProfile);
+        recipeViewHolder.memProfile.setBackground(new ShapeDrawable(new OvalShape()));
+        recipeViewHolder.memProfile.setClipToOutline(true);
 
         recipeViewHolder.memName.setText(recipeIntro.get(position).mem_name);
 
@@ -154,9 +186,11 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         ImageView memProfile;
         TextView memName;
         CheckBox recipeFav;
+        View view;
 
         public RecipeViewHolder(View view) {
             super(view);
+            this.view = view;
             recipeImg = view.findViewById(R.id.recipe_img);
             recipeName = view.findViewById(R.id.recipe_name);
             recipeMin = view.findViewById(R.id.recipe_min);
@@ -165,7 +199,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
             memName = view.findViewById(R.id.mem_name);
             recipeFav = view.findViewById(R.id.recipe_fav);
 
-
         }
     }
 
@@ -173,5 +206,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     public int getItemCount() {
         return recipeIntro.size();
     }
+
 
 }
