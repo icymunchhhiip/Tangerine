@@ -2,6 +2,7 @@ package com.sixsense.tangerine;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -24,7 +25,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.kakao.usermgmt.response.MeV2Response;
 import com.sixsense.tangerine.home.HomeFragment;
+import com.sixsense.tangerine.home.InRecipeFragment;
 import com.sixsense.tangerine.home.SearchFragment;
+import com.sixsense.tangerine.home.write.WriteRecipeActivity;
 
 import java.security.MessageDigest;
 
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static MeV2Response MY_ACCOUNT;
     long backKeyPressedTime;
+    ImageButton buttonWriting;
 
     private void getKeyHash() {
         try {
@@ -53,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
         getKeyHash();
 
         Toolbar toolbar = findViewById(R.id.toolbar_home);
+        buttonWriting = toolbar.findViewById(R.id.recipe_write);
+        buttonWriting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WriteRecipeActivity.class);
+                startActivity(intent);
+            }
+        });
 //        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
 //        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -103,11 +115,15 @@ public class MainActivity extends AppCompatActivity {
                 ConstraintLayout layout = findViewById(R.id.main_layout);
                 Toolbar toolbar = layout.findViewById(R.id.toolbar_home);
                 toolbar.setNavigationIcon(null);
-                ImageButton buttonWriting = toolbar.findViewById(R.id.recipe_write);
                 if(buttonWriting.getVisibility()!=View.VISIBLE) {
                     buttonWriting.setVisibility(View.VISIBLE);
                 }
                 Log.d("yo","yes");
+            } else if (current instanceof InRecipeFragment){
+                ConstraintLayout layout = findViewById(R.id.main_layout);
+                layout.findViewById(R.id.toolbar_show_title).setVisibility(View.GONE);
+                Toolbar toolbar = layout.findViewById(R.id.toolbar_home);
+                toolbar.setVisibility(View.VISIBLE);
             } else{
                 Log.d("yo","no");
                 Log.d("yo", String.valueOf(current.getClass()));

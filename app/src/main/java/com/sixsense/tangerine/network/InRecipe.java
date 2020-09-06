@@ -2,10 +2,11 @@ package com.sixsense.tangerine.network;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InRecipe {
+public class InRecipe implements Serializable {
     @SerializedName("r_id")
     public String rId;
     @SerializedName("level")
@@ -25,7 +26,7 @@ public class InRecipe {
     @SerializedName("recipe_list")
     public List<RecipeContent> recipeList = new ArrayList<>();
 
-    public class IngrInfo {
+    public class IngrInfo implements Serializable {
         @SerializedName("ingr_name")
         public String ingrName;
         @SerializedName("ingr_cnt")
@@ -34,7 +35,7 @@ public class InRecipe {
         public String ingrKcal;
     }
 
-    public class RecipeContent {
+    public class RecipeContent implements Serializable {
         @SerializedName("r_img")
         public String recipeImg;
         @SerializedName("r_desc")

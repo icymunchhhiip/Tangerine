@@ -37,13 +37,19 @@ public class SliderFragment extends Fragment implements BaseSliderView.OnSliderC
         View view = inflater.inflate(R.layout.home_slider, container, false);
 
         mSliderLayout = view.findViewById(R.id.slider);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         new MainEventCall().execute();
 
         mSliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Top);
         mSliderLayout.setDuration(3000);
         mSliderLayout.addOnPageChangeListener(this);
 
-        return view;
+//        super.onViewCreated(view, savedInstanceState);
     }
 
     @SuppressLint("StaticFieldLeak")

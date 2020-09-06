@@ -10,8 +10,8 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <include
-        android:id="@+id/toolbar_home"
-        layout="@layout/home_toolbar_inner"
+        android:id="@+id/toolbar_show_title"
+        layout="@layout/home_toolbar_show_title"
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent"/>
 

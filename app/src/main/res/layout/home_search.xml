@@ -418,7 +418,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/condition_button"
+        android:background="@drawable/condition"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/ok"
         android:textColor="@color/condition"

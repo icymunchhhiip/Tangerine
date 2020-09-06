@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_width="385dp"
+    android:layout_height="400dp"
+    android:id="@+id/ingr_popup_id"
+    android:background="@color/colorTangerine">
+
+
+    <LinearLayout
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="250dp"
+        android:layout_marginHorizontal="15dp">
+        <EditText
+            android:id="@+id/editSearch"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="재료명"
+            />
+        <ListView
+            android:scrollbars="vertical"
+            android:id="@+id/ingr_searchLV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentLeft="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="재료수:"
+                android:textSize="20dp"/>
+            <EditText
+                android:id="@+id/write_ingr_num_id"
+                android:gravity="center"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:hint="수량"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="unit:"
+                android:textSize="20dp"/>
+            <EditText
+                android:id="@+id/write_ingr_unit_id"
+                android:gravity="center"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:hint="단위"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true">
+            <EditText
+                android:id="@+id/write_ingr_kcal_id"
+                android:gravity="center"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:hint="칼로리"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="kcal"
+                android:textSize="20dp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+    <Button
+        android:gravity="center"
+        android:id="@+id/register_ingr_id"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="등록"/>
+
+    <TextView
+        android:layout_gravity="center"
+        android:id="@+id/popup_alarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

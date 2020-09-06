@@ -1,6 +1,8 @@
 package com.sixsense.tangerine.home;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.sixsense.tangerine.R;
+import com.sixsense.tangerine.home.write.WriteRecipeActivity;
 import com.sixsense.tangerine.main.MainPagerFragmentDirections;
 
 import java.security.cert.TrustAnchor;
@@ -80,6 +83,7 @@ public class HomeFragment extends Fragment {
                         Toolbar toolbar = layout.findViewById(R.id.toolbar_home);
                         ImageButton buttonWriting = toolbar.findViewById(R.id.recipe_write);
                         buttonWriting.setVisibility(View.GONE);
+
                         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
                         mSearchFragment = new SearchFragment();
                         NavDirections action = MainPagerFragmentDirections.actionMainPagerFragmentToSearchFragment();

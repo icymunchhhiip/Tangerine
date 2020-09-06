@@ -27,6 +27,8 @@ public class RecipeIntroList {
         public String recipe_tags;
         @SerializedName("mem_profile")
         public String mem_profile;
+        @SerializedName("mem_id")
+        public Long mem_id;
         @SerializedName("mem_name")
         public String mem_name;
         @SerializedName("recipe_fav")

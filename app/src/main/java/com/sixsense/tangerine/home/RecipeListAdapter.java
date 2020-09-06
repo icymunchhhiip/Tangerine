@@ -14,7 +14,10 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavDirections;
@@ -69,6 +72,24 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
             public void onClick(View v) {
                 if(position!=RecyclerView.NO_POSITION){
                     NavDirections navDirections;
+                    ConstraintLayout layout = fragment.getActivity().findViewById(R.id.main_layout);
+                    Toolbar toolbar = layout.findViewById(R.id.toolbar_show_title);
+                    layout.findViewById(R.id.toolbar_home).setVisibility(View.GONE);
+                    toolbar.setVisibility(View.VISIBLE);
+                    if(recipeIntro.get(position).mem_id == MainActivity.MY_ACCOUNT.getId()){
+                        toolbar.findViewById(R.id.edit_recipe).setVisibility(View.VISIBLE);
+                        toolbar.findViewById(R.id.del_recipe).setVisibility(View.VISIBLE);
+                    }else {
+                        toolbar.findViewById(R.id.edit_recipe).setVisibility(View.GONE);
+                        toolbar.findViewById(R.id.del_recipe).setVisibility(View.GONE);
+                    }
+                    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            fragment.getActivity().onBackPressed();
+                        }
+                    });
+//                    mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
                     if(fragment instanceof RecentRecipeListFragment) {
                         navDirections = MainPagerFragmentDirections.actionMainPagerFragmentToInRecipeFragment(recipeIntro.get(position));
                     } else {
@@ -142,7 +163,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
         @Override
         protected String doInBackground(Integer... integers) {
-            //progressbar
             HttpInterface httpInterface = HttpClient.getClient().create(HttpInterface.class);
             Call<String> call = httpInterface.setRecipeLike((int)MainActivity.MY_ACCOUNT.getId(), integers[0], checkedState);
             String response = null;

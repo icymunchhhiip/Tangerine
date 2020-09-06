@@ -3,6 +3,8 @@
     package="com.sixsense.tangerine">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name="com.sixsense.tangerine.login.GlobalApplication"
@@ -22,6 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".home.write.WriteRecipeActivity"/>
     </application>
 
 </manifest>

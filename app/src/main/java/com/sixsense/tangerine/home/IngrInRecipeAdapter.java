@@ -5,40 +5,62 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.network.InRecipe;
 
 import java.util.List;
 
-public class IngrInRecipeAdapter extends ArrayAdapter {
-    Context context;
+public class IngrInRecipeAdapter extends RecyclerView.Adapter<IngrInRecipeAdapter.IngrViewHolder> {
+    View view;
     List<InRecipe.IngrInfo> resource;
 
-    public IngrInRecipeAdapter(@NonNull Context context, List<InRecipe.IngrInfo> resource) {
-        super(context, R.layout.home_ingrlist, resource);
-        this.context=context;
+    public IngrInRecipeAdapter(List<InRecipe.IngrInfo> resource) {
         this.resource = resource;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View row=convertView;
-        if(convertView==null)
-            row = LayoutInflater.from(getContext()).inflate(R.layout.home_ingrlist, parent, false);
+    public IngrInRecipeAdapter.IngrViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.home_ingrlist, parent, false);
 
-        TextView ingr = row.findViewById(R.id.ingrTV);
-        TextView cnt = row.findViewById(R.id.numTV);
-        TextView kcal = row.findViewById(R.id.kcalTV);
+        return new IngrInRecipeAdapter.IngrViewHolder(view);
+    }
 
-        ingr.setText(resource.get(position).ingrName);
-        cnt.setText(resource.get(position).ingrCnt);
-        kcal.setText(resource.get(position).ingrKcal);
-        return row;
+    @Override
+    public void onBindViewHolder(IngrInRecipeAdapter.IngrViewHolder holder, final int position) {
+        holder.ingr.setText(resource.get(position).ingrName);
+        holder.cnt.setText(resource.get(position).ingrCnt);
+        holder.kcal.setText(resource.get(position).ingrKcal);
+
+    }
+
+    public class IngrViewHolder extends RecyclerView.ViewHolder {
+        TextView ingr;
+        TextView cnt;
+        TextView kcal;
+        View view;
+
+        public IngrViewHolder(View view) {
+            super(view);
+            this.view = view;
+            ingr = view.findViewById(R.id.ingrTV);
+            cnt = view.findViewById(R.id.numTV);
+            kcal = view.findViewById(R.id.kcalTV);
+
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return resource.size();
     }
 }
