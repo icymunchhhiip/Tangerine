@@ -80,8 +80,8 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
                         toolbar.findViewById(R.id.edit_recipe).setVisibility(View.VISIBLE);
                         toolbar.findViewById(R.id.del_recipe).setVisibility(View.VISIBLE);
                     }else {
-                        toolbar.findViewById(R.id.edit_recipe).setVisibility(View.GONE);
-                        toolbar.findViewById(R.id.del_recipe).setVisibility(View.GONE);
+                        toolbar.findViewById(R.id.edit_recipe).setVisibility(View.INVISIBLE);
+                        toolbar.findViewById(R.id.del_recipe).setVisibility(View.INVISIBLE);
                     }
                     toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                         @Override

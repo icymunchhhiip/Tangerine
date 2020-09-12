@@ -109,4 +109,5 @@ public class RecentRecipeListFragment extends Fragment {
         }
 
     }
+
 }

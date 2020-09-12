@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -153,6 +154,20 @@ public class InRecipeFragment extends Fragment {
                     }
                 });
             }
+            if(del.getVisibility()==View.VISIBLE) {
+                del.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String state="fail";
+                        try {
+                             state = new DeleteCall().execute().get();
+                             if(state.equals("success")){
+                                 getActivity().onBackPressed();
+                             }
+                        } catch (Exception e){ }
+                    }
+                });
+            }
 //            if(del.getVisibility() == View.VISIBLE){
 //                del.setOnClickListener(new View.OnClickListener() {
 //                    @Override
@@ -242,6 +257,28 @@ public class InRecipeFragment extends Fragment {
 
             }
 
+        }
+
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class DeleteCall extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... Voids) {
+            HttpInterface httpInterface = HttpClient.getClient().create(HttpInterface.class);
+            Call<String> call = httpInterface.deleteRecipe(currentInfo.recipe_id);
+            String response = null;
+            try {
+                response = call.execute().body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPreExecute() {
         }
 
     }

@@ -38,7 +38,8 @@ public class IngrInRecipeAdapter extends RecyclerView.Adapter<IngrInRecipeAdapte
     @Override
     public void onBindViewHolder(IngrInRecipeAdapter.IngrViewHolder holder, final int position) {
         holder.ingr.setText(resource.get(position).ingrName);
-        holder.cnt.setText(resource.get(position).ingrCnt);
+        String cnt = resource.get(position).ingrCount+resource.get(position).ingrUnit;
+        holder.cnt.setText(cnt);
         holder.kcal.setText(resource.get(position).ingrKcal);
 
     }

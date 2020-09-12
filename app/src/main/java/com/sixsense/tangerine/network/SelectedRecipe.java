@@ -6,9 +6,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InRecipe implements Serializable {
-    @SerializedName("r_id")
-    public String rId;
+public class SelectedRecipe {
+    @SerializedName("mem_id")
+    public Long mem_id;
+    @SerializedName("recipe_name")
+    public String recipe_name;
     @SerializedName("level")
     public String level;
     @SerializedName("food_type")
@@ -22,9 +24,9 @@ public class InRecipe implements Serializable {
     @SerializedName("total_kcal")
     public String totalKcal;
     @SerializedName("ingr_list")
-    public List<IngrInfo> ingrList = new ArrayList<>();
+    public List<SelectedRecipe.IngrInfo> ingrList = new ArrayList<>();
     @SerializedName("recipe_list")
-    public List<RecipeContent> recipeList = new ArrayList<>();
+    public List<SelectedRecipe.RecipeContent> recipeList = new ArrayList<>();
 
     public class IngrInfo implements Serializable {
         @SerializedName("ingr_name")

@@ -22,7 +22,7 @@
                     android:layout_gravity="center"
                     android:id="@+id/food_image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/exdescimg"
                     android:layout_marginBottom="@dimen/card_content_margin"/>
@@ -51,6 +51,7 @@
                             android:layout_marginHorizontal="10dp"
                             android:text="00:00:00"
                             android:textSize="18dp"
+                            android:minHeight="@dimen/no_dp"
                             android:textColor="@color/colorTangerine"
                             />
                         <ImageView

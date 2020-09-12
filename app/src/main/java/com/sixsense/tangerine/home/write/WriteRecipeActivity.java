@@ -1,7 +1,9 @@
 package com.sixsense.tangerine.home.write;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,17 +18,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kakao.network.IRequest;
 import com.sixsense.tangerine.R;
+import com.sixsense.tangerine.home.RecentRecipeListFragment;
+import com.sixsense.tangerine.home.RecipeListAdapter;
+import com.sixsense.tangerine.network.HttpClient;
+import com.sixsense.tangerine.network.HttpInterface;
 import com.sixsense.tangerine.network.InRecipe;
 import com.sixsense.tangerine.network.RecipeIntroList;
+import com.sixsense.tangerine.network.SelectedRecipe;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+
+import static com.sixsense.tangerine.MainActivity.MY_ACCOUNT;
 
 public class WriteRecipeActivity extends AppCompatActivity {
     private RsettingPrivate storeRsetting  = new RsettingPrivate();
@@ -62,6 +76,7 @@ public class WriteRecipeActivity extends AppCompatActivity {
 
     EditText recipe_write_title;
 
+    SelectedRecipe selectedRecipe;
 
 
     @Override
@@ -73,32 +88,62 @@ public class WriteRecipeActivity extends AppCompatActivity {
 
         rv_ingr=(RecyclerView)findViewById(R.id.RV_ingr_id);
         rv_ingr_itemArrayList = new ArrayList<ingr_list_item>();
+        //rv_ingr_itemlist에 불러온 값 넣기
 
         recipe_write_title = findViewById(R.id.recipe_write_title);
         write_recipe_cancle_bt=findViewById(R.id.write_recipe_cancle_bt);
         write_recipe_finished_bt = findViewById(R.id.write_recipe_finished_bt);
+        write_recipe_cancle_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        write_recipe_finished_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    String state="fail";
+                    state=new InsertCall().execute(selectedRecipe).get();
+                    if(state.equals("success")){
+                        storeDB();
+                        onBackPressed();
+                    }
+                } catch (Exception e){ }
+            }
+        });
 
         currentInfo = (RecipeIntroList.RecipeIntro) getIntent().getSerializableExtra("currentIntro");
-        getIntent().getSerializableExtra("currentDetail");
+        currentDetail = (InRecipe) getIntent().getSerializableExtra("currentDetail");
         if(currentInfo!=null){
             recipe_write_title.setText(currentInfo.recipe_name);
         }
+
         if(currentDetail!=null){
             getbuttons(currentDetail.foodType,currentDetail.level,currentDetail.rTool,currentDetail.rTime);
+            Recipe_desc(currentDetail.recipeList);
+            for(InRecipe.IngrInfo ingr:currentDetail.ingrList){
+                rv_ingr_itemArrayList.add(new ingr_list_item(ingr.ingrName, ingr.ingrCount, ingr.ingrUnit, ingr.ingrKcal));
+            }
+
         }
         else {
             getbuttons(null,null,null,null);
+            Recipe_desc(null);
+
         }
-        storeDB();
-        Recipe_desc();
+        rv_ingr_Adapter = new AddedListAdapter(WriteRecipeActivity.this, rv_ingr_itemArrayList);
+        rv_ingr.setLayoutManager(new LinearLayoutManager(WriteRecipeActivity.this));
+        rv_ingr_Adapter.notifyItemInserted(rv_ingr_itemArrayList.size()+1);
+        rv_ingr.setAdapter(rv_ingr_Adapter);
+
         ingr_add_bt.setOnClickListener(new View.OnClickListener() {
             int num = 0;
             @Override
             public void onClick(View v) {
-                rv_ingr_Adapter = new AddedListAdapter(WriteRecipeActivity.this, rv_ingr_itemArrayList);
-                rv_ingr.setLayoutManager(new LinearLayoutManager(WriteRecipeActivity.this));
-
                 PopUP();
+                rv_ingr_Adapter.notifyDataSetChanged();
+                rv_ingr_Adapter.notifyItemInserted(rv_ingr_itemArrayList.size()+1);
                 //listView.setAdapter(myListAdapter);
             }
         });
@@ -108,9 +153,11 @@ public class WriteRecipeActivity extends AppCompatActivity {
     public void storeDB(){
 
         storeRsetting.setR_likes(0);
-        if(storeRsetting.getR_title()==null){
+        if(recipe_write_title.getText()==null){
             Toast.makeText(getApplicationContext(), "제목이 입력되지 않았습니다.", Toast.LENGTH_LONG).show();
             return;
+        } else {
+            selectedRecipe.recipe_name = recipe_write_title.getText().toString();
         }
         if(storeRsetting.getR_foodT()==0){
             Toast.makeText(getApplicationContext(), "종류가 선택되지 않았습니다.", Toast.LENGTH_LONG).show();
@@ -131,11 +178,19 @@ public class WriteRecipeActivity extends AppCompatActivity {
 
 
         int recipeIngrSize = rv_ingr_itemArrayList.size();
-        recipeIngrPrivate = new RecipeIngrPrivate[recipeIngrSize];
         if(recipeIngrSize==0){
-            Toast.makeText(getApplicationContext(), "레시피를 입력하지 않았습니다.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "재료를 입력하지 않았습니다.", Toast.LENGTH_LONG).show();
             return;
-
+        } else {
+            selectedRecipe.ingrList = new ArrayList<>();
+            for(ingr_list_item item : rv_ingr_itemArrayList){
+                SelectedRecipe.IngrInfo tmp = selectedRecipe.new IngrInfo();
+                tmp.ingrName = item.ingr_list_name;
+                tmp.ingrCount = item.ingr_list_num;
+                tmp.ingrKcal = item.ingr_list_kcal;
+                tmp.ingrUnit = item.ingr_list_unit;
+                selectedRecipe.ingrList.add(tmp);
+            }
         }
 
         int rid = 0;
@@ -147,21 +202,25 @@ public class WriteRecipeActivity extends AppCompatActivity {
             recipeIngrPrivate[i].setRkcal(Float.parseFloat(ingr.ingr_list_kcal));
             recipeIngrPrivate[i].setRunit(ingr.ingr_list_unit);
         }
-
-        write_recipe_finished_bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
-    public void Recipe_desc(){
+
+    public void Recipe_desc(List<InRecipe.RecipeContent> recipeList){
         desc_add_bt = findViewById(R.id.desc_add_bt);
 
         recipe_desc_RV = findViewById(R.id.RV_recipe_desc_id);
         recipe_desc_AL= new ArrayList<RecipeDescItem>();
         recipe_desc_AD = new RecipeDescAdapter(WriteRecipeActivity.this, recipe_desc_AL);
-        recipe_desc_AL.add(new RecipeDescItem("","","", 0,"00:00:00"));
+        if(recipeList!=null){
+            for(InRecipe.RecipeContent content :recipeList){
+                if(content.recipeTime==null){
+                    recipe_desc_AL.add(new RecipeDescItem(content.recipeImg, content.recipeDesc, content.descDetail, 0, "00:00:00"));
+                }else {
+                    recipe_desc_AL.add(new RecipeDescItem(content.recipeImg, content.recipeDesc, content.descDetail, 0, content.recipeTime));
+                }
+            }
+        }else {
+            recipe_desc_AL.add(new RecipeDescItem("", "", "", 0, "00:00:00"));
+        }
 
         recipe_desc_RV.setLayoutManager(new LinearLayoutManager(WriteRecipeActivity.this, LinearLayoutManager.HORIZONTAL, false));
         recipe_desc_RV.setAdapter(recipe_desc_AD);
@@ -219,11 +278,11 @@ public class WriteRecipeActivity extends AppCompatActivity {
 
         rv_ingr.setLayoutManager(new LinearLayoutManager(WriteRecipeActivity.this));
 
-        exampleList.add(new ingr_list_item("감자","0", "개","45"));
-        exampleList.add(new ingr_list_item("고구마","0", "개","80"));
-        exampleList.add(new ingr_list_item("오이","0", "개","9"));
-        exampleList.add(new ingr_list_item("돼지감자","0", "개","70"));
-        exampleList.add(new ingr_list_item("고추","0", "개","30"));
+        try {
+            List<InRecipe.IngrInfo> ingrInfoList = new IngrListCall().execute().get();
+            putExL(ingrInfoList);
+        }catch (Exception e){}
+
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,7 +301,7 @@ public class WriteRecipeActivity extends AppCompatActivity {
                     write_ingr_num_id.setText("");
                 }
                 try {
-                    ingrkcal= Integer.parseInt(String.valueOf(write_ingr_kcal_id.getText()));
+                    ingrkcal= Float.parseFloat(String.valueOf(write_ingr_kcal_id.getText()));
                     nk = ingrkcal+"";
                 }catch (Exception e){
                     write_ingr_kcal_id.setText("");
@@ -256,7 +315,6 @@ public class WriteRecipeActivity extends AppCompatActivity {
                     float totalkcal = ingrkcal*ingrnum;
                     nk = String.valueOf(totalkcal);
                     rv_ingr_itemArrayList.add(new ingr_list_item(ingrname, nn, ingrunit, nk));
-                    rv_ingr.setAdapter(rv_ingr_Adapter);
 
                     rv_ingr_Adapter.setOnItemClickListener(new AddedListAdapter.OnItemClickListener(){
                         @Override
@@ -282,8 +340,6 @@ public class WriteRecipeActivity extends AppCompatActivity {
                 else{alarm.setText("칼로리에는 정수만, 재료수에는 숫자만 입력해주세요.");}
             }
         });
-
-
 
         showSearchList =  new ArrayList<ingr_list_item>();
         showSearchList.addAll(exampleList);
@@ -356,7 +412,11 @@ public class WriteRecipeActivity extends AppCompatActivity {
         // 리스트 데이터가 변경되었으므로 아답터를 갱신하여 검색된 데이터를 화면에 보여준다.
         searchAdapter.notifyDataSetChanged();
     }
-
+    private void putExL(List<InRecipe.IngrInfo> ingrInfoList){
+        for(InRecipe.IngrInfo ingrInfo : ingrInfoList){
+            exampleList.add(new ingr_list_item(ingrInfo.ingrName,ingrInfo.ingrCount, ingrInfo.ingrUnit,ingrInfo.ingrKcal));
+        }
+    }
     public void getbuttons(String foodType, String level, String rTool, String rTime){
         ToggleButton foodtype_all, foodtype_meal, foodtype_snack;
         ToggleButton foodtool_all, foodtool_fire, foodtool_microwave, foodtool_oven, foodtool_airfryer;
@@ -385,74 +445,82 @@ public class WriteRecipeActivity extends AppCompatActivity {
         foodtool_oven = findViewById(R.id.foodtool_oven);
         foodtool_airfryer = findViewById(R.id.foodtool_airfryer);
 
-        switch (foodType){
-            case "난이도 전체":
-                foodtype_all.setChecked(true);
-                break;
-            case "한끼":
-                foodtype_meal.setChecked(true);
-                break;
-            case "간식":
-                foodtype_snack.setChecked(true);
-                break;
-            default:
+        if(foodType!=null){
+            switch (foodType){
+                case "난이도 전체":
+                    foodtype_all.setChecked(true);
+                    break;
+                case "한끼":
+                    foodtype_meal.setChecked(true);
+                    break;
+                case "간식":
+                    foodtype_snack.setChecked(true);
+                    break;
+                default:
+            }
         }
 
-        switch (level){
-            case "난이도 전체":
-                foodlevel_all.setChecked(true);
-                break;
-            case "초간단":
-                foodlevel_veryeasy.setChecked(true);
-                break;
-            case "초급":
-                foodlevel_easy.setChecked(true);
-                break;
-            case "중급":
-                foodtime_medium.setChecked(true);
-                break;
-            case "고급":
-                foodlevel_hard.setChecked(true);
-                break;
-            default:
+        if(level!=null){
+            switch (level){
+                case "난이도 전체":
+                    foodlevel_all.setChecked(true);
+                    break;
+                case "초간단":
+                    foodlevel_veryeasy.setChecked(true);
+                    break;
+                case "초급":
+                    foodlevel_easy.setChecked(true);
+                    break;
+                case "중급":
+                    foodtime_medium.setChecked(true);
+                    break;
+                case "고급":
+                    foodlevel_hard.setChecked(true);
+                    break;
+                default:
+            }
         }
 
-        switch (rTool){
-            case "도구 전체":
-                foodtool_all.setChecked(true);
-                break;
-            case "불":
-                foodtool_fire.setChecked(true);
-                break;
-            case "전자레인지":
-                foodtool_microwave.setChecked(true);
-                break;
-            case "오븐":
-                foodtool_oven.setChecked(true);
-                break;
-            case "에어프라이어":
-                foodtool_airfryer.setChecked(true);
-                break;
-            default:
+        if(rTool!=null){
+            switch (rTool){
+                case "도구 전체":
+                    foodtool_all.setChecked(true);
+                    break;
+                case "불":
+                    foodtool_fire.setChecked(true);
+                    break;
+                case "전자레인지":
+                    foodtool_microwave.setChecked(true);
+                    break;
+                case "오븐":
+                    foodtool_oven.setChecked(true);
+                    break;
+                case "에어프라이어":
+                    foodtool_airfryer.setChecked(true);
+                    break;
+                default:
+            }
         }
 
-        switch (rTime){
-            case "시간 전체":
-                foodtime_all.setChecked(true);
-                break;
-            case "0-30분":
-                foodtime_veryshort.setChecked(true);
-                break;
-            case "30분-1시간":
-                foodtime_short.setChecked(true);
-                break;
-            case "1-2시간":
-                foodtime_medium.setChecked(true);
-                break;
-            case "2시간 이상":
-                foodtime_long.setChecked(true);
-                break;
-            default:
+        if(rTime!=null){
+            switch (rTime){
+                case "시간 전체":
+                    foodtime_all.setChecked(true);
+                    break;
+                case "0-30분":
+                    foodtime_veryshort.setChecked(true);
+                    break;
+                case "30분-1시간":
+                    foodtime_short.setChecked(true);
+                    break;
+                case "1-2시간":
+                    foodtime_medium.setChecked(true);
+                    break;
+                case "2시간 이상":
+                    foodtime_long.setChecked(true);
+                    break;
+                default:
+            }
         }
 
         toggleClickCheck(2, foodtype_all, foodtype_meal, foodtype_snack);
@@ -540,6 +608,42 @@ public class WriteRecipeActivity extends AppCompatActivity {
         elsev2.setChecked(false);
         elsev3.setChecked(false);
         elsev4.setChecked(false);
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class IngrListCall extends AsyncTask<Void, Void, List<InRecipe.IngrInfo>> {
+
+        @Override
+        protected List<InRecipe.IngrInfo> doInBackground(Void... voids) {
+            HttpInterface httpInterface = HttpClient.getClient().create(HttpInterface.class);
+            Call<List<InRecipe.IngrInfo>> call = httpInterface.getIngrs();
+            List<InRecipe.IngrInfo> resource = null;
+            try {
+                resource = call.execute().body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return resource;
+        }
+
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class InsertCall extends AsyncTask<SelectedRecipe, Void, String> {
+        @Override
+        protected String doInBackground(SelectedRecipe... selectedRecipes) {
+            HttpInterface httpInterface = HttpClient.getClient().create(HttpInterface.class);
+            Call<String> call = httpInterface.setRecipe(selectedRecipes[0]);
+            String response = null;
+            try {
+                response = call.execute().body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+
     }
 
 

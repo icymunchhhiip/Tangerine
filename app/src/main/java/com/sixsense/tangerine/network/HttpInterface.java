@@ -1,9 +1,11 @@
 package com.sixsense.tangerine.network;
 
 import java.lang.reflect.Member;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -45,4 +47,19 @@ public interface HttpInterface {
     Call<InRecipe> getInRecipe(
             @Query("recipe_id") int recipe_id
     );
+
+    @GET("/recipe/ingrs.php")
+    Call<List<InRecipe.IngrInfo>> getIngrs();
+
+    @POST("/recipe/insert-recipe.php")
+    Call<String> setRecipe(
+            @Body SelectedRecipe selectedRecipe
+    );
+
+    @DELETE("/recipe/del-recipe.php")
+    Call<String> deleteRecipe(
+            @Query("recipe_id") int recipe_id
+    );
+
+
 }
