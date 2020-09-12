@@ -10,15 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -26,60 +22,62 @@ import androidx.navigation.Navigation;
 import com.sixsense.tangerine.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SearchFragment extends Fragment {
-    private CheckBox mKindsAll;
-    private CheckBox mKindsMeal;
-    private CheckBox mKindsSnack;
-    private CheckBox mLevelAll;
-    private CheckBox mLevelVeryEasy;
-    private CheckBox mLevelEasy;
-    private CheckBox mLevelMiddle;
-    private CheckBox mLevelHard;
-    private CheckBox mToolAll;
-    private CheckBox mToolFire;
-    private CheckBox mToolMicrowave;
-    private CheckBox mToolOven;
-    private CheckBox mToolAir;
-    private CheckBox mTimeAll;
-    private CheckBox mTimeUntil30m;
-    private CheckBox mTimeUntil1h;
-    private CheckBox mTimeUntil2h;
-    private CheckBox mTimeOver2h;
+    private CheckBox mCheckBoxKindsAll;
+    private CheckBox mCheckBoxKindsMeal;
+    private CheckBox mCheckBoxKindsSnack;
+    private CheckBox mCheckBoxLevelAll;
+    private CheckBox mCheckBoxLevelVeryEasy;
+    private CheckBox mCheckBoxLevelEasy;
+    private CheckBox mCheckBoxLevelMiddle;
+    private CheckBox mCheckBoxLevelHard;
+    private CheckBox mCheckBoxToolAll;
+    private CheckBox mCheckBoxToolFire;
+    private CheckBox mCheckBoxToolMicrowave;
+    private CheckBox mCheckBoxToolOven;
+    private CheckBox mCheckBoxToolAir;
+    private CheckBox mCheckBoxTimeAll;
+    private CheckBox mCheckBoxTimeUntil30m;
+    private CheckBox mCheckBoxTimeUntil1h;
+    private CheckBox mCheckBoxTimeUntil2h;
+    private CheckBox mCheckBoxTimeOver2h;
 
     private View view;
+    private static final String TAG = SearchFragment.class.getSimpleName();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.home_search, container, false);
 
-        mKindsAll = view.findViewById(R.id.kinds_all);
-        mKindsMeal = view.findViewById(R.id.kinds_meal);
-        mKindsSnack = view.findViewById(R.id.kinds_snack);
+        mCheckBoxKindsAll = view.findViewById(R.id.kinds_all);
+        mCheckBoxKindsMeal = view.findViewById(R.id.kinds_meal);
+        mCheckBoxKindsSnack = view.findViewById(R.id.kinds_snack);
 
-        mLevelAll = view.findViewById(R.id.level_all);
-        mLevelVeryEasy = view.findViewById(R.id.level_very_easy);
-        mLevelEasy = view.findViewById(R.id.level_easy);
-        mLevelMiddle = view.findViewById(R.id.level_middle);
-        mLevelHard = view.findViewById(R.id.level_hard);
+        mCheckBoxLevelAll = view.findViewById(R.id.level_all);
+        mCheckBoxLevelVeryEasy = view.findViewById(R.id.level_very_easy);
+        mCheckBoxLevelEasy = view.findViewById(R.id.level_easy);
+        mCheckBoxLevelMiddle = view.findViewById(R.id.level_middle);
+        mCheckBoxLevelHard = view.findViewById(R.id.level_hard);
 
-        mToolAll = view.findViewById(R.id.tool_all);
-        mToolFire = view.findViewById(R.id.tool_fire);
-        mToolMicrowave = view.findViewById(R.id.tool_microwave);
-        mToolOven = view.findViewById(R.id.tool_oven);
-        mToolAir = view.findViewById(R.id.tool_air);
+        mCheckBoxToolAll = view.findViewById(R.id.tool_all);
+        mCheckBoxToolFire = view.findViewById(R.id.tool_fire);
+        mCheckBoxToolMicrowave = view.findViewById(R.id.tool_microwave);
+        mCheckBoxToolOven = view.findViewById(R.id.tool_oven);
+        mCheckBoxToolAir = view.findViewById(R.id.tool_air);
 
-        mTimeAll = view.findViewById(R.id.time_all);
-        mTimeUntil30m = view.findViewById(R.id.time_until_30m);
-        mTimeUntil1h = view.findViewById(R.id.time_until_1h);
-        mTimeUntil2h = view.findViewById(R.id.time_until_2h);
-        mTimeOver2h = view.findViewById(R.id.time_over_2h);
+        mCheckBoxTimeAll = view.findViewById(R.id.time_all);
+        mCheckBoxTimeUntil30m = view.findViewById(R.id.time_until_30m);
+        mCheckBoxTimeUntil1h = view.findViewById(R.id.time_until_1h);
+        mCheckBoxTimeUntil2h = view.findViewById(R.id.time_until_2h);
+        mCheckBoxTimeOver2h = view.findViewById(R.id.time_over_2h);
 
-        mKindsAll.setChecked(true);
-        mLevelAll.setChecked(true);
-        mToolAll.setChecked(true);
-        mTimeAll.setChecked(true);
+        mCheckBoxKindsAll.setChecked(true);
+        mCheckBoxLevelAll.setChecked(true);
+        mCheckBoxToolAll.setChecked(true);
+        mCheckBoxTimeAll.setChecked(true);
 
         LinearLayout kindsAllLayout = view.findViewById(R.id.kinds_all_lay);
         LinearLayout kindsMealLayout = view.findViewById(R.id.kinds_meal_lay);
@@ -100,98 +98,97 @@ public class SearchFragment extends Fragment {
         LinearLayout timeUntil2hLayout = view.findViewById(R.id.time_until_2h_lay);
         LinearLayout timeOver2hLayout = view.findViewById(R.id.time_over_2h_lay);
 
-        expandViewHitArea(kindsAllLayout, mKindsAll);
-        expandViewHitArea(kindsMealLayout, mKindsMeal);
-        expandViewHitArea(kindsSnackLayout, mKindsSnack);
-        expandViewHitArea(levelAllLayout, mLevelAll);
-        expandViewHitArea(levelVeryEasyLayout, mLevelVeryEasy);
-        expandViewHitArea(levelEasyLayout, mLevelEasy);
-        expandViewHitArea(levelMiddleLayout, mLevelMiddle);
-        expandViewHitArea(levelHardLayout, mLevelHard);
-        expandViewHitArea(toolAllLayout, mToolAll);
-        expandViewHitArea(toolFireLayout, mToolFire);
-        expandViewHitArea(toolMicrowaveLayout, mToolMicrowave);
-        expandViewHitArea(toolOvenLayout, mToolOven);
-        expandViewHitArea(toolAirLayout, mToolAir);
-        expandViewHitArea(timeAllLayout, mTimeAll);
-        expandViewHitArea(timeUntil30mLayout, mTimeUntil30m);
-        expandViewHitArea(timeUntil1hLayout, mTimeUntil1h);
-        expandViewHitArea(timeUntil2hLayout, mTimeUntil2h);
-        expandViewHitArea(timeOver2hLayout, mTimeOver2h);
+        expandViewHitArea(kindsAllLayout, mCheckBoxKindsAll);
+        expandViewHitArea(kindsMealLayout, mCheckBoxKindsMeal);
+        expandViewHitArea(kindsSnackLayout, mCheckBoxKindsSnack);
+        expandViewHitArea(levelAllLayout, mCheckBoxLevelAll);
+        expandViewHitArea(levelVeryEasyLayout, mCheckBoxLevelVeryEasy);
+        expandViewHitArea(levelEasyLayout, mCheckBoxLevelEasy);
+        expandViewHitArea(levelMiddleLayout, mCheckBoxLevelMiddle);
+        expandViewHitArea(levelHardLayout, mCheckBoxLevelHard);
+        expandViewHitArea(toolAllLayout, mCheckBoxToolAll);
+        expandViewHitArea(toolFireLayout, mCheckBoxToolFire);
+        expandViewHitArea(toolMicrowaveLayout, mCheckBoxToolMicrowave);
+        expandViewHitArea(toolOvenLayout, mCheckBoxToolOven);
+        expandViewHitArea(toolAirLayout, mCheckBoxToolAir);
+        expandViewHitArea(timeAllLayout, mCheckBoxTimeAll);
+        expandViewHitArea(timeUntil30mLayout, mCheckBoxTimeUntil30m);
+        expandViewHitArea(timeUntil1hLayout, mCheckBoxTimeUntil1h);
+        expandViewHitArea(timeUntil2hLayout, mCheckBoxTimeUntil2h);
+        expandViewHitArea(timeOver2hLayout, mCheckBoxTimeOver2h);
 
-        CheckBox.OnCheckedChangeListener onCheckedChangeListener = new CheckBox.OnCheckedChangeListener(){
+        CheckBox.OnCheckedChangeListener onCheckedChangeListener = new CheckBox.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     switch (buttonView.getId()) {
                         case R.id.kinds_all:
-                            mKindsMeal.setChecked(false);
-                            mKindsSnack.setChecked(false);
+                            mCheckBoxKindsMeal.setChecked(false);
+                            mCheckBoxKindsSnack.setChecked(false);
                             break;
                         case R.id.kinds_meal:
                         case R.id.kinds_snack:
-                            mKindsAll.setChecked(false);
+                            mCheckBoxKindsAll.setChecked(false);
                             break;
                         case R.id.level_all:
-                            mLevelVeryEasy.setChecked(false);
-                            mLevelEasy.setChecked(false);
-                            mLevelMiddle.setChecked(false);
-                            mLevelHard.setChecked(false);
+                            mCheckBoxLevelVeryEasy.setChecked(false);
+                            mCheckBoxLevelEasy.setChecked(false);
+                            mCheckBoxLevelMiddle.setChecked(false);
+                            mCheckBoxLevelHard.setChecked(false);
                             break;
                         case R.id.level_very_easy:
                         case R.id.level_easy:
                         case R.id.level_middle:
                         case R.id.level_hard:
-                            mLevelAll.setChecked(false);
+                            mCheckBoxLevelAll.setChecked(false);
                             break;
                         case R.id.tool_all:
-                            mToolFire.setChecked(false);
-                            mToolMicrowave.setChecked(false);
-                            mToolOven.setChecked(false);
-                            mToolAir.setChecked(false);
+                            mCheckBoxToolFire.setChecked(false);
+                            mCheckBoxToolMicrowave.setChecked(false);
+                            mCheckBoxToolOven.setChecked(false);
+                            mCheckBoxToolAir.setChecked(false);
                             break;
                         case R.id.tool_fire:
                         case R.id.tool_microwave:
                         case R.id.tool_oven:
                         case R.id.tool_air:
-                            mToolAll.setChecked(false);
+                            mCheckBoxToolAll.setChecked(false);
                             break;
                         case R.id.time_all:
-                            mTimeUntil30m.setChecked(false);
-                            mTimeUntil1h.setChecked(false);
-                            mTimeUntil2h.setChecked(false);
-                            mTimeOver2h.setChecked(false);
+                            mCheckBoxTimeUntil30m.setChecked(false);
+                            mCheckBoxTimeUntil1h.setChecked(false);
+                            mCheckBoxTimeUntil2h.setChecked(false);
+                            mCheckBoxTimeOver2h.setChecked(false);
                             break;
                         case R.id.time_until_30m:
                         case R.id.time_until_1h:
                         case R.id.time_until_2h:
                         case R.id.time_over_2h:
-                            mTimeAll.setChecked(false);
+                            mCheckBoxTimeAll.setChecked(false);
                             break;
                     }
                 }
             }
         };
 
-        mKindsAll.setOnCheckedChangeListener(onCheckedChangeListener);
-        mKindsMeal.setOnCheckedChangeListener(onCheckedChangeListener);
-        mKindsSnack.setOnCheckedChangeListener(onCheckedChangeListener);
-        mLevelAll.setOnCheckedChangeListener(onCheckedChangeListener);
-        mLevelVeryEasy.setOnCheckedChangeListener(onCheckedChangeListener);
-        mLevelEasy.setOnCheckedChangeListener(onCheckedChangeListener);
-        mLevelMiddle.setOnCheckedChangeListener(onCheckedChangeListener);
-        mLevelHard.setOnCheckedChangeListener(onCheckedChangeListener);
-        mToolAll.setOnCheckedChangeListener(onCheckedChangeListener);
-        mToolFire.setOnCheckedChangeListener(onCheckedChangeListener);
-        mToolMicrowave.setOnCheckedChangeListener(onCheckedChangeListener);
-        mToolOven.setOnCheckedChangeListener(onCheckedChangeListener);
-        mToolAir.setOnCheckedChangeListener(onCheckedChangeListener);
-        mTimeAll.setOnCheckedChangeListener(onCheckedChangeListener);
-        mTimeUntil30m.setOnCheckedChangeListener(onCheckedChangeListener);
-        mTimeUntil1h.setOnCheckedChangeListener(onCheckedChangeListener);
-        mTimeUntil2h.setOnCheckedChangeListener(onCheckedChangeListener);
-        mTimeOver2h.setOnCheckedChangeListener(onCheckedChangeListener);
-
+        mCheckBoxKindsAll.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxKindsMeal.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxKindsSnack.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxLevelAll.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxLevelVeryEasy.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxLevelEasy.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxLevelMiddle.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxLevelHard.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxToolAll.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxToolFire.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxToolMicrowave.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxToolOven.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxToolAir.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxTimeAll.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxTimeUntil30m.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxTimeUntil1h.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxTimeUntil2h.setOnCheckedChangeListener(onCheckedChangeListener);
+        mCheckBoxTimeOver2h.setOnCheckedChangeListener(onCheckedChangeListener);
 
 
         Button button = view.findViewById(R.id.search_ok);
@@ -199,154 +196,154 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ArrayList<String> conditionArray = new ArrayList<String>();
-                Log.d("testtestest","in");
                 SearchView searchView = getActivity().findViewById(R.id.recipe_search);
-                String recipeName="";
+                String recipeName = "";
                 try {
                     recipeName = searchView.getQuery().toString();
-                }catch (Exception e){
+                } catch (Exception e) {
+                    Log.e(TAG, Objects.requireNonNull(e.getMessage()));
                 }
                 String kindCondition = "000000";
                 String levelCondition = "0000";
                 String toolCondition = "0000";
                 String timeCondition = "0000";
 
-                if(mKindsAll.isChecked()){
-                    kindCondition +="11";
-                    conditionArray.add(mKindsAll.getText().toString());
-                }else{
-                    if(mKindsMeal.isChecked()){
-                        kindCondition+="1";
-                        conditionArray.add(mKindsMeal.getText().toString());
-                    } else{
-                        kindCondition+="0";
-                    }
-                    if(mKindsSnack.isChecked()){
-                        kindCondition+="1";
-                        conditionArray.add(mKindsSnack.getText().toString());
-                    }else {
-                        kindCondition+="0";
-                    }
-                }
-                if(mLevelAll.isChecked()){
-                    levelCondition +="1111";
-                    conditionArray.add(mLevelAll.getText().toString());
+                if (mCheckBoxKindsAll.isChecked()) {
+                    kindCondition += "11";
+                    conditionArray.add(mCheckBoxKindsAll.getText().toString());
                 } else {
-                    if(mLevelVeryEasy.isChecked()){
-                        levelCondition+="1";
-                        conditionArray.add(mLevelVeryEasy.getText().toString());
-                    } else{
-                        levelCondition+="0";
+                    if (mCheckBoxKindsMeal.isChecked()) {
+                        kindCondition += "1";
+                        conditionArray.add(mCheckBoxKindsMeal.getText().toString());
+                    } else {
+                        kindCondition += "0";
                     }
-                    if(mLevelEasy.isChecked()){
-                        levelCondition+="1";
-                        conditionArray.add(mLevelEasy.getText().toString());
-                    }else{
-                        levelCondition+="0";
-                    }
-                    if(mLevelMiddle.isChecked()){
-                        levelCondition+="1";
-                        conditionArray.add(mLevelMiddle.getText().toString());
-                    }else{
-                        levelCondition+="0";
-                    }
-                    if(mLevelHard.isChecked()){
-                        levelCondition+="1";
-                        conditionArray.add(mLevelHard.getText().toString());
-                    }else{
-                        levelCondition+="0";
+                    if (mCheckBoxKindsSnack.isChecked()) {
+                        kindCondition += "1";
+                        conditionArray.add(mCheckBoxKindsSnack.getText().toString());
+                    } else {
+                        kindCondition += "0";
                     }
                 }
-                if(mToolAll.isChecked()){
-                    toolCondition +="1111";
-                    conditionArray.add(mToolAll.getText().toString());
-                }else {
-                    if(mToolFire.isChecked()){
-                        toolCondition+="1";
-                        conditionArray.add(mToolFire.getText().toString());
-                    }else{
-                        toolCondition+="0";
+                if (mCheckBoxLevelAll.isChecked()) {
+                    levelCondition += "1111";
+                    conditionArray.add(mCheckBoxLevelAll.getText().toString());
+                } else {
+                    if (mCheckBoxLevelVeryEasy.isChecked()) {
+                        levelCondition += "1";
+                        conditionArray.add(mCheckBoxLevelVeryEasy.getText().toString());
+                    } else {
+                        levelCondition += "0";
                     }
-                    if(mToolMicrowave.isChecked()){
-                        toolCondition+="1";
-                        conditionArray.add(mToolMicrowave.getText().toString());
-                    }  else {
-                        toolCondition+="0";
+                    if (mCheckBoxLevelEasy.isChecked()) {
+                        levelCondition += "1";
+                        conditionArray.add(mCheckBoxLevelEasy.getText().toString());
+                    } else {
+                        levelCondition += "0";
                     }
-                    if(mToolOven.isChecked()){
-                        toolCondition+="1";
-                        conditionArray.add(mToolOven.getText().toString());
-                    }else{
-                        toolCondition+="0";
+                    if (mCheckBoxLevelMiddle.isChecked()) {
+                        levelCondition += "1";
+                        conditionArray.add(mCheckBoxLevelMiddle.getText().toString());
+                    } else {
+                        levelCondition += "0";
                     }
-                    if(mToolAir.isChecked()){
-                        toolCondition+="1";
-                        conditionArray.add( mToolAir.getText().toString());
-                    }else{
-                        toolCondition+="0";
-                    }
-                }
-                if(mTimeAll.isChecked()){
-                    timeCondition +="1111";
-                    conditionArray.add(mTimeAll.getText().toString());
-                }else {
-                    if(mTimeUntil30m.isChecked()){
-                        timeCondition+="1";
-                        conditionArray.add(mTimeUntil30m.getText().toString());
-                    }else{
-                        timeCondition+="0";
-                    }
-                    if(mTimeUntil1h.isChecked()){
-                        timeCondition+="1";
-                        conditionArray.add(mTimeUntil1h.getText().toString());
-                    }else{
-                        timeCondition+="0";
-                    }
-                    if(mTimeUntil2h.isChecked()){
-                        timeCondition+="1";
-                        conditionArray.add(mTimeUntil2h.getText().toString());
-                    }else{
-                        timeCondition+="0";
-                    }
-                    if(mTimeOver2h.isChecked()){
-                        timeCondition+="1";
-                        conditionArray.add(mTimeOver2h.getText().toString());
-                    }else{
-                        timeCondition+="0";
+                    if (mCheckBoxLevelHard.isChecked()) {
+                        levelCondition += "1";
+                        conditionArray.add(mCheckBoxLevelHard.getText().toString());
+                    } else {
+                        levelCondition += "0";
                     }
                 }
-                Log.d("testtestest",recipeName);
-//                resultFragment = new ResultFragment(recipeName, kindByte,levelByte,toolByte,timeByte);
-                if(kindCondition.equals("00000000")){
-                    kindCondition ="00000011";
-                    conditionArray.add(mKindsAll.getText().toString());
+                if (mCheckBoxToolAll.isChecked()) {
+                    toolCondition += "1111";
+                    conditionArray.add(mCheckBoxToolAll.getText().toString());
+                } else {
+                    if (mCheckBoxToolFire.isChecked()) {
+                        toolCondition += "1";
+                        conditionArray.add(mCheckBoxToolFire.getText().toString());
+                    } else {
+                        toolCondition += "0";
+                    }
+                    if (mCheckBoxToolMicrowave.isChecked()) {
+                        toolCondition += "1";
+                        conditionArray.add(mCheckBoxToolMicrowave.getText().toString());
+                    } else {
+                        toolCondition += "0";
+                    }
+                    if (mCheckBoxToolOven.isChecked()) {
+                        toolCondition += "1";
+                        conditionArray.add(mCheckBoxToolOven.getText().toString());
+                    } else {
+                        toolCondition += "0";
+                    }
+                    if (mCheckBoxToolAir.isChecked()) {
+                        toolCondition += "1";
+                        conditionArray.add(mCheckBoxToolAir.getText().toString());
+                    } else {
+                        toolCondition += "0";
+                    }
                 }
-                if(levelCondition.equals("00000000")){
-                        levelCondition ="00001111";
-                        conditionArray.add(mLevelAll.getText().toString());
+                if (mCheckBoxTimeAll.isChecked()) {
+                    timeCondition += "1111";
+                    conditionArray.add(mCheckBoxTimeAll.getText().toString());
+                } else {
+                    if (mCheckBoxTimeUntil30m.isChecked()) {
+                        timeCondition += "1";
+                        conditionArray.add(mCheckBoxTimeUntil30m.getText().toString());
+                    } else {
+                        timeCondition += "0";
+                    }
+                    if (mCheckBoxTimeUntil1h.isChecked()) {
+                        timeCondition += "1";
+                        conditionArray.add(mCheckBoxTimeUntil1h.getText().toString());
+                    } else {
+                        timeCondition += "0";
+                    }
+                    if (mCheckBoxTimeUntil2h.isChecked()) {
+                        timeCondition += "1";
+                        conditionArray.add(mCheckBoxTimeUntil2h.getText().toString());
+                    } else {
+                        timeCondition += "0";
+                    }
+                    if (mCheckBoxTimeOver2h.isChecked()) {
+                        timeCondition += "1";
+                        conditionArray.add(mCheckBoxTimeOver2h.getText().toString());
+                    } else {
+                        timeCondition += "0";
+                    }
                 }
-                if(toolCondition.equals("00000000")){
-                    toolCondition ="00001111";
-                    conditionArray.add(mToolAll.getText().toString());
+                if (kindCondition.equals("00000000")) {
+                    kindCondition = "00000011";
+                    conditionArray.add(mCheckBoxKindsAll.getText().toString());
                 }
-                if(timeCondition.equals("00000000")){
-                    timeCondition ="00001111";
-                    conditionArray.add(mTimeAll.getText().toString());
+                if (levelCondition.equals("00000000")) {
+                    levelCondition = "00001111";
+                    conditionArray.add(mCheckBoxLevelAll.getText().toString());
+                }
+                if (toolCondition.equals("00000000")) {
+                    toolCondition = "00001111";
+                    conditionArray.add(mCheckBoxToolAll.getText().toString());
+                }
+                if (timeCondition.equals("00000000")) {
+                    timeCondition = "00001111";
+                    conditionArray.add(mCheckBoxTimeAll.getText().toString());
                 }
 
                 String[] conditions = new String[conditionArray.size()];
-                int i =0;
-                for(String s:conditionArray){
-                    conditions[i]=s;
+                int i = 0;
+                for (String s : conditionArray) {
+                    conditions[i] = s;
                     ++i;
                 }
-                NavDirections action = SearchFragmentDirections.actionSearchFragmentToResultFragment(recipeName, kindCondition,levelCondition,toolCondition,timeCondition,conditions);
-                Navigation.findNavController(view).navigate(action);
+                NavDirections navDirections =
+                        SearchFragmentDirections.actionSearchFragmentToResultFragment(recipeName, kindCondition, levelCondition, toolCondition, timeCondition, conditions);
+                Navigation.findNavController(view).navigate(navDirections);
 
             }
         });
         return view;
     }
+
     private void expandViewHitArea(final View parent, final View child) {
 
         parent.post(new Runnable() {

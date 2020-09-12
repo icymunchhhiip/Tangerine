@@ -18,6 +18,7 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
+                android:id="@+id/write_recipe_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorBackground"
@@ -127,8 +128,8 @@
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="난이도 전체"
-                android:textOn="난이도 전체" />
+                android:textOff="종류 전체"
+                android:textOn="종류 전체" />
 
             <ToggleButton
                 android:id="@+id/foodtype_meal"

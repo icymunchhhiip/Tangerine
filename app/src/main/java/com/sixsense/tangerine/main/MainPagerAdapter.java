@@ -23,6 +23,7 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
 
+
     @NonNull
     @Override
     public Fragment getItem(int position) {
@@ -48,5 +49,4 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
 //        super.destroyItem(container, position, object);
     }
-//instanse item?
 }

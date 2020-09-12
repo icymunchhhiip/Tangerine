@@ -1,7 +1,5 @@
 package com.sixsense.tangerine.network;
 
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -10,28 +8,28 @@ import java.util.List;
 
 public class RecipeIntroList {
     @SerializedName("has_more")
-    public Integer has_more=0;
+    public Integer hasMore = 0;
     @SerializedName("data")
-    public List<RecipeIntro> data=new ArrayList<>();
+    public List<RecipeIntro> data = new ArrayList<>();
 
     public class RecipeIntro implements Serializable {
         @SerializedName("recipe_id")
-        public Integer recipe_id;
+        public Integer recipeId;
         @SerializedName("recipe_img")
-        public String recipe_img;
+        public String recipeImg;
         @SerializedName("recipe_name")
-        public String recipe_name;
+        public String recipeName;
         @SerializedName("recipe_min")
-        public String recipe_min;
+        public String recipeMin;
         @SerializedName("recipe_tags")
-        public String recipe_tags;
+        public String recipeTags;
         @SerializedName("mem_profile")
-        public String mem_profile;
+        public String memProfile;
         @SerializedName("mem_id")
-        public Long mem_id;
+        public Long memId;
         @SerializedName("mem_name")
-        public String mem_name;
+        public String memName;
         @SerializedName("recipe_fav")
-        public int recipe_fav;
+        public int recipeFav;
     }
 }

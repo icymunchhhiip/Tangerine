@@ -3,6 +3,7 @@ package com.sixsense.tangerine.home;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +21,16 @@ import com.sixsense.tangerine.network.HttpClient;
 import com.sixsense.tangerine.network.HttpInterface;
 import com.sixsense.tangerine.network.MainEventList;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 
-public class SliderFragment extends Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener{
+public class SliderFragment extends Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
     private SliderLayout mSliderLayout;
     private List<MainEventList.MainEvent> mainEventList;
-    private String mainEventImageURL = HttpClient.BASE_URL+"main-event/imgs/";
+    private static final String TAG = SliderFragment.class.getSimpleName();
 
     @Nullable
     @Override
@@ -42,47 +43,55 @@ public class SliderFragment extends Fragment implements BaseSliderView.OnSliderC
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onResume() {
         new MainEventCall().execute();
 
         mSliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Top);
         mSliderLayout.setDuration(3000);
         mSliderLayout.addOnPageChangeListener(this);
+        super.onResume();
+    }
 
-//        super.onViewCreated(view, savedInstanceState);
+    @Override
+    public void onSliderClick(BaseSliderView slider) {
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
     }
 
     @SuppressLint("StaticFieldLeak")
-    private class MainEventCall extends AsyncTask<Void,Void,Void> {
+    private class MainEventCall extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
             HttpInterface httpInterface = HttpClient.getClient().create(HttpInterface.class);
             Call<MainEventList> call = httpInterface.getMainEvent();
-            MainEventList resource = null;
             try {
-                resource = call.execute().body();
-            } catch (IOException e) {
-                e.printStackTrace();
+                mainEventList = call.execute().body().data;
+            } catch (Exception e) {
+                Log.e(TAG, Objects.requireNonNull(e.getMessage()));
             }
-            assert resource != null;
-            mainEventList = resource.data;
 
             return null;
         }
 
         @Override
-        protected void onPreExecute() {
-
-        }
-
-        @Override
         protected void onPostExecute(Void aVoid) {
-            for(MainEventList.MainEvent url : mainEventList){
+            for (MainEventList.MainEvent url : mainEventList) {
                 DefaultSliderView defaultSliderView = new DefaultSliderView(getContext());
-                // initialize a SliderLayout
+
+                String BaseUrl = HttpClient.BASE_URL + "main-event/imgs/";
                 defaultSliderView
-                        .image(mainEventImageURL + url.img)
+                        .image(BaseUrl + url.img)
                         .setScaleType(BaseSliderView.ScaleType.Fit);
 
                 mSliderLayout.addSlider(defaultSliderView);
@@ -91,27 +100,10 @@ public class SliderFragment extends Fragment implements BaseSliderView.OnSliderC
 
     }
 
-
     @Override
     public void onStop() {
-        // To prevent a memory leak on rotation, make sure to call stopAutoCycle() on the slider before activity or fragment is destroyed
         mSliderLayout.stopAutoCycle();
         super.onStop();
     }
-
-    @Override
-    public void onSliderClick(BaseSliderView slider) {
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
-
-    @Override
-    public void onPageSelected(int position) {
-//        Log.d("Slider Demo", "Page Changed: " + position);
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {}
 
 }

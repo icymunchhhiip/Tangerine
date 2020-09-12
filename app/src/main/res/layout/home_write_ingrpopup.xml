@@ -31,7 +31,7 @@
     </LinearLayout>
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_alignParentLeft="true">
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_centerInParent="true">
+            android:layout_weight="1">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_alignParentRight="true">
+            android:layout_weight="1">
             <EditText
                 android:id="@+id/write_ingr_kcal_id"
                 android:gravity="center"
@@ -94,7 +94,7 @@
                 android:textSize="20dp"/>
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
     <Button
         android:gravity="center"
         android:id="@+id/register_ingr_id"

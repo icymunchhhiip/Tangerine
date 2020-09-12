@@ -25,6 +25,9 @@ allprojects {
         }
         /*카카오*/
         maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/'}
+
+        /*네이버 지도*/
+        maven { url 'https://navercorp.bintray.com/maps'}
     }
 }
 

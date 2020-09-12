@@ -1,6 +1,5 @@
 package com.sixsense.tangerine.network;
 
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

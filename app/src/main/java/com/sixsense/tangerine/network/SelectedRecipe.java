@@ -8,21 +8,22 @@ import java.util.List;
 
 public class SelectedRecipe {
     @SerializedName("mem_id")
-    public Long mem_id;
+    public int memId;
+    @SerializedName("recipe_id")
+    public int recipeId;
     @SerializedName("recipe_name")
-    public String recipe_name;
+    public String recipeName;
     @SerializedName("level")
-    public String level;
+    public int level;
     @SerializedName("food_type")
-    public String foodType;
+    public int foodType;
     @SerializedName("r_time")
-    public String rTime;
+    public int rTime;
     @SerializedName("like_num")
-    public String likeNum;
+    public int likeNum;
     @SerializedName("r_tool")
-    public String rTool;
-    @SerializedName("total_kcal")
-    public String totalKcal;
+    public int rTool;
+
     @SerializedName("ingr_list")
     public List<SelectedRecipe.IngrInfo> ingrList = new ArrayList<>();
     @SerializedName("recipe_list")
@@ -32,11 +33,11 @@ public class SelectedRecipe {
         @SerializedName("ingr_name")
         public String ingrName;
         @SerializedName("ingr_count")
-        public String ingrCount;
+        public float ingrCount;
         @SerializedName("ingr_unit")
         public String ingrUnit;
         @SerializedName("ingr_kcal")
-        public String ingrKcal;
+        public float ingrKcal;
     }
 
     public class RecipeContent implements Serializable {
@@ -48,5 +49,7 @@ public class SelectedRecipe {
         public String descDetail;
         @SerializedName("r_time")
         public String recipeTime;
+        @SerializedName("r_num")
+        public int rNum;
     }
 }

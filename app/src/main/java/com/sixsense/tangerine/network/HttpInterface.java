@@ -20,32 +20,32 @@ public interface HttpInterface {
 
     @GET("/recipe/recent.php")
     Call<RecipeIntroList> getRecentRecipe(
-            @Query("m_id") int m_id,
+            @Query("m_id") int mId,
             @Query("page") int page,
-            @Query("page_size") int page_size
+            @Query("page_size") int pageSize
     );
 
     @GET("/recipe/condition.php")
     Call<RecipeIntroList> getRecipeCondition(
-            @Query("r_name") String r_name,
-            @Query("r_kinds") byte r_kinds,
-            @Query("r_level") byte r_level,
-            @Query("r_tool") byte r_tool,
-            @Query("r_time") byte r_time,
+            @Query("r_name") String rName,
+            @Query("r_kinds") byte rKinds,
+            @Query("r_level") byte rLevel,
+            @Query("r_tool") byte rTool,
+            @Query("r_time") byte rTime,
             @Query("page") int page,
-            @Query("page_size") int page_size
+            @Query("page_size") int pageSize
     );
 
     @GET("/recipe/like.php")
     Call<String> setRecipeLike(
-            @Query("m_id") int m_id,
-            @Query("recipe_id") int recipe_id,
+            @Query("m_id") int mId,
+            @Query("recipe_id") int recipeId,
             @Query("action") String action
     );
 
     @GET("/recipe/in-recipe.php")
     Call<InRecipe> getInRecipe(
-            @Query("recipe_id") int recipe_id
+            @Query("recipe_id") int recipeId
     );
 
     @GET("/recipe/ingrs.php")
@@ -58,7 +58,7 @@ public interface HttpInterface {
 
     @DELETE("/recipe/del-recipe.php")
     Call<String> deleteRecipe(
-            @Query("recipe_id") int recipe_id
+            @Query("recipe_id") int recipeId
     );
 
 

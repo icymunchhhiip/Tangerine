@@ -13,40 +13,42 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
-//import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.kakao.usermgmt.response.MeV2Response;
-import com.sixsense.tangerine.home.HomeFragment;
+import com.sixsense.tangerine.community.BoardListFragment;
+import com.sixsense.tangerine.community.MarketListFragment;
+import com.sixsense.tangerine.community.MyCommunityListener;
+import com.sixsense.tangerine.community.item.Member;
 import com.sixsense.tangerine.home.InRecipeFragment;
 import com.sixsense.tangerine.home.SearchFragment;
 import com.sixsense.tangerine.home.write.WriteRecipeActivity;
 
 import java.security.MessageDigest;
+import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyCommunityListener {
 
-    public static MeV2Response MY_ACCOUNT;
-    long backKeyPressedTime;
-    ImageButton buttonWriting;
+    public static MeV2Response sMyAccount;
+    public static Member member;
+
+    private ImageButton mImageButtonWriting;
+    private static final String TAG = "MainActivity";
 
     private void getKeyHash() {
         try {
-            PackageInfo info = getPackageManager().getPackageInfo("com.sixsense.tangerine", PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            PackageInfo packageInfo = getPackageManager().getPackageInfo("com.sixsense.tangerine", PackageManager.GET_SIGNATURES);
+            for (Signature signature : packageInfo.signatures) {
+                MessageDigest messageDigest = MessageDigest.getInstance("SHA");
+                messageDigest.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(messageDigest.digest(), Base64.DEFAULT));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, Objects.requireNonNull(e.getMessage()));
         }
     }
 
@@ -57,98 +59,63 @@ public class MainActivity extends AppCompatActivity {
         getKeyHash();
 
         Toolbar toolbar = findViewById(R.id.toolbar_home);
-        buttonWriting = toolbar.findViewById(R.id.recipe_write);
-        buttonWriting.setOnClickListener(new View.OnClickListener() {
+        mImageButtonWriting = toolbar.findViewById(R.id.recipe_write);
+        mImageButtonWriting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, WriteRecipeActivity.class);
                 startActivity(intent);
             }
         });
-//        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onBackPressed();
-//            }
-//        });
         setSupportActionBar(toolbar);
-
-
-//        getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(),R.color.colorBackground));
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            activity.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-//            // edited here
-//            activity.getWindow().setStatusBarColor(Color.WHITE);
-//        }
     }
-
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//        return super.onSupportNavigateUp();
-//    }
-
-//    @Override
-//    public void onBackPressed() {
-//        int count = getSupportFragmentManager().getBackStackEntryCount();
-//        if (count == 0) {
-//            super.onBackPressed();
-//        } else {
-//            getSupportFragmentManager().popBackStack();
-//        }
-//
-//    }
 
     @Override
     public void onBackPressed() {
-        if (System.currentTimeMillis() > backKeyPressedTime + 500) {
-            backKeyPressedTime = System.currentTimeMillis();
-//            for (Fragment fragment: getSupportFragmentManager().getFragments()) {
-//                if (fragment.isVisible()) {
-//                    //할일
-//
-//                }
-//            }
-            NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.main_frame);
-            Fragment current = navHostFragment.getChildFragmentManager().getFragments().get(0);
-            if (current instanceof SearchFragment) {
-                ConstraintLayout layout = findViewById(R.id.main_layout);
-                Toolbar toolbar = layout.findViewById(R.id.toolbar_home);
-                toolbar.setNavigationIcon(null);
-                if(buttonWriting.getVisibility()!=View.VISIBLE) {
-                    buttonWriting.setVisibility(View.VISIBLE);
-                }
-                Log.d("yo","yes");
-            } else if (current instanceof InRecipeFragment){
-                ConstraintLayout layout = findViewById(R.id.main_layout);
-                layout.findViewById(R.id.toolbar_show_title).setVisibility(View.GONE);
-                Toolbar toolbar = layout.findViewById(R.id.toolbar_home);
-                toolbar.setVisibility(View.VISIBLE);
-            } else{
-                Log.d("yo","no");
-                Log.d("yo", String.valueOf(current.getClass()));
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.main_frame);
+        Fragment current = navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (current instanceof SearchFragment) {
+            ConstraintLayout layout = findViewById(R.id.main_layout);
+            Toolbar toolbar = layout.findViewById(R.id.toolbar_home);
+            toolbar.setNavigationIcon(null);
+            if (mImageButtonWriting.getVisibility() != View.VISIBLE) {
+                mImageButtonWriting.setVisibility(View.VISIBLE);
             }
-            super.onBackPressed();
-        } else {
-            AppFinish();
+        } else if (current instanceof InRecipeFragment) {
+            ConstraintLayout layout = findViewById(R.id.main_layout);
+            layout.findViewById(R.id.toolbar_show_title).setVisibility(View.GONE);
+            Toolbar toolbar = layout.findViewById(R.id.toolbar_home);
+            toolbar.setVisibility(View.VISIBLE);
         }
-    }
 
-    public void AppFinish() {
-        finish();
-        System.exit(0);
-        android.os.Process.killProcess(android.os.Process.myPid());
+        super.onBackPressed();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{
-                onBackPressed();
-                return true;
-            }
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void showMarketListFragment() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new MarketListFragment()).commit();
+    }
+
+    @Override
+    public void showBoardListFragment(){
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new BoardListFragment()).commit();
+    }
+
+    @Override
+    public void setMemberLocation(String localString, int localCode) { member.setLocalAddress(localString,localCode);}
+
+    @Override
+    public Member getMember(){
+        return member;
     }
 
 }
