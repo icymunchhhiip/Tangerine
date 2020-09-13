@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="85dp"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="#FFFFFFFF"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true">
+
+    <TextView
+        android:id="@+id/ingredientTextView"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="재료이름"
+        android:textSize="15sp" />
+
+
+</androidx.cardview.widget.CardView>

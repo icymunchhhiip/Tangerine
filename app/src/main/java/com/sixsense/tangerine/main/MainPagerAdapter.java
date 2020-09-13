@@ -8,8 +8,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.sixsense.tangerine.community.CommunityFragment;
-import com.sixsense.tangerine.ref.RefrigeratorFragment;
-import com.sixsense.tangerine.setting.SettingFragment;
+import com.sixsense.tangerine.ref.MyrefridgeratorFragment;
+import com.sixsense.tangerine.setting.MyinfoFragment;
 import com.sixsense.tangerine.home.HomeFragment;
 
 public class MainPagerAdapter extends FragmentStatePagerAdapter {
@@ -31,11 +31,11 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
             case FRAGMENT_HOME:
                 return new HomeFragment();
             case FRAGMENT_REF:
-                return new RefrigeratorFragment();
+                return new MyrefridgeratorFragment();
             case FRAGMENT_COMMUNITY:
                 return new CommunityFragment();
             case FRAGMENT_SETTING:
-                return new SettingFragment();
+                return new MyinfoFragment();
         }
         return new HomeFragment();
     }

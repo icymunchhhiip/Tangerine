@@ -138,6 +138,7 @@ public class RecipeDescAdapter extends RecyclerView.Adapter<RecipeDescAdapter.Vi
 
         public ViewHolder(View itemview, final OnItemClickListener listener) {
             super(itemview);
+            setIsRecyclable(false);
             recipe_desc_detail = itemview.findViewById(R.id.rdesc_detail);
             recipe_desc = itemview.findViewById(R.id.rdesc);
             food_image = itemview.findViewById(R.id.food_image);

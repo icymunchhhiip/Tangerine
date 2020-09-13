@@ -53,6 +53,11 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
+        <activity android:name=".setting.MylikeRecipeActivity"/>
+        <activity android:name=".setting.EditProfileActivity"/>
+        <activity android:name=".setting.MywrittenRecipeActivity"/>
+        <activity android:name=".setting.MywrittenMarketActivity"/>
     </application>
 
 </manifest>

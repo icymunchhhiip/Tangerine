@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    android:background="@drawable/ref" >
+    />
+
+    <RelativeLayout
+        android:id="@+id/edit_profile_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/edit_profile_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/colorBackground">
+
+            <TextView
+                android:id="@+id/edit_profile_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="나의 냉장고"
+                android:textColor="@color/colorFontDark"
+                android:textSize="15dp" />
+            <Button
+                android:id="@+id/addbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:background="@android:color/transparent"
+                android:text="추가"
+                android:textSize="15dp"
+                />
+        </androidx.appcompat.widget.Toolbar>
+
+
+
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/freezerRecyclerView"
+                android:layout_width="235dp"
+                android:layout_height="190dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fridgeRecyclerView"
+                android:layout_width="235dp"
+                android:layout_height="350dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="20dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  ※ 유통기한이 ※\n       지났어요!"
+                android:textColor="#F44336" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/roomRecyclerView"
+                android:layout_width="95dp"
+                android:layout_height="440dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="40dp"></androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/textView_main_result" />
+</LinearLayout>

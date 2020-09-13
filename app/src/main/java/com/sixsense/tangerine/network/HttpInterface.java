@@ -1,6 +1,9 @@
 package com.sixsense.tangerine.network;
 
+import com.sixsense.tangerine.community.item.CookingTip;
+
 import java.lang.reflect.Member;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -61,5 +64,7 @@ public interface HttpInterface {
             @Query("recipe_id") int recipeId
     );
 
+    @GET("/community/tips/imgs.php")
+    Call<ArrayList<CookingTip>> getTipsImgs();
 
 }
