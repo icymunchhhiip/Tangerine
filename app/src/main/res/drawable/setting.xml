@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="20dp"
+    android:shape="rectangle">
+
+    <!--각 모서리 라운딩-->
+    <corners
+        android:bottomLeftRadius="12dp"
+        android:bottomRightRadius="12dp"
+        android:topLeftRadius="12dp"
+        android:topRightRadius="12dp"/>
+
+    <!--좌측여백-->
+    <padding
+        android:left="10dp" />
+
+    <!--테두리두께, 색상-->
+    <stroke
+        android:width="1dp"
+        android:color="#EAEAEA"/>
+</shape>
