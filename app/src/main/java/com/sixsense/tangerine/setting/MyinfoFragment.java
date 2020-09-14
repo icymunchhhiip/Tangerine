@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
@@ -24,13 +26,16 @@ import com.kakao.usermgmt.response.MeV2Response;
 import com.sixsense.tangerine.AppConstants;
 import com.sixsense.tangerine.Constant;
 import com.sixsense.tangerine.JsonParser;
+import com.sixsense.tangerine.MainActivity;
 import com.sixsense.tangerine.OnTaskCompletedListener;
 import com.sixsense.tangerine.R;
+import com.sixsense.tangerine.main.MainPagerFragmentDirections;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.net.URL;
 
 public class MyinfoFragment extends Fragment {
@@ -99,16 +104,16 @@ public class MyinfoFragment extends Fragment {
         myRecipeBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MywrittenRecipeActivity.class);
-                startActivity(intent);
+                NavDirections navDirections = MainPagerFragmentDirections.actionMainPagerFragmentToMywrittenRecipeFragment();
+                Navigation.findNavController(v).navigate(navDirections);
             }
         });
 
         mylikeRecipeBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MylikeRecipeActivity.class);
-                startActivity(intent);
+                NavDirections navDirections = MainPagerFragmentDirections.actionMainPagerFragmentToMylikeRecipeFragment();
+                Navigation.findNavController(v).navigate(navDirections);
             }
         });
 

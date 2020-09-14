@@ -67,4 +67,12 @@ public interface HttpInterface {
     @GET("/community/tips/imgs.php")
     Call<ArrayList<CookingTip>> getTipsImgs();
 
+    @GET("/recipe/my.php")
+    Call<RecipeIntroList> getMyRecipe(
+            @Query("action") String action,
+            @Query("m_id") int mId,
+            @Query("page") int page,
+            @Query("page_size") int pageSize
+    );
+
 }

@@ -19,42 +19,26 @@ import com.sixsense.tangerine.network.HttpClient;
 import com.sixsense.tangerine.network.HttpInterface;
 import com.sixsense.tangerine.network.RecipeIntroList;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import retrofit2.Call;
 
-public class ResultRecipeListFragment extends Fragment {
+import static com.sixsense.tangerine.MainActivity.sMyAccount;
+
+public class MyRecipeListFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private GridLayoutManager mLayoutManager;
     private List<RecipeIntroList.RecipeIntro> mRecipeIntroList;
     private int mPageNo;
     private int mHasMore;
+    private static final String TAG = MyRecipeListFragment.class.getSimpleName();
+    private String mAction;
 
-    private String mRecipeName;
-    private Byte mKindByte;
-    private Byte mLevelByte;
-    private Byte mToolByte;
-    private Byte mTimeByte;
-
-    private static final String TAG = ResultRecipeListFragment.class.getSimpleName();
-
-//    public ResultRecipeListFragment() {
-//        this.mPageNo = 1;
-//        this.mHasMore = 0;
-//        this.mRecipeIntroList = new ArrayList<>(0);
-//    }
-
-    public ResultRecipeListFragment(String recipeName, Byte kindByte, Byte levelByte, Byte toolByte, Byte timeByte) {
-        this.mRecipeName = recipeName;
-        this.mKindByte = kindByte;
-        this.mLevelByte = levelByte;
-        this.mToolByte = toolByte;
-        this.mTimeByte = timeByte;
-
+    public MyRecipeListFragment(String mAction) {
+        this.mAction = mAction; //like //written
         this.mPageNo = 1;
         this.mHasMore = 0;
         this.mRecipeIntroList = new ArrayList<>(0);
@@ -64,33 +48,35 @@ public class ResultRecipeListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_recipe_recycler, container, false);
+
         mRecyclerView = view.findViewById(R.id.recipe_recycler);
 
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new GridLayoutManager(getContext(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
+        ItemOffsetDecoration itemOffsetDecoration = new ItemOffsetDecoration(view.getContext(), R.dimen.card_offset);
+        mRecyclerView.addItemDecoration(itemOffsetDecoration);
 
         if (mRecipeIntroList.isEmpty()) {
-            new ConditionRecipeCall().execute();
+            new MyRecipeCall().execute();
         } else if (mHasMore == 1) {
             ++mPageNo;
-            new ConditionRecipeCall().execute();
+            new MyRecipeCall().execute();
         }
-
         return view;
     }
 
     @SuppressLint("StaticFieldLeak")
-    private class ConditionRecipeCall extends AsyncTask<Void, Void, Void> {
+    private class MyRecipeCall extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
             HttpInterface httpInterface = HttpClient.getClient().create(HttpInterface.class);
             int pageSize = 10;
-            Call<RecipeIntroList> call = httpInterface.getRecipeCondition(mRecipeName, mKindByte, mLevelByte, mToolByte, mTimeByte, mPageNo, pageSize);
+            Call<RecipeIntroList> call = httpInterface.getMyRecipe(mAction,(int) sMyAccount.getId(), mPageNo, pageSize);
             try {
                 RecipeIntroList resource = call.execute().body();
-                mRecipeIntroList = resource.data;
+                mRecipeIntroList.addAll(resource.data);
                 mHasMore = resource.hasMore;
             } catch (Exception e) {
                 Log.e(TAG, Objects.requireNonNull(e.getMessage()));
@@ -107,15 +93,20 @@ public class ResultRecipeListFragment extends Fragment {
                     super.onScrolled(recyclerView, dx, dy);
                     int totalItemCount = mLayoutManager.getItemCount();
                     int lastVisible = mLayoutManager.findLastCompletelyVisibleItemPosition();
+
                     if ((lastVisible >= totalItemCount - 1) && mHasMore == 1) {
                         ++mPageNo;
-                        new ConditionRecipeCall().execute();
+                        new MyRecipeCall().execute();
                     }
+
                 }
             };
             mRecyclerView.addOnScrollListener(onScrollListener);
-            mRecyclerView.setAdapter(new RecipeListAdapter(mRecipeIntroList, ResultRecipeListFragment.this));
+
+            mRecyclerView.setAdapter(new RecipeListAdapter(mRecipeIntroList, MyRecipeListFragment.this));
             setHasOptionsMenu(true);
         }
+
     }
+
 }

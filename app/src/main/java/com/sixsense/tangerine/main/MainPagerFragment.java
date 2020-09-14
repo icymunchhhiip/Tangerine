@@ -22,7 +22,6 @@ public class MainPagerFragment extends Fragment {
     private BottomNavigationView mBottomBar;
     private MenuItem mMenuItemPrev;
     private Toolbar mToolbarHome;
-    private Toolbar mToolbarRef;
     private Toolbar mToolbarSetting;
     private View toolbars;
 
@@ -35,7 +34,6 @@ public class MainPagerFragment extends Fragment {
         toolbars = layout.findViewById(R.id.toolbar);
         toolbars.setVisibility(View.VISIBLE);
         mToolbarHome = layout.findViewById(R.id.toolbar_home);
-        mToolbarRef = layout.findViewById(R.id.toolbar_ref);
         mToolbarSetting = layout.findViewById(R.id.toolbar_setting);
         mToolbarHome.setVisibility(View.VISIBLE);
 
@@ -59,22 +57,15 @@ public class MainPagerFragment extends Fragment {
                     case 0:
                         toolbars.setVisibility(View.VISIBLE);
                         mToolbarHome.setVisibility(View.VISIBLE);
-                        mToolbarRef.setVisibility(View.GONE);
                         mToolbarSetting.setVisibility(View.GONE);
                         break;
                     case 1:
-                        toolbars.setVisibility(View.VISIBLE);
-                        mToolbarHome.setVisibility(View.GONE);
-                        mToolbarRef.setVisibility(View.VISIBLE);
-                        mToolbarSetting.setVisibility(View.GONE);
-                        break;
                     case 2:
                         toolbars.setVisibility(View.GONE);
                         break;
                     case 3:
                         toolbars.setVisibility(View.VISIBLE);
                         mToolbarHome.setVisibility(View.GONE);
-                        mToolbarRef.setVisibility(View.GONE);
                         mToolbarSetting.setVisibility(View.VISIBLE);
                         break;
                 }

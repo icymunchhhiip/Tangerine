@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +29,9 @@ import com.sixsense.tangerine.main.MainPagerFragmentDirections;
 import com.sixsense.tangerine.network.HttpClient;
 import com.sixsense.tangerine.network.HttpInterface;
 import com.sixsense.tangerine.network.RecipeIntroList;
+import com.sixsense.tangerine.setting.MylikeRecipeFragment;
+import com.sixsense.tangerine.setting.MylikeRecipeFragmentDirections;
+import com.sixsense.tangerine.setting.MywrittenRecipeFragmentDirections;
 
 import java.util.List;
 
@@ -86,10 +90,15 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
                             mFragment.getActivity().onBackPressed();
                         }
                     });
+                    String navLabel = (String) Navigation.findNavController(mFragment.getView()).getCurrentDestination().getLabel();
                     if (mFragment instanceof RecentRecipeListFragment) {
                         navDirections = MainPagerFragmentDirections.actionMainPagerFragmentToInRecipeFragment(mRecipeIntro.get(position));
-                    } else {
+                    } else if (mFragment instanceof ResultRecipeListFragment) {
                         navDirections = ResultFragmentDirections.actionResultFragmentToInRecipeFragment(mRecipeIntro.get(position));
+                    } else if (navLabel.equals("MylikeRecipeFragment")){
+                        navDirections = MylikeRecipeFragmentDirections.actionMylikeRecipeFragmentToInRecipeFragment(mRecipeIntro.get(position));
+                    } else {
+                        navDirections = MywrittenRecipeFragmentDirections.actionMywrittenRecipeFragmentToInRecipeFragment(mRecipeIntro.get(position));
                     }
                     Navigation.findNavController(mFragment.getView()).navigate(navDirections);
 

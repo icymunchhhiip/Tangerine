@@ -89,6 +89,12 @@
         <action
             android:id="@+id/action_mainPagerFragment_to_inRecipeFragment"
             app:destination="@id/inRecipeFragment" />
+        <action
+            android:id="@+id/action_mainPagerFragment_to_mywrittenRecipeFragment"
+            app:destination="@id/mywrittenRecipeFragment" />
+        <action
+            android:id="@+id/action_mainPagerFragment_to_mylikeRecipeFragment"
+            app:destination="@id/mylikeRecipeFragment" />
     </fragment>
     <fragment
         android:id="@+id/inRecipeFragment"
@@ -98,5 +104,21 @@
             android:name="recipe_intro_item"
             app:argType="com.sixsense.tangerine.network.RecipeIntroList$RecipeIntro"
             app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/mywrittenRecipeFragment"
+        android:name="com.sixsense.tangerine.setting.MywrittenRecipeFragment"
+        android:label="MywrittenRecipeFragment" >
+        <action
+            android:id="@+id/action_mywrittenRecipeFragment_to_inRecipeFragment"
+            app:destination="@id/inRecipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mylikeRecipeFragment"
+        android:name="com.sixsense.tangerine.setting.MylikeRecipeFragment"
+        android:label="MylikeRecipeFragment" >
+        <action
+            android:id="@+id/action_mylikeRecipeFragment_to_inRecipeFragment"
+            app:destination="@id/inRecipeFragment" />
     </fragment>
 </navigation>
