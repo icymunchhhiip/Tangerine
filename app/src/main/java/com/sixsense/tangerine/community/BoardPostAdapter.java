@@ -119,7 +119,7 @@ public class BoardPostAdapter extends RecyclerView.Adapter<BoardPostAdapter.View
 
             String profilePath = writer.getProfilePath();
             if(!TextUtils.isEmpty(profilePath))
-                new DownloadFilesTask(this,bImageViewProfile,AppConstants.ABSOLUTE_PATH).execute(profilePath);
+                new DownloadFilesTask(this,bImageViewProfile, AppConstants.ABSOLUTE_PATH).execute(profilePath);
         }
 
         @Override

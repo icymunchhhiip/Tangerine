@@ -21,21 +21,11 @@ public class MainPagerFragment extends Fragment {
     private ViewPager mViewPager;
     private BottomNavigationView mBottomBar;
     private MenuItem mMenuItemPrev;
-    private Toolbar mToolbarHome;
-    private Toolbar mToolbarSetting;
-    private View toolbars;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_pager, container, false);
-
-        ConstraintLayout layout = getActivity().findViewById(R.id.main_layout);
-        toolbars = layout.findViewById(R.id.toolbar);
-        toolbars.setVisibility(View.VISIBLE);
-        mToolbarHome = layout.findViewById(R.id.toolbar_home);
-        mToolbarSetting = layout.findViewById(R.id.toolbar_setting);
-        mToolbarHome.setVisibility(View.VISIBLE);
 
         mViewPager = view.findViewById(R.id.main_view_pager);
         mBottomBar = view.findViewById(R.id.main_bottom_bar);
@@ -53,22 +43,6 @@ public class MainPagerFragment extends Fragment {
                 }
 
                 mBottomBar.getMenu().getItem(position).setChecked(true);
-                switch (position) {
-                    case 0:
-                        toolbars.setVisibility(View.VISIBLE);
-                        mToolbarHome.setVisibility(View.VISIBLE);
-                        mToolbarSetting.setVisibility(View.GONE);
-                        break;
-                    case 1:
-                    case 2:
-                        toolbars.setVisibility(View.GONE);
-                        break;
-                    case 3:
-                        toolbars.setVisibility(View.VISIBLE);
-                        mToolbarHome.setVisibility(View.GONE);
-                        mToolbarSetting.setVisibility(View.VISIBLE);
-                        break;
-                }
                 mMenuItemPrev = mBottomBar.getMenu().getItem(position);
             }
 

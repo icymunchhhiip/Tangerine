@@ -5,8 +5,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -118,6 +116,7 @@ public class BoardReadingActivity extends BaseActivity implements OnTaskComplete
         textViewDescript.setText(item.getDescription());
         textViewLikes.setText(Integer.toString(item.getLikes()));
 
+        /*-------------------------------------------------------------------------------------------------------*/
         final Member writer = item.getWriter(); //작성자 가져오기
         textViewNickname.setText(writer.getNickname());//닉네임
 
@@ -129,52 +128,52 @@ public class BoardReadingActivity extends BaseActivity implements OnTaskComplete
         if(!TextUtils.isEmpty(imgpath))
             new DownloadFilesTask(this,imageViewImg, AppConstants.RELATEVE_PATH).execute(imgpath);
 
-        imageViewHeart.setOnClickListener(new View.OnClickListener() { //좋아요 버튼
-            @Override
-            public void onClick(View v) {
-                String paramNames[] = {"m_id", "b_no", "l_type", "my_like"};
-                if (item.isMyLike() == false) { // 좋아요
-                    imageViewHeart.setImageResource(R.drawable.ic_favorite_selected_24dp);
-                    item.LikePlus();
-                    String values[] = {Integer.toString(member.getId()), Integer.toString(item.getB_no()), AppConstants.BOARD_BINARY, "like"};
-                    InsertDataTask insertDataTask = new InsertDataTask(BoardReadingActivity.this,paramNames,values);
-                    insertDataTask.execute("community/press_like.php",null,null);
-                    textViewLikes.setText(Integer.toString(item.getLikes()));
-                    item.setMyLike(true);
-
-                } else { // 좋아요 취소
-                    imageViewHeart.setImageResource(R.drawable.ic_favorite_unselected_24dp);
-                    item.LikeMinus();
-                    String values[] = {Integer.toString(member.getId()), Integer.toString(item.getB_no()), AppConstants.BOARD_BINARY, "cancel"};
-                    InsertDataTask insertDataTask = new InsertDataTask(BoardReadingActivity.this,paramNames,values);
-                    insertDataTask.execute("community/press_like.php",null,null);
-                    textViewLikes.setText(Integer.toString(item.getLikes()));
-                    item.setMyLike(false);
-                }
-            }
-        });
-
-        buttonCommentSubmit.setOnClickListener(new View.OnClickListener() { //댓글 등록 버튼
-            @Override
-            public void onClick(View v) {
-                insertComment();
-                // 키보드 내려기
-                editTextComment.getText().clear();
-                InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                updatePost(item.getB_no());
-            }
-        });
+//        imageViewHeart.setOnClickListener(new View.OnClickListener() { //좋아요 버튼
+//            @Override
+//            public void onClick(View v) {
+//                String paramNames[] = {"m_id", "b_no", "l_type", "my_like"};
+//                if (item.isMyLike() == false) { // 좋아요
+//                    imageViewHeart.setImageResource(R.drawable.ic_favorite_selected_24dp);
+//                    item.LikePlus();
+//                    String values[] = {Integer.toString(member.getId()), Integer.toString(item.getB_no()), AppConstants.BOARD_BINARY, "like"};
+//                    InsertDataTask insertDataTask = new InsertDataTask(BoardReadingActivity.this,paramNames,values);
+//                    insertDataTask.execute("community/press_like.php",null,null);
+//                    textViewLikes.setText(Integer.toString(item.getLikes()));
+//                    item.setMyLike(true);
+//
+//                } else { // 좋아요 취소
+//                    imageViewHeart.setImageResource(R.drawable.ic_favorite_unselected_24dp);
+//                    item.LikeMinus();
+//                    String values[] = {Integer.toString(member.getId()), Integer.toString(item.getB_no()), AppConstants.BOARD_BINARY, "cancel"};
+//                    InsertDataTask insertDataTask = new InsertDataTask(BoardReadingActivity.this,paramNames,values);
+//                    insertDataTask.execute("community/press_like.php",null,null);
+//                    textViewLikes.setText(Integer.toString(item.getLikes()));
+//                    item.setMyLike(false);
+//                }
+//            }
+//        });
+//
+//        buttonCommentSubmit.setOnClickListener(new View.OnClickListener() { //댓글 등록 버튼
+//            @Override
+//            public void onClick(View v) {
+//                insertComment();
+//                // 키보드 내려기
+//                editTextComment.getText().clear();
+//                InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+//                updatePost(item.getB_no());
+//            }
+//        });
     }
 
-    public void insertComment(){
-        String paramNames[] = {"p_no","p_type","m_id","c_description"};
-        String values[] = {Integer.toString(item.getB_no()), AppConstants.BOARD_BINARY, Integer.toString(member.getId()), editTextComment.getText().toString()};
-        InsertDataTask insertDataTask = new InsertDataTask(this,paramNames,values);
-        insertDataTask.execute("community/insert_comment.php",null,null);
-    }
+//    public void insertComment(){
+//        String paramNames[] = {"p_no","p_type","m_id","c_description"};
+//        String values[] = {Integer.toString(item.getB_no()), AppConstants.BOARD_BINARY, Integer.toString(member.getId()), editTextComment.getText().toString()};
+//        InsertDataTask insertDataTask = new InsertDataTask(this,paramNames,values);
+//        insertDataTask.execute("community/insert_comment.php",null,null);
+//    }
 
-    @Override
+
     public void onDownloadImgSet(ImageView imageView, Bitmap bitmap) {
         imageView.setImageBitmap(bitmap);
     }
@@ -187,7 +186,7 @@ public class BoardReadingActivity extends BaseActivity implements OnTaskComplete
         adapter.notifyDataSetChanged();
     }
 
-    @Override
+
     public void jsonToItem(String jsonString) {
         try {
             JSONObject jsonObject = new JSONObject(jsonString);

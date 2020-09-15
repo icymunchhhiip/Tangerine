@@ -45,6 +45,7 @@
 
         <activity android:name=".community.MyInfoActivity"/>
         <activity android:name=".community.MyPostsActivity" />
+        <activity android:name=".community.CookingTipActivity"/>
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
@@ -57,7 +58,6 @@
         <activity android:name=".setting.MylikeRecipeFragment"/>
         <activity android:name=".setting.EditProfileActivity"/>
         <activity android:name=".setting.MywrittenRecipeFragment"/>
-        <activity android:name=".setting.MywrittenMarketActivity"/>
     </application>
 
 </manifest>

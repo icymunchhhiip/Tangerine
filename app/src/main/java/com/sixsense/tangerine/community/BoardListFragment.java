@@ -107,6 +107,7 @@ public class BoardListFragment extends Fragment implements OnTaskCompletedListen
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("boardItem", item);
                 bundle.putSerializable("member", member);
+
                 bundle.putInt("p_type", AppConstants.BOARD_SIG);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, AppConstants.DELETE_OK);
@@ -124,7 +125,7 @@ public class BoardListFragment extends Fragment implements OnTaskCompletedListen
                     if (editTextSearch.getText().toString() != null) {
                         String paramNames[] = new String[]{"m_id", "search"};
                         String values[] = {String.valueOf(member.getId()), editTextSearch.getText().toString()};
-                        GetDataTask task = new GetDataTask(BoardListFragment.this,paramNames, values,AppConstants.MODE_SEARCH);
+                        GetDataTask task = new GetDataTask(BoardListFragment.this,paramNames, values, AppConstants.MODE_SEARCH);
                         task.execute("community/search_board.php");
                         adapter.notifyDataSetChanged();
                         editTextSearch.setText("");
@@ -145,7 +146,7 @@ public class BoardListFragment extends Fragment implements OnTaskCompletedListen
     private void loadPost() {
         String paramNames[] = {"m_id"};
         String values[] = {String.valueOf(member.getId())};
-        GetDataTask task = new GetDataTask(this,paramNames,values,AppConstants.MODE_READ);
+        GetDataTask task = new GetDataTask(this,paramNames,values, AppConstants.MODE_READ);
         task.execute("community/read_board.php");
     }
 

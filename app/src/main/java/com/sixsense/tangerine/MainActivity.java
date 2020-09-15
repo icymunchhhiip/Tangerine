@@ -58,38 +58,38 @@ public class MainActivity extends AppCompatActivity implements MyCommunityListen
         setContentView(R.layout.activity_main);
         getKeyHash();
 
-        Toolbar toolbar = findViewById(R.id.toolbar_home);
-        mImageButtonWriting = toolbar.findViewById(R.id.recipe_write);
-        mImageButtonWriting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, WriteRecipeActivity.class);
-                startActivity(intent);
-            }
-        });
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar_home);
+//        mImageButtonWriting = toolbar.findViewById(R.id.recipe_write);
+//        mImageButtonWriting.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, WriteRecipeActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        setSupportActionBar(toolbar);
     }
 
-    @Override
-    public void onBackPressed() {
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.main_frame);
-        Fragment current = navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (current instanceof SearchFragment) {
-            ConstraintLayout layout = findViewById(R.id.main_layout);
-            Toolbar toolbar = layout.findViewById(R.id.toolbar_home);
-            toolbar.setNavigationIcon(null);
-            if (mImageButtonWriting.getVisibility() != View.VISIBLE) {
-                mImageButtonWriting.setVisibility(View.VISIBLE);
-            }
-        } else if (current instanceof InRecipeFragment) {
-            ConstraintLayout layout = findViewById(R.id.main_layout);
-            layout.findViewById(R.id.toolbar_show_title).setVisibility(View.GONE);
-            Toolbar toolbar = layout.findViewById(R.id.toolbar_home);
-            toolbar.setVisibility(View.VISIBLE);
-        }
-
-        super.onBackPressed();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.main_frame);
+//        Fragment current = navHostFragment.getChildFragmentManager().getFragments().get(0);
+//        if (current instanceof SearchFragment) {
+//            ConstraintLayout layout = findViewById(R.id.main_layout);
+//            Toolbar toolbar = layout.findViewById(R.id.toolbar_home);
+//            toolbar.setNavigationIcon(null);
+//            if (mImageButtonWriting.getVisibility() != View.VISIBLE) {
+//                mImageButtonWriting.setVisibility(View.VISIBLE);
+//            }
+//        } else if (current instanceof InRecipeFragment) {
+//            ConstraintLayout layout = findViewById(R.id.main_layout);
+//            layout.findViewById(R.id.toolbar_show_title).setVisibility(View.GONE);
+//            Toolbar toolbar = layout.findViewById(R.id.toolbar_home);
+//            toolbar.setVisibility(View.VISIBLE);
+//        }
+//
+//        super.onBackPressed();
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

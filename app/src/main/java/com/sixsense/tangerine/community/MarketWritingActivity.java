@@ -87,7 +87,7 @@ public class MarketWritingActivity extends AppCompatActivity implements OnTaskCo
             item = (MarketPost) bundle.getSerializable("item");
 
             String[] paramNames = {"m_id", "p_type","p_no"};
-            String[] values = {String.valueOf(member.getId()),AppConstants.MARKET_BINARY, Integer.toString(item.getMk_no())};
+            String[] values = {String.valueOf(member.getId()), AppConstants.MARKET_BINARY, Integer.toString(item.getMk_no())};
             GetDataTask task = new GetDataTask(this, paramNames, values, AppConstants.MODE_READ);
             task.execute("community/get_post.php",null,null);
 
@@ -195,7 +195,7 @@ public class MarketWritingActivity extends AppCompatActivity implements OnTaskCo
         mkEditTextPrice.setText(Integer.toString(item.getPrice()));
         mkEditTextDescription.setText(item.getDescription());
         if(item.getImgPath()!= null){
-            new DownloadFilesTask(this,mkImageViewSelected,AppConstants.RELATEVE_PATH).execute(item.getImgPath());
+            new DownloadFilesTask(this,mkImageViewSelected, AppConstants.RELATEVE_PATH).execute(item.getImgPath());
         }
     }
 

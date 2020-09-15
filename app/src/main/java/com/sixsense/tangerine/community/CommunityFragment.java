@@ -2,7 +2,6 @@ package com.sixsense.tangerine.community;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
@@ -28,7 +26,7 @@ public class CommunityFragment extends Fragment implements OnTaskCompletedListen
 
     private MarketNoLocationFragment marketNoLocationFragment; //위치설정x 인경우
     private MarketListFragment marketListFragment; //위치설정o 인경우 장터 글목록
-    private CookingTipFragment cookingTipFragment; //꿀팁
+    private CookingTipListFragment cookingTipFragment; //꿀팁
     private BoardListFragment boardListFragment; //게시판 글목록
 
     private TabLayout tabLayout;
@@ -45,7 +43,7 @@ public class CommunityFragment extends Fragment implements OnTaskCompletedListen
 
         marketNoLocationFragment = new MarketNoLocationFragment();
         marketListFragment = new MarketListFragment();
-        cookingTipFragment = new CookingTipFragment();
+        cookingTipFragment = new CookingTipListFragment();
         boardListFragment = new BoardListFragment();
 
         // TODO: 로그인 성공 -> DB에 저장된 Member 정보 -> 전달받음
@@ -108,7 +106,7 @@ public class CommunityFragment extends Fragment implements OnTaskCompletedListen
     public void getMemberDB(int m_id){
         String[] paramNames = {"m_id"};
         String[] values = {String.valueOf(m_id)};
-        GetDataTask getDataTask = new GetDataTask(this,paramNames,values,AppConstants.MODE_READ);
+        GetDataTask getDataTask = new GetDataTask(this,paramNames,values, AppConstants.MODE_READ);
         getDataTask.execute("community/get_member.php");
     }
 

@@ -71,25 +71,25 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
             public void onClick(View v) {
                 if (position != RecyclerView.NO_POSITION) {
                     NavDirections navDirections;
-                    ConstraintLayout layout = mFragment.getActivity().findViewById(R.id.main_layout);
-                    Toolbar toolbar = layout.findViewById(R.id.toolbar_show_title);
-                    layout.findViewById(R.id.toolbar_home).setVisibility(View.GONE);
-                    toolbar.setVisibility(View.VISIBLE);
-                    Button buttonEdit = toolbar.findViewById(R.id.edit_recipe);
-                    Button buttonDel = toolbar.findViewById(R.id.del_recipe);
-                    if (mRecipeIntro.get(position).memId == MainActivity.sMyAccount.getId()) {
-                        buttonEdit.setVisibility(View.VISIBLE);
-                        buttonDel.setVisibility(View.VISIBLE);
-                    } else {
-                        buttonEdit.setVisibility(View.INVISIBLE);
-                        buttonDel.setVisibility(View.INVISIBLE);
-                    }
-                    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mFragment.getActivity().onBackPressed();
-                        }
-                    });
+//                    ConstraintLayout layout = mFragment.getActivity().findViewById(R.id.main_layout);
+//                    Toolbar toolbar = mView.findViewById(R.id.toolbar_show_title);
+//                    layout.findViewById(R.id.toolbar_home).setVisibility(View.GONE);
+//                    toolbar.setVisibility(View.VISIBLE);
+//                    Button buttonEdit = mView.findViewById(R.id.edit_recipe);
+//                    Button buttonDel = mView.findViewById(R.id.del_recipe);
+//                    if (mRecipeIntro.get(position).memId == MainActivity.sMyAccount.getId()) {
+//                        buttonEdit.setVisibility(View.VISIBLE);
+//                        buttonDel.setVisibility(View.VISIBLE);
+//                    } else {
+//                        buttonEdit.setVisibility(View.INVISIBLE);
+//                        buttonDel.setVisibility(View.INVISIBLE);
+//                    }
+//                    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            mFragment.getActivity().onBackPressed();
+//                        }
+//                    });
                     String navLabel = (String) Navigation.findNavController(mFragment.getView()).getCurrentDestination().getLabel();
                     if (mFragment instanceof RecentRecipeListFragment) {
                         navDirections = MainPagerFragmentDirections.actionMainPagerFragmentToInRecipeFragment(mRecipeIntro.get(position));

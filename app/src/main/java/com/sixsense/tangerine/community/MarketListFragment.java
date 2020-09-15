@@ -117,7 +117,7 @@ public class MarketListFragment extends Fragment implements OnTaskCompletedListe
             public void onItemClick(MarketPostAdapter.ViewHolder holder, View view, int position) { //게시글 클릭 이벤트
                 MarketPost item = adapter.getItem(position);
 
-                Intent intent = new Intent(getContext(),MarketReadingActivity.class);
+                Intent intent = new Intent(getContext(), MarketReadingActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("marketItem",item);
                 bundle.putSerializable("member", member);

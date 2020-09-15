@@ -57,10 +57,11 @@ public class RecentRecipeListFragment extends Fragment {
 
         if (mRecipeIntroList.isEmpty()) {
             new RecentRecipeCall().execute();
-        } else if (mHasMore == 1) {
-            ++mPageNo;
-            new RecentRecipeCall().execute();
         }
+//        else if (mHasMore == 1) {
+//            ++mPageNo;
+//            new RecentRecipeCall().execute();
+//        }
         return view;
     }
 

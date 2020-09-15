@@ -3,13 +3,17 @@ package com.sixsense.tangerine.home;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -21,11 +25,34 @@ public class ResultFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.home_result, container, false);
+        final View view = inflater.inflate(R.layout.home_result, container, false);
+
+        Toolbar toolbar = view.findViewById(R.id.toolbar_result);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
 
         if (getArguments() != null) {
             ResultFragmentArgs args = ResultFragmentArgs.fromBundle(getArguments());
             String recipeName = args.getRecipeName();
+            final SearchView searchView = view.findViewById(R.id.recipe_search);
+            searchView.setQuery(recipeName,false);
+//            searchView.setFocusableInTouchMode();
+            searchView.setSubmitButtonEnabled(false);
+            searchView.setInputType(InputType.TYPE_NULL);
+            searchView.setEnabled(false);
+            searchView.clearFocus();
+//            searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+//                @Override
+//                public boolean onClose() {
+//                    Toast.makeText(getContext(),"d",Toast.LENGTH_SHORT);
+//                    getActivity().onBackPressed();
+//                    return false;
+//                }
+//            });
             String kindString = args.getKindByte();
             if (kindString == null || kindString.equals("000000")) {
                 kindString = "00000011";
@@ -83,4 +110,5 @@ public class ResultFragment extends Fragment {
         }
         return total;
     }
+
 }

@@ -27,7 +27,7 @@ public class MylikeRecipeFragment extends Fragment {
 
         MyRecipeListFragment myRecipeListFragment = new MyRecipeListFragment("like");
 
-        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.my_like_frame, myRecipeListFragment).addToBackStack(null).commit();
 
         return view;

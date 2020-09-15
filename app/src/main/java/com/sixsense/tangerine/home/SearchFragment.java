@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -51,6 +52,14 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.home_search, container, false);
+
+        Toolbar toolbar = view.findViewById(R.id.toolbar_search);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
 
         mCheckBoxKindsAll = view.findViewById(R.id.kinds_all);
         mCheckBoxKindsMeal = view.findViewById(R.id.kinds_meal);
@@ -196,7 +205,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ArrayList<String> conditionArray = new ArrayList<String>();
-                SearchView searchView = getActivity().findViewById(R.id.recipe_search);
+                SearchView searchView = view.findViewById(R.id.recipe_search);
                 String recipeName = "";
                 try {
                     recipeName = searchView.getQuery().toString();

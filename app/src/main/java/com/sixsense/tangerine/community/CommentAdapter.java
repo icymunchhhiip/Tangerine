@@ -73,7 +73,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
             String profilePath = writer.getProfilePath();
             if(!TextUtils.isEmpty(profilePath))
-                new DownloadFilesTask(this,cImageViewProfile,AppConstants.ABSOLUTE_PATH).execute(profilePath);
+                new DownloadFilesTask(this,cImageViewProfile, AppConstants.ABSOLUTE_PATH).execute(profilePath);
         }
 
         @Override

@@ -31,7 +31,7 @@ public class MywrittenRecipeFragment extends Fragment {
 
         MyRecipeListFragment myRecipeListFragment = new MyRecipeListFragment("written");
 
-        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.my_written_frame, myRecipeListFragment).addToBackStack(null).commit();
 
         return view;

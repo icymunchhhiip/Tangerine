@@ -58,14 +58,22 @@ public class InRecipeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_in_recipe, container, false);
 
+        Toolbar toolbar = view.findViewById(R.id.toolbar_show_title);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
+
         if (getArguments() != null) {
             InRecipeFragmentArgs args = InRecipeFragmentArgs.fromBundle(getArguments());
             mCurrentInfo = args.getRecipeIntroItem();
 
-            ConstraintLayout layout = getActivity().findViewById(R.id.main_layout);
-            Toolbar toolbar = layout.findViewById(R.id.toolbar_show_title);
+//            ConstraintLayout layout = getActivity().findViewById(R.id.main_layout);
+//            Toolbar toolbar = layout.findViewById(R.id.toolbar_show_title);
 
-            TextView textTitle = toolbar.findViewById(R.id.toolbar_recipe_title);
+            TextView textTitle = view.findViewById(R.id.toolbar_recipe_title);
             textTitle.setText(mCurrentInfo.recipeName);
 
             ImageView imageMain = view.findViewById(R.id.mainImg);
@@ -131,8 +139,16 @@ public class InRecipeFragment extends Fragment {
                 Log.e(TAG, Objects.requireNonNull(e.getMessage()));
             }
 
-            Button buttonEdit = toolbar.findViewById(R.id.edit_recipe);
-            Button buttonDel = toolbar.findViewById(R.id.del_recipe);
+            Button buttonEdit = view.findViewById(R.id.edit_recipe);
+            Button buttonDel = view.findViewById(R.id.del_recipe);
+            if (mCurrentInfo.memId == MainActivity.sMyAccount.getId()) {
+                buttonEdit.setVisibility(View.VISIBLE);
+                buttonDel.setVisibility(View.VISIBLE);
+            } else {
+                buttonEdit.setVisibility(View.INVISIBLE);
+                buttonDel.setVisibility(View.INVISIBLE);
+            }
+
             if (buttonEdit.getVisibility() == View.VISIBLE) {
                 buttonEdit.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -91,7 +91,7 @@ public class MyBoardListFragment extends Fragment implements OnTaskCompletedList
     private void loadPost() {
         String paramNames[] = {"m_id"};
         String values[] = {String.valueOf(member.getId())};
-        GetDataTask task = new GetDataTask(this,paramNames,values,AppConstants.MODE_READ);
+        GetDataTask task = new GetDataTask(this,paramNames,values, AppConstants.MODE_READ);
         task.execute("community/read_myboard.php");
     }
 

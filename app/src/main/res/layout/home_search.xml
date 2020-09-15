@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/condition_start_margin"
     android:background="@color/colorBackground"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.Toolbar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        app:navigationIcon="@drawable/ic_arrow_back_24dp">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/recipe_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            app:queryBackground="@android:color/transparent"
+            android:background="@drawable/search_bg"
+            android:autofillHints="@string/search_title"
+            app:iconifiedByDefault="false" />
+    </androidx.appcompat.widget.Toolbar>
+
     <TextView
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
@@ -15,6 +37,7 @@
         android:textSize="@dimen/font_middle" />
 
     <com.sixsense.tangerine.home.FlowLayout
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/conditions_top_margin"
@@ -80,6 +103,7 @@
     </com.sixsense.tangerine.home.FlowLayout>
 
     <TextView
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:button="@android:color/transparent"
@@ -89,6 +113,7 @@
         android:textSize="@dimen/font_middle" />
 
     <com.sixsense.tangerine.home.FlowLayout
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/conditions_top_margin"
@@ -192,6 +217,7 @@
     </com.sixsense.tangerine.home.FlowLayout>
 
     <TextView
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
@@ -200,6 +226,7 @@
         android:textSize="@dimen/font_middle" />
 
     <com.sixsense.tangerine.home.FlowLayout
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/conditions_top_margin"
@@ -303,6 +330,7 @@
     </com.sixsense.tangerine.home.FlowLayout>
 
     <TextView
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
@@ -311,6 +339,7 @@
         android:textSize="@dimen/font_middle" />
 
     <com.sixsense.tangerine.home.FlowLayout
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/conditions_top_margin"

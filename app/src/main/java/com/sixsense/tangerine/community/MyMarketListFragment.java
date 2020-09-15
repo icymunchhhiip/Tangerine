@@ -65,7 +65,7 @@ public class MyMarketListFragment extends Fragment implements OnTaskCompletedLis
 
         String[] paramNames ={"m_id"};
         String[] values = {Integer.toString(member.getId())};
-        GetDataTask task = new GetDataTask(this,paramNames,values,AppConstants.MODE_READ);
+        GetDataTask task = new GetDataTask(this,paramNames,values, AppConstants.MODE_READ);
         task.execute("community/read_mymarket.php");
         adapter.notifyDataSetChanged();
 
@@ -77,7 +77,7 @@ public class MyMarketListFragment extends Fragment implements OnTaskCompletedLis
 //                    myUpdateListener.onReceivedMarketPost(item);
 //                }
 
-                Intent intent = new Intent(getContext(),MarketReadingActivity.class);
+                Intent intent = new Intent(getContext(), MarketReadingActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("marketItem",item);
                 bundle.putSerializable("member", member);
