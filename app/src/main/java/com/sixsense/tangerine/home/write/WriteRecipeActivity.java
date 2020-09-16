@@ -44,6 +44,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.sixsense.tangerine.MainActivity;
 import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.network.HttpClient;
 import com.sixsense.tangerine.network.HttpInterface;
@@ -485,7 +486,7 @@ public class WriteRecipeActivity extends AppCompatActivity {
                         params.put("image", imageData);
                         SimpleDateFormat dateFormat = new SimpleDateFormat ( "yyyyMMddHHmmss");
                         Date time = new Date();
-                        String fname = sMyAccount.getId() +"_" +dateFormat.format(time);
+                        String fname = MainActivity.sMyId +"_" +dateFormat.format(time);
                         params.put("filename", fname);
                         recipe_desc_AL.get(CLICKPOSITION).food_image_addr = fname+".jpeg";
                         return params;
@@ -521,7 +522,7 @@ public class WriteRecipeActivity extends AppCompatActivity {
         } else {
             selectedRecipe.likeNum = 0;
         }
-        selectedRecipe.memId = (int) sMyAccount.getId();
+        selectedRecipe.memId = MainActivity.sMyId;
         if (recipe_write_title.getText() == null || recipe_write_title.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "제목이 입력되지 않았습니다.", Toast.LENGTH_LONG).show();
             return false;

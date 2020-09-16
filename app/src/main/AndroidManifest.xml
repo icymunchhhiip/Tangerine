@@ -34,6 +34,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".home.InRecipeActivity" />
         <activity android:name=".home.write.WriteRecipeActivity" />
 
         <activity android:name=".community.SetLocationActivity" />
@@ -42,10 +43,13 @@
         <activity android:name=".community.MarketReadingActivity" />
         <activity android:name=".community.MarketWritingActivity" />
         <activity android:name=".community.BaseActivity" />
+        <activity android:name=".community.CookingTipActivity" />
 
-        <activity android:name=".community.MyInfoActivity"/>
+        <activity android:name=".community.MyInfoActivity" />
+        <activity android:name=".setting.EditProfileActivity" />
         <activity android:name=".community.MyPostsActivity" />
-        <activity android:name=".community.CookingTipActivity"/>
+        <activity android:name=".setting.MylikeRecipeActivity" />
+        <activity android:name=".setting.MywrittenRecipeActivity" />
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
@@ -55,9 +59,7 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".setting.MylikeRecipeFragment"/>
-        <activity android:name=".setting.EditProfileActivity"/>
-        <activity android:name=".setting.MywrittenRecipeFragment"/>
+
     </application>
 
 </manifest>

@@ -58,6 +58,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onSuccess(MeV2Response result) {
                 MainActivity.sMyAccount = result;
+                MainActivity.sMyId = (int)result.getId();
                 MainActivity.member = new Member((int)MainActivity.sMyAccount.getId(),"가상로그인",null); //전달받은 회원데이터(가상 데이터)
                 NavDirections navDirections = LoginFragmentDirections.actionLoginFragmentToMainPagerFragment();
                 Navigation.findNavController(mView).navigate(navDirections);

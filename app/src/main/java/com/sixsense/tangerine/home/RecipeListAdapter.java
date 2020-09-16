@@ -1,23 +1,23 @@
 package com.sixsense.tangerine.home;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,13 +25,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.sixsense.tangerine.MainActivity;
 import com.sixsense.tangerine.R;
+import com.sixsense.tangerine.community.AppConstants;
+import com.sixsense.tangerine.community.MarketReadingActivity;
 import com.sixsense.tangerine.main.MainPagerFragmentDirections;
 import com.sixsense.tangerine.network.HttpClient;
 import com.sixsense.tangerine.network.HttpInterface;
 import com.sixsense.tangerine.network.RecipeIntroList;
-import com.sixsense.tangerine.setting.MylikeRecipeFragment;
-import com.sixsense.tangerine.setting.MylikeRecipeFragmentDirections;
-import com.sixsense.tangerine.setting.MywrittenRecipeFragmentDirections;
 
 import java.util.List;
 
@@ -70,37 +69,12 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
             @Override
             public void onClick(View v) {
                 if (position != RecyclerView.NO_POSITION) {
-                    NavDirections navDirections;
-//                    ConstraintLayout layout = mFragment.getActivity().findViewById(R.id.main_layout);
-//                    Toolbar toolbar = mView.findViewById(R.id.toolbar_show_title);
-//                    layout.findViewById(R.id.toolbar_home).setVisibility(View.GONE);
-//                    toolbar.setVisibility(View.VISIBLE);
-//                    Button buttonEdit = mView.findViewById(R.id.edit_recipe);
-//                    Button buttonDel = mView.findViewById(R.id.del_recipe);
-//                    if (mRecipeIntro.get(position).memId == MainActivity.sMyAccount.getId()) {
-//                        buttonEdit.setVisibility(View.VISIBLE);
-//                        buttonDel.setVisibility(View.VISIBLE);
-//                    } else {
-//                        buttonEdit.setVisibility(View.INVISIBLE);
-//                        buttonDel.setVisibility(View.INVISIBLE);
-//                    }
-//                    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            mFragment.getActivity().onBackPressed();
-//                        }
-//                    });
-                    String navLabel = (String) Navigation.findNavController(mFragment.getView()).getCurrentDestination().getLabel();
-                    if (mFragment instanceof RecentRecipeListFragment) {
-                        navDirections = MainPagerFragmentDirections.actionMainPagerFragmentToInRecipeFragment(mRecipeIntro.get(position));
-                    } else if (mFragment instanceof ResultRecipeListFragment) {
-                        navDirections = ResultFragmentDirections.actionResultFragmentToInRecipeFragment(mRecipeIntro.get(position));
-                    } else if (navLabel.equals("MylikeRecipeFragment")){
-                        navDirections = MylikeRecipeFragmentDirections.actionMylikeRecipeFragmentToInRecipeFragment(mRecipeIntro.get(position));
-                    } else {
-                        navDirections = MywrittenRecipeFragmentDirections.actionMywrittenRecipeFragmentToInRecipeFragment(mRecipeIntro.get(position));
-                    }
-                    Navigation.findNavController(mFragment.getView()).navigate(navDirections);
+
+                    Intent intent = new Intent(mFragment.getContext(), InRecipeActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("EXTRA_CURRENT_INFO",mRecipeIntro.get(position));
+                    intent.putExtras(bundle);
+                    mFragment.startActivity(intent);
 
                 }
             }
@@ -165,11 +139,12 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         @Override
         protected String doInBackground(Integer... integers) {
             HttpInterface httpInterface = HttpClient.getClient().create(HttpInterface.class);
-            Call<String> call = httpInterface.setRecipeLike((int) MainActivity.sMyAccount.getId(), integers[0], mCheckedState);
+            Call<String> call = httpInterface.setRecipeLike(MainActivity.sMyId, integers[0], mCheckedState);
             String response = null;
             try {
                 response = call.execute().body();
-            } catch (Exception ignore) {}
+            } catch (Exception ignore) {
+            }
             return response;
         }
 

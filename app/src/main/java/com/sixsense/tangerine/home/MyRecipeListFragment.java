@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sixsense.tangerine.MainActivity;
 import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.network.HttpClient;
 import com.sixsense.tangerine.network.HttpInterface;
@@ -73,7 +74,7 @@ public class MyRecipeListFragment extends Fragment {
         protected Void doInBackground(Void... voids) {
             HttpInterface httpInterface = HttpClient.getClient().create(HttpInterface.class);
             int pageSize = 10;
-            Call<RecipeIntroList> call = httpInterface.getMyRecipe(mAction,(int) sMyAccount.getId(), mPageNo, pageSize);
+            Call<RecipeIntroList> call = httpInterface.getMyRecipe(mAction, MainActivity.sMyId, mPageNo, pageSize);
             try {
                 RecipeIntroList resource = call.execute().body();
                 mRecipeIntroList.addAll(resource.data);

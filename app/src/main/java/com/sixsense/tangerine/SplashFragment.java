@@ -51,7 +51,8 @@ public class SplashFragment extends Fragment {
                         @Override
                         public void onSuccess(MeV2Response result) {
                             MainActivity.sMyAccount = result;
-                            MainActivity.member = new Member((int)MainActivity.sMyAccount.getId(),"가상로그인",null); //전달받은 회원데이터(가상 데이터)
+                            MainActivity.sMyId = (int)result.getId();
+                            MainActivity.member = new Member(MainActivity.sMyId,"가상로그인",null); //전달받은 회원데이터(가상 데이터)
                             NavDirections navDirections = SplashFragmentDirections.actionSplashFragmentToMainPagerFragment();
                             Navigation.findNavController(getActivity(),R.id.main_frame).navigate(navDirections);
                         }

@@ -105,16 +105,18 @@ public class MyinfoFragment extends Fragment {
         myRecipeBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections navDirections = MainPagerFragmentDirections.actionMainPagerFragmentToMywrittenRecipeFragment();
-                Navigation.findNavController(v).navigate(navDirections);
+                Intent intent = new Intent(getActivity(), MywrittenRecipeActivity.class);
+                intent.putExtra("EXTRA_USER_ID",MainActivity.sMyId);
+                startActivity(intent);
             }
         });
 
         mylikeRecipeBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections navDirections = MainPagerFragmentDirections.actionMainPagerFragmentToMylikeRecipeFragment();
-                Navigation.findNavController(v).navigate(navDirections);
+                Intent intent = new Intent(getActivity(), MylikeRecipeActivity.class);
+                intent.putExtra("EXTRA_USER_ID",MainActivity.sMyId);
+                startActivity(intent);
             }
         });
 
