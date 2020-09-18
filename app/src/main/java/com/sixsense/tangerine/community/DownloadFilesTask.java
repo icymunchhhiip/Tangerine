@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.sixsense.tangerine.OnTaskCompletedListener;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,7 +36,7 @@ public class DownloadFilesTask extends AsyncTask<String,Void, Bitmap> {
             if (pathForm == AppConstants.ABSOLUTE_PATH){
                 url = new URL(img_url);
             }
-            else if(pathForm == AppConstants.RELATEVE_PATH) {
+            else if(pathForm == AppConstants.RELATIVE_PATH) {
                 url = new URL(serverUrl + img_url);
             }
             else{

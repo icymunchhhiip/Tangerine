@@ -3,18 +3,8 @@ package com.sixsense.tangerine.community;
 import java.text.SimpleDateFormat;
 
 public class AppConstants {
-    public static int MARKET_SIG = 0; //장터 게시판
-    public static int BOARD_SIG = 2; //게시판
-
-    //카테고리 바이너리값
-    public static String CATEGORY_1 = "01"; //잡담 01
-    public static String CATEGORY_2 = "10"; //꿀팁 10
-    public static String CATEGORY_3 = "11"; //질문 11
-
-    //게시판 바이너리값
-    public static String MARKET_BINARY = "01";
-    public static String BOARD_BINARY = "10";
-
+    public static int MARKET_SIG = 0; //장터 게시물
+    public static int TIPS_SIG = 1; //꿀팁 게시물
 
     public static int MODE_READ = 10; //읽기
     public static int MODE_WRITE = 11; //새로작성
@@ -23,7 +13,7 @@ public class AppConstants {
     public static int MODE_SEARCH = 14; //검색
 
     public static int ABSOLUTE_PATH = 1; //절대경로 : 프로필
-    public static int RELATEVE_PATH = 2; //상대경로 : 게시글 이미지
+    public static int RELATIVE_PATH = 2; //상대경로 : 게시글 이미지
 
     public static int WRITE_OK = 202;
     public static int EDIT_OK = 203;

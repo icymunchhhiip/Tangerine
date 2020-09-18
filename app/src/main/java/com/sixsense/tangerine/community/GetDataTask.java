@@ -1,8 +1,17 @@
 package com.sixsense.tangerine.community;
 
 import android.os.AsyncTask;
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.sixsense.tangerine.OnTaskCompletedListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class GetDataTask extends AsyncTask<String, Void, String> {
+    private static final String TAG = "GetDataTask";
     private OnTaskCompletedListener listener;
     private String[] paramNames = null;
     private String[] values = null;
@@ -22,6 +31,16 @@ public class GetDataTask extends AsyncTask<String, Void, String> {
         HttpClient httpClient = new HttpClient();
         String result = httpClient.GetDataRequest(urlpage, paramNames, values);
 
+        try {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JSONObject jo = new JSONObject(result);
+            String prettyJsonString = gson.toJson(jo);
+
+            Log.d(TAG, prettyJsonString);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return result;
     }
 
@@ -32,8 +51,10 @@ public class GetDataTask extends AsyncTask<String, Void, String> {
         if (mode == AppConstants.MODE_SEARCH  && result.equals("no result")) {
             listener.noResultNotice(values[1]);
         } else if (result != null) {
-            if(mode == AppConstants.MODE_READ || mode == AppConstants.MODE_SEARCH)
-                listener.jsonToItem(result);
+            if(mode == AppConstants.MODE_READ || mode == AppConstants.MODE_SEARCH) {
+                if (listener.jsonToItem(result) == true)
+                    return;
+            }
         }
     }
 }

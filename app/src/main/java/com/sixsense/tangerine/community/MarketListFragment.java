@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sixsense.tangerine.MainActivity;
+import com.sixsense.tangerine.OnTaskCompletedListener;
 import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.community.item.MarketPost;
 import com.sixsense.tangerine.community.item.Member;
@@ -117,7 +118,7 @@ public class MarketListFragment extends Fragment implements OnTaskCompletedListe
             public void onItemClick(MarketPostAdapter.ViewHolder holder, View view, int position) { //게시글 클릭 이벤트
                 MarketPost item = adapter.getItem(position);
 
-                Intent intent = new Intent(getContext(), MarketReadingActivity.class);
+                Intent intent = new Intent(getContext(),MarketReadingActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("marketItem",item);
                 bundle.putSerializable("member", member);
@@ -182,13 +183,9 @@ public class MarketListFragment extends Fragment implements OnTaskCompletedListe
         }
     }
 
-    @Override
-    public void onDownloadImgSet(ImageView imageView, Bitmap bitmap) {
-
-    }
 
     @Override
-    public void jsonToItem(String jsonString) {
+    public boolean jsonToItem(String jsonString) {
         String TAG_JSON = "localmarketlist";
         ArrayList<MarketPost> items = new ArrayList<>();
         try {
@@ -221,8 +218,10 @@ public class MarketListFragment extends Fragment implements OnTaskCompletedListe
             }
             adapter.setItems(items);
             adapter.notifyDataSetChanged();
+            return true;
         } catch (JSONException e) {
             Log.d(TAG, "showResult: ", e);
+            return false;
         }
     }
 
@@ -237,4 +236,8 @@ public class MarketListFragment extends Fragment implements OnTaskCompletedListe
         textViewNoResult.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void onDownloadImgSet(ImageView imageView, Bitmap bitmap) {
+
+    }
 }

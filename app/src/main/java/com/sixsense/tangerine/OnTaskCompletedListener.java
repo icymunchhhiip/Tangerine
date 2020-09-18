@@ -5,7 +5,7 @@ import android.widget.ImageView;
 
 public interface OnTaskCompletedListener {
     void onDownloadImgSet(ImageView imageView, Bitmap bitmap);
-    void jsonToItem(String jsonString);
+    boolean jsonToItem(String jsonString);
 
-    void noResultNotice(String searchString);
+    void noResultNotice(String searchString); //검색결과 없을때
 }

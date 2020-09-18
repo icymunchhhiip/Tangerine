@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.content.CursorLoader;
 
+import com.sixsense.tangerine.OnTaskCompletedListener;
 import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.community.item.MarketPost;
 import com.sixsense.tangerine.community.item.Member;
@@ -86,10 +87,10 @@ public class MarketWritingActivity extends AppCompatActivity implements OnTaskCo
         if (mode == AppConstants.MODE_EDIT) {
             item = (MarketPost) bundle.getSerializable("item");
 
-            String[] paramNames = {"m_id", "p_type","p_no"};
-            String[] values = {String.valueOf(member.getId()), AppConstants.MARKET_BINARY, Integer.toString(item.getMk_no())};
+            String[] paramNames = {"m_id", "p_no"};
+            String[] values = {String.valueOf(member.getId()), Integer.toString(item.getMk_no())};
             GetDataTask task = new GetDataTask(this, paramNames, values, AppConstants.MODE_READ);
-            task.execute("community/get_post.php",null,null);
+            task.execute("community/get_marketpost.php",null,null);
 
             loadPost();
         }
@@ -195,10 +196,9 @@ public class MarketWritingActivity extends AppCompatActivity implements OnTaskCo
         mkEditTextPrice.setText(Integer.toString(item.getPrice()));
         mkEditTextDescription.setText(item.getDescription());
         if(item.getImgPath()!= null){
-            new DownloadFilesTask(this,mkImageViewSelected, AppConstants.RELATEVE_PATH).execute(item.getImgPath());
+            new DownloadFilesTask(this,mkImageViewSelected,AppConstants.RELATIVE_PATH).execute(item.getImgPath());
         }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -284,7 +284,7 @@ public class MarketWritingActivity extends AppCompatActivity implements OnTaskCo
     }
 
     @Override
-    public void jsonToItem(String jsonString) {
+    public boolean jsonToItem(String jsonString) {
         try {
             JSONObject jsonObject = new JSONObject(jsonString);
             JSONObject p_and_c = jsonObject.getJSONObject("post&comment");
@@ -313,10 +313,11 @@ public class MarketWritingActivity extends AppCompatActivity implements OnTaskCo
 
             MarketPost readPost = new MarketPost(new Member(m_id, m_name, m_profile), mk_no, mk_localcode, mk_price, mk_title, mk_description, mk_date, mk_imgpath);
             item = readPost;
-
+            return true;
         } catch (JSONException e) {
             Log.d(TAG, "showResult: ", e);
         }
+        return false;
     }
 
     @Override

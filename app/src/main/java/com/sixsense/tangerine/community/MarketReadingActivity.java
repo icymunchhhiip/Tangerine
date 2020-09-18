@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sixsense.tangerine.OnTaskCompletedListener;
 import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.community.item.Comment;
 import com.sixsense.tangerine.community.item.MarketPost;
@@ -106,7 +107,7 @@ public class MarketReadingActivity extends BaseActivity implements OnTaskComplet
 
         String imgpath = item.getImgPath();
         if (!TextUtils.isEmpty(imgpath))
-            new DownloadFilesTask(this, imageViewImg, AppConstants.RELATEVE_PATH).execute(imgpath);
+            new DownloadFilesTask(this, imageViewImg, AppConstants.RELATIVE_PATH).execute(imgpath);
 
         buttonCommentSubmit.setOnClickListener(new View.OnClickListener() { //댓글 등록 버튼
             @Override
@@ -123,22 +124,22 @@ public class MarketReadingActivity extends BaseActivity implements OnTaskComplet
     }
 
     private void updatePost(int mk_no) {
-        String[] paramNames = {"m_id", "p_type","p_no"};
-        String[] values = {String.valueOf(member.getId()), AppConstants.MARKET_BINARY, Integer.toString(mk_no)};
+        String[] paramNames = {"m_id", "p_no"};
+        String[] values = {String.valueOf(member.getId()), Integer.toString(mk_no)};
         GetDataTask task = new GetDataTask(this, paramNames, values, AppConstants.MODE_READ);
-        task.execute("community/get_post.php",null,null);
+        task.execute("community/get_marketpost.php",null,null);
         adapter.notifyDataSetChanged();
     }
 
     public void insertComment() {
-        String paramNames[] = {"p_no", "p_type", "m_id", "c_description"};
-        String values[] = {Integer.toString(item.getMk_no()), "01", Integer.toString(member.getId()), editTextComment.getText().toString()};
+        String paramNames[] = {"p_no", "m_id", "c_description"};
+        String values[] = {Integer.toString(item.getMk_no()), Integer.toString(member.getId()), editTextComment.getText().toString()};
         InsertDataTask insertDataTask = new InsertDataTask(this, paramNames, values);
-        insertDataTask.execute("community/insert_comment.php", null, null);
+        insertDataTask.execute("community/insert_marketcomment.php", null, null);
     }
 
     @Override
-    public void jsonToItem(String jsonString) {
+    public boolean jsonToItem(String jsonString) {
         try {
             JSONObject jsonObject = new JSONObject(jsonString);
             JSONObject p_and_c = jsonObject.getJSONObject("post&comment");
@@ -187,20 +188,20 @@ public class MarketReadingActivity extends BaseActivity implements OnTaskComplet
 
                     JSONObject comment = item.getJSONObject("comment");
                     int p_no = comment.getInt("p_no");
-                    int p_type = comment.getInt("p_type");
                     int c_no = comment.getInt("c_no");
                     String c_description = comment.getString("c_description");
                     String c_date = comment.getString("c_date");
-                    Comment readComment = new Comment(p_no, p_type, new Member(c_m_id, c_m_name, c_m_profile), c_no, c_description, c_date);
+                    Comment readComment = new Comment(p_no, new Member(c_m_id, c_m_name, c_m_profile), c_no, c_description, c_date);
                     items.add(readComment);
                 }
             }
             adapter.setItems(items);
             adapter.notifyDataSetChanged();
-
+            return true;
         } catch (JSONException e) {
             Log.d(TAG, "showResult: ", e);
         }
+        return false;
     }
 
     @Override

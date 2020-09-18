@@ -5,22 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.kakao.usermgmt.response.MeV2Response;
-import com.sixsense.tangerine.community.BoardListFragment;
+import com.sixsense.tangerine.community.CookingTipListFragment;
+import com.sixsense.tangerine.community.InsertDataTask;
 import com.sixsense.tangerine.community.MarketListFragment;
+import com.sixsense.tangerine.community.MarketNoLocationFragment;
 import com.sixsense.tangerine.community.MyCommunityListener;
 import com.sixsense.tangerine.community.item.Member;
 
 import java.security.MessageDigest;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements MyCommunityListener {
+public class MainActivity extends AppCompatActivity implements MyCommunityListener, OnTaskCompletedListener {
 
     public static MeV2Response sMyAccount;
     public static int sMyId;
@@ -64,16 +68,42 @@ public class MainActivity extends AppCompatActivity implements MyCommunityListen
     }
 
     @Override
-    public void showBoardListFragment(){
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new BoardListFragment()).commit();
+    public void showNoLocationFragment(){
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new MarketNoLocationFragment()).commit();
     }
 
     @Override
-    public void setMemberLocation(String localString, int localCode) { member.setLocalAddress(localString,localCode);}
+    public void showCookingTipListFragment() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new CookingTipListFragment()).commit();
+    }
+
+    @Override
+    public void setMemberLocation(String localString, int localCode) {
+        member.setLocalAddress(localString,localCode);
+
+        String[] paramNames = {"m_id","m_localstr","m_localcode"};
+        String[] values = {String.valueOf(this.member.getId()),localString, String.valueOf(localCode)};
+        com.sixsense.tangerine.community.InsertDataTask insertDataTask = new InsertDataTask(this,paramNames,values);
+        insertDataTask.execute("community/save_local.php",null,null);
+    }
 
     @Override
     public Member getMember(){
         return member;
     }
 
+    @Override
+    public boolean jsonToItem(String jsonString) {
+        return false;
+    }
+
+    @Override
+    public void onDownloadImgSet(ImageView imageView, Bitmap bitmap) {
+
+    }
+
+    @Override
+    public void noResultNotice(String searchString) {
+
+    }
 }

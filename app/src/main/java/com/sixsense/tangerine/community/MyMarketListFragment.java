@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sixsense.tangerine.OnTaskCompletedListener;
 import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.community.item.MarketPost;
 import com.sixsense.tangerine.community.item.Member;
@@ -65,7 +66,7 @@ public class MyMarketListFragment extends Fragment implements OnTaskCompletedLis
 
         String[] paramNames ={"m_id"};
         String[] values = {Integer.toString(member.getId())};
-        GetDataTask task = new GetDataTask(this,paramNames,values, AppConstants.MODE_READ);
+        GetDataTask task = new GetDataTask(this,paramNames,values,AppConstants.MODE_READ);
         task.execute("community/read_mymarket.php");
         adapter.notifyDataSetChanged();
 
@@ -77,11 +78,10 @@ public class MyMarketListFragment extends Fragment implements OnTaskCompletedLis
 //                    myUpdateListener.onReceivedMarketPost(item);
 //                }
 
-                Intent intent = new Intent(getContext(), MarketReadingActivity.class);
+                Intent intent = new Intent(getContext(),MarketReadingActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("marketItem",item);
                 bundle.putSerializable("member", member);
-                bundle.putInt("p_type", AppConstants.MARKET_SIG);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, AppConstants.DELETE_OK);
             }
@@ -107,7 +107,7 @@ public class MyMarketListFragment extends Fragment implements OnTaskCompletedLis
     }
 
     @Override
-    public void jsonToItem(String jsonString) {
+    public boolean jsonToItem(String jsonString) {
         String TAG_JSON = "mymarketlist";
         ArrayList<MarketPost> items = new ArrayList<>();
         try {
@@ -140,9 +140,11 @@ public class MyMarketListFragment extends Fragment implements OnTaskCompletedLis
             }
             adapter.setItems(items);
             adapter.notifyDataSetChanged();
+            return true;
         } catch (JSONException e) {
             Log.d(TAG, "showResult: ", e);
         }
+        return false;
     }
 
     @Override

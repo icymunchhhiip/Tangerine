@@ -1,7 +1,5 @@
 package com.sixsense.tangerine.community.item;
 
-import android.widget.ImageView;
-
 import java.io.Serializable;
 
 public class Member implements Serializable {
@@ -11,7 +9,9 @@ public class Member implements Serializable {
     private String localString;
     private int localCode = 0;
 
-    private ImageView profileView;
+    public Member(int id){
+        this.id = id;
+    }
 
     public Member(int id, String nickname, String profilePath){
         this.id = id;
@@ -19,10 +19,11 @@ public class Member implements Serializable {
         this.profilePath = profilePath;
     }
 
-    public Member(int id, String nickname, String profilePath, int localCode){
+    public Member(int id, String nickname, String profilePath, String localString, int localCode){
         this.id = id;
         this.nickname = nickname;
         this.profilePath = profilePath;
+        this.localString = localString;
         this.localCode = localCode;
     }
 
@@ -61,9 +62,5 @@ public class Member implements Serializable {
     public void setLocalAddress(String localString,int localCode) {
         this.localString = localString;
         this.localCode = localCode;
-    }
-
-    public ImageView getProfileView() {
-        return profileView;
     }
 }

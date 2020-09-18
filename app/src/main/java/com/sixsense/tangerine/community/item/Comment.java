@@ -2,16 +2,14 @@ package com.sixsense.tangerine.community.item;
 
 public class Comment {
     int p_no; // 댓글이 달린 게시글 식별번호
-    int p_type; // 게시글 타입
 
     Member writer; // 작성자 정보
     int c_no; // 댓글 식별번호
     String description; // 댓글 내용
     String date; // 댓글 작성 날짜
 
-    public Comment(int p_no, int p_type, Member writer, int c_no, String description, String date) {
+    public Comment(int p_no, Member writer, int c_no, String description, String date) {
         this.p_no = p_no;
-        this.p_type = p_type;
         this.writer = writer;
         this.c_no = c_no;
         this.description = description;
@@ -24,14 +22,6 @@ public class Comment {
 
     public void setP_no(int p_no) {
         this.p_no = p_no;
-    }
-
-    public int getP_type() {
-        return p_type;
-    }
-
-    public void setP_type(int p_type) {
-        this.p_type = p_type;
     }
 
     public Member getWriter() {

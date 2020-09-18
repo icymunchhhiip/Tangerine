@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sixsense.tangerine.OnTaskCompletedListener;
 import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.community.item.Comment;
 import com.sixsense.tangerine.community.item.Member;
@@ -73,7 +74,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
             String profilePath = writer.getProfilePath();
             if(!TextUtils.isEmpty(profilePath))
-                new DownloadFilesTask(this,cImageViewProfile, AppConstants.ABSOLUTE_PATH).execute(profilePath);
+                new DownloadFilesTask(this,cImageViewProfile,AppConstants.ABSOLUTE_PATH).execute(profilePath);
         }
 
         @Override
@@ -82,8 +83,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         }
 
         @Override
-        public void jsonToItem(String jsonString) {
-
+        public boolean jsonToItem(String jsonString) {
+            return false;
         }
 
         @Override

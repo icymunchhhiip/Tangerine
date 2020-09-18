@@ -27,7 +27,7 @@ import retrofit2.Call;
 
 public class CookingTipListFragment extends Fragment {
     private RecyclerView recyclerView;
-    private CookingTipListAdapter adapter;
+    private CookingTipAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,21 +36,20 @@ public class CookingTipListFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         layoutManager = new GridLayoutManager(getContext(),2);
-        adapter = new CookingTipListAdapter();
+        adapter = new CookingTipAdapter();
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         new TipsCall().execute();
 
         adapter.setOnItemClickListener(new OnCookingTipListItemClickListener() { //게시글 누르면
 
-            public void onItemClick(CookingTipListAdapter.ViewHolder holder, View view, int position) {
+            public void onItemClick(CookingTipAdapter.ViewHolder holder, View view, int position) {
                 CookingTip item = adapter.getItem(position);
 
                 Intent intent = new Intent(getContext(), CookingTipActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("cooking", item);
-
-                bundle.putInt("p_type", AppConstants.BOARD_SIG);//putInt로 넘겨주고 여기에서 getInt로 전달받는다
+                bundle.putSerializable("tipsItem", item);
+                bundle.putInt("p_type", AppConstants.TIPS_SIG);//putInt로 넘겨주고 여기에서 getInt로 전달받는다
                 intent.putExtras(bundle);//putExtras로 Bundle 데이터를 넘겨주고 여기에서getExtras로 데이터를 참조한다.
                 startActivityForResult(intent, AppConstants.DELETE_OK);
             }

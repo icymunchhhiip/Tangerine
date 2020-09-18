@@ -226,8 +226,8 @@ public class EditProfileActivity extends AppCompatActivity implements OnTaskComp
     }
 
     @Override
-    public void jsonToItem(String jsonString) {
-
+    public boolean jsonToItem(String jsonString) {
+        return false;
     }
 
     @Override

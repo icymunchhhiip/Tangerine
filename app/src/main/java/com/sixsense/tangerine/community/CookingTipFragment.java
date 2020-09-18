@@ -20,7 +20,6 @@ import com.sixsense.tangerine.network.HttpClient;
 import com.sixsense.tangerine.network.HttpInterface;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import retrofit2.Call;

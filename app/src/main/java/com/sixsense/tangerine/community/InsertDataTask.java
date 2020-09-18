@@ -3,6 +3,8 @@ package com.sixsense.tangerine.community;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.sixsense.tangerine.OnTaskCompletedListener;
+
 public class InsertDataTask extends AsyncTask<String, Void, String> {
     private static final String TAG = "InsertTask";
 

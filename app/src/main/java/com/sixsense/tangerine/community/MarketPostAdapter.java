@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sixsense.tangerine.OnTaskCompletedListener;
 import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.community.item.MarketPost;
 import com.sixsense.tangerine.community.item.Member;
@@ -105,7 +106,7 @@ public class MarketPostAdapter extends RecyclerView.Adapter<MarketPostAdapter.Vi
 
             String imgpath = item.getImgPath();
             if(!TextUtils.isEmpty(imgpath))
-                new DownloadFilesTask(this,mkImageViewThumbnail, AppConstants.RELATEVE_PATH).execute(imgpath);
+                new DownloadFilesTask(this,mkImageViewThumbnail, AppConstants.RELATIVE_PATH).execute(imgpath);
         }
 
         @Override
@@ -114,7 +115,8 @@ public class MarketPostAdapter extends RecyclerView.Adapter<MarketPostAdapter.Vi
         }
 
         @Override
-        public void jsonToItem(String jsonString) {
+        public boolean jsonToItem(String jsonString) {
+            return false;
         }
 
         @Override

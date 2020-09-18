@@ -59,12 +59,12 @@ public class MyInfoActivity extends AppCompatActivity {
 //                //username=Long.toString(result.getId());
 //                userimg = result.getKakaoAccount().getProfile().getThumbnailImageUrl();
 //
-                user_name = findViewById(R.id.user_name);
-                user_name.setText(member.getNickname());
+        user_name = findViewById(R.id.user_name);
+        user_name.setText(member.getNickname());
 //                user_name.setText(username);
 
-                user_img = findViewById(R.id.user_img);
-                //new DownloadFilesTask().execute(userimg);
+        user_img = findViewById(R.id.user_img);
+        //new DownloadFilesTask().execute(userimg);
 //            }
 //        });
 

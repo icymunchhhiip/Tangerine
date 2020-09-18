@@ -6,14 +6,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.community.item.CookingTip;
 
 import java.util.ArrayList;
 
-public class CookingTipActivity extends AppCompatActivity {
+public class CookingTipActivity extends BaseActivity {
     private static final String TAG = "CookingTipActivity";
     private ArrayList<CookingTip> mList;
     private CookingTip item;
@@ -26,13 +24,13 @@ public class CookingTipActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tip);
+        setContentView(R.layout.community_activity_tips_reading);
 
         Bundle bundle = getIntent().getExtras();
-        item = (CookingTip) bundle.getSerializable("cooking");
+        item = (CookingTip) bundle.getSerializable("tipsItem");
 
 
-        CookingTipListAdapter adapter= new CookingTipListAdapter();
+        CookingTipAdapter adapter= new CookingTipAdapter();
 
         tv_upload_date = findViewById(R.id.tv_upload_date);
         tv_title = findViewById(R.id.tv_title);

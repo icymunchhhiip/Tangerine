@@ -16,8 +16,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
@@ -30,13 +28,11 @@ import com.sixsense.tangerine.MainActivity;
 import com.sixsense.tangerine.OnTaskCompletedListener;
 import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.community.MyPostsActivity;
-import com.sixsense.tangerine.main.MainPagerFragmentDirections;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.net.URL;
 
 public class MyinfoFragment extends Fragment {
@@ -223,8 +219,8 @@ public class MyinfoFragment extends Fragment {
                     }
 
                     @Override
-                    public void jsonToItem(String jsonString) {
-
+                    public boolean jsonToItem(String jsonString) {
+                        return false;
                     }
 
                     @Override

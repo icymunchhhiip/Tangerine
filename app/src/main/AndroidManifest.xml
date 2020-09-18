@@ -38,8 +38,6 @@
         <activity android:name=".home.write.WriteRecipeActivity" />
 
         <activity android:name=".community.SetLocationActivity" />
-        <activity android:name=".community.BoardReadingActivity" />
-        <activity android:name=".community.BoardWritingActivity" />
         <activity android:name=".community.MarketReadingActivity" />
         <activity android:name=".community.MarketWritingActivity" />
         <activity android:name=".community.BaseActivity" />

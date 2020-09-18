@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.sixsense.tangerine.OnTaskCompletedListener;
 import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.community.item.Member;
 
@@ -92,11 +93,6 @@ public class MarketNoLocationFragment extends Fragment implements OnTaskComplete
                 if (myCommunityListener != null) {
                     myCommunityListener.setMemberLocation(localString, localCode); //Community 액티비티의 member객체에 위치 set
 
-                    String[] paramNames = {"m_id","m_localstr","m_localcode"};
-                    String[] values = {String.valueOf(this.member.getId()),localString, String.valueOf(localCode)};
-                    InsertDataTask insertDataTask = new InsertDataTask(this,paramNames,values);
-                    insertDataTask.execute("community/save_local.php",null,null);
-
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     fragmentManager.beginTransaction().remove(MarketNoLocationFragment.this).commit(); //현재 프래그먼트 스택 제거
                     myCommunityListener.showMarketListFragment();//위치설정o 프래그먼트로 이동
@@ -111,8 +107,8 @@ public class MarketNoLocationFragment extends Fragment implements OnTaskComplete
     }
 
     @Override
-    public void jsonToItem(String jsonString) {
-
+    public boolean jsonToItem(String jsonString) {
+        return false;
     }
 
     @Override
