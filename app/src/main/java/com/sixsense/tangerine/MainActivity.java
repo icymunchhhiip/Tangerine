@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements MyCommunityListen
     public static int sMyId;
     public static Member member;
 
-    private ImageButton mImageButtonWriting;
     private static final String TAG = "MainActivity";
 
     private void getKeyHash() {
@@ -99,11 +98,9 @@ public class MainActivity extends AppCompatActivity implements MyCommunityListen
 
     @Override
     public void onDownloadImgSet(ImageView imageView, Bitmap bitmap) {
-
     }
 
     @Override
     public void noResultNotice(String searchString) {
-
     }
 }

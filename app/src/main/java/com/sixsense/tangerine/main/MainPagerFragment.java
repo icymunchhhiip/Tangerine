@@ -48,7 +48,6 @@ public class MainPagerFragment extends Fragment {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
         mBottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

@@ -204,7 +204,7 @@ public class SearchFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<String> conditionArray = new ArrayList<String>();
+                ArrayList<String> conditionArray = new ArrayList<>();
                 SearchView searchView = view.findViewById(R.id.recipe_search);
                 String recipeName = "";
                 try {
@@ -212,129 +212,96 @@ public class SearchFragment extends Fragment {
                 } catch (Exception e) {
                     Log.e(TAG, Objects.requireNonNull(e.getMessage()));
                 }
-                String kindCondition = "000000";
-                String levelCondition = "0000";
-                String toolCondition = "0000";
-                String timeCondition = "0000";
+                StringBuilder kindCondition = new StringBuilder("00000000");
+                StringBuilder levelCondition = new StringBuilder("00000000");
+                StringBuilder toolCondition = new StringBuilder("00000000");
+                StringBuilder timeCondition = new StringBuilder("00000000");
 
-                if (mCheckBoxKindsAll.isChecked()) {
-                    kindCondition += "11";
-                    conditionArray.add(mCheckBoxKindsAll.getText().toString());
-                } else {
-                    if (mCheckBoxKindsMeal.isChecked()) {
-                        kindCondition += "1";
-                        conditionArray.add(mCheckBoxKindsMeal.getText().toString());
-                    } else {
-                        kindCondition += "0";
-                    }
-                    if (mCheckBoxKindsSnack.isChecked()) {
-                        kindCondition += "1";
-                        conditionArray.add(mCheckBoxKindsSnack.getText().toString());
-                    } else {
-                        kindCondition += "0";
-                    }
+                if (mCheckBoxKindsMeal.isChecked()) {
+                    kindCondition.setCharAt(7, '1');
+                    conditionArray.add(mCheckBoxKindsMeal.getText().toString());
                 }
-                if (mCheckBoxLevelAll.isChecked()) {
-                    levelCondition += "1111";
-                    conditionArray.add(mCheckBoxLevelAll.getText().toString());
-                } else {
-                    if (mCheckBoxLevelVeryEasy.isChecked()) {
-                        levelCondition += "1";
-                        conditionArray.add(mCheckBoxLevelVeryEasy.getText().toString());
-                    } else {
-                        levelCondition += "0";
-                    }
-                    if (mCheckBoxLevelEasy.isChecked()) {
-                        levelCondition += "1";
-                        conditionArray.add(mCheckBoxLevelEasy.getText().toString());
-                    } else {
-                        levelCondition += "0";
-                    }
-                    if (mCheckBoxLevelMiddle.isChecked()) {
-                        levelCondition += "1";
-                        conditionArray.add(mCheckBoxLevelMiddle.getText().toString());
-                    } else {
-                        levelCondition += "0";
-                    }
-                    if (mCheckBoxLevelHard.isChecked()) {
-                        levelCondition += "1";
-                        conditionArray.add(mCheckBoxLevelHard.getText().toString());
-                    } else {
-                        levelCondition += "0";
-                    }
+                if (mCheckBoxKindsSnack.isChecked()) {
+                    kindCondition.setCharAt(6, '1');
+                    conditionArray.add(mCheckBoxKindsSnack.getText().toString());
                 }
-                if (mCheckBoxToolAll.isChecked()) {
-                    toolCondition += "1111";
-                    conditionArray.add(mCheckBoxToolAll.getText().toString());
-                } else {
-                    if (mCheckBoxToolFire.isChecked()) {
-                        toolCondition += "1";
-                        conditionArray.add(mCheckBoxToolFire.getText().toString());
-                    } else {
-                        toolCondition += "0";
-                    }
-                    if (mCheckBoxToolMicrowave.isChecked()) {
-                        toolCondition += "1";
-                        conditionArray.add(mCheckBoxToolMicrowave.getText().toString());
-                    } else {
-                        toolCondition += "0";
-                    }
-                    if (mCheckBoxToolOven.isChecked()) {
-                        toolCondition += "1";
-                        conditionArray.add(mCheckBoxToolOven.getText().toString());
-                    } else {
-                        toolCondition += "0";
-                    }
-                    if (mCheckBoxToolAir.isChecked()) {
-                        toolCondition += "1";
-                        conditionArray.add(mCheckBoxToolAir.getText().toString());
-                    } else {
-                        toolCondition += "0";
-                    }
+
+                if (mCheckBoxLevelVeryEasy.isChecked()) {
+                    levelCondition.setCharAt(7,'1');
+                    conditionArray.add(mCheckBoxLevelVeryEasy.getText().toString());
                 }
-                if (mCheckBoxTimeAll.isChecked()) {
-                    timeCondition += "1111";
-                    conditionArray.add(mCheckBoxTimeAll.getText().toString());
-                } else {
-                    if (mCheckBoxTimeUntil30m.isChecked()) {
-                        timeCondition += "1";
-                        conditionArray.add(mCheckBoxTimeUntil30m.getText().toString());
-                    } else {
-                        timeCondition += "0";
-                    }
-                    if (mCheckBoxTimeUntil1h.isChecked()) {
-                        timeCondition += "1";
-                        conditionArray.add(mCheckBoxTimeUntil1h.getText().toString());
-                    } else {
-                        timeCondition += "0";
-                    }
-                    if (mCheckBoxTimeUntil2h.isChecked()) {
-                        timeCondition += "1";
-                        conditionArray.add(mCheckBoxTimeUntil2h.getText().toString());
-                    } else {
-                        timeCondition += "0";
-                    }
-                    if (mCheckBoxTimeOver2h.isChecked()) {
-                        timeCondition += "1";
-                        conditionArray.add(mCheckBoxTimeOver2h.getText().toString());
-                    } else {
-                        timeCondition += "0";
-                    }
+                if (mCheckBoxLevelEasy.isChecked()) {
+                    levelCondition.setCharAt(6,'1');
+                    conditionArray.add(mCheckBoxLevelEasy.getText().toString());
                 }
-                if (kindCondition.equals("00000000")) {
-                    kindCondition = "00000011";
+                if (mCheckBoxLevelMiddle.isChecked()) {
+                    levelCondition.setCharAt(5,'1');
+                    conditionArray.add(mCheckBoxLevelMiddle.getText().toString());
+                }
+                if (mCheckBoxLevelHard.isChecked()) {
+                    levelCondition.setCharAt(4,'1');
+                    conditionArray.add(mCheckBoxLevelHard.getText().toString());
+                }
+
+                if (mCheckBoxToolFire.isChecked()) {
+                    toolCondition.setCharAt(7,'1');
+                    conditionArray.add(mCheckBoxToolFire.getText().toString());
+                }
+                if (mCheckBoxToolMicrowave.isChecked()) {
+                    toolCondition.setCharAt(6,'1');
+                    conditionArray.add(mCheckBoxToolMicrowave.getText().toString());
+                }
+                if (mCheckBoxToolOven.isChecked()) {
+                    toolCondition.setCharAt(5,'1');
+                    conditionArray.add(mCheckBoxToolOven.getText().toString());
+                }
+                if (mCheckBoxToolAir.isChecked()) {
+                    toolCondition.setCharAt(4,'1');
+                    conditionArray.add(mCheckBoxToolAir.getText().toString());
+                }
+
+                if (mCheckBoxTimeUntil30m.isChecked()) {
+                    timeCondition.setCharAt(7,'1');
+                    conditionArray.add(mCheckBoxTimeUntil30m.getText().toString());
+                }
+                if (mCheckBoxTimeUntil1h.isChecked()) {
+                    timeCondition.setCharAt(6,'1');
+                    conditionArray.add(mCheckBoxTimeUntil1h.getText().toString());
+                }
+                if (mCheckBoxTimeUntil2h.isChecked()) {
+                    timeCondition.setCharAt(5,'1');
+                    conditionArray.add(mCheckBoxTimeUntil2h.getText().toString());
+                }
+                if (mCheckBoxTimeOver2h.isChecked()) {
+                    timeCondition.setCharAt(4,'1');
+                    conditionArray.add(mCheckBoxTimeOver2h.getText().toString());
+                }
+
+
+                if (mCheckBoxKindsAll.isChecked()||kindCondition.toString().equals("00000000")) {
+                    kindCondition.setCharAt(6, '1');
+                    kindCondition.setCharAt(7, '1');
                     conditionArray.add(mCheckBoxKindsAll.getText().toString());
                 }
-                if (levelCondition.equals("00000000")) {
-                    levelCondition = "00001111";
+                if (mCheckBoxLevelAll.isChecked()||levelCondition.toString().equals("00000000")) {
+                    levelCondition.setCharAt(4,'1');
+                    levelCondition.setCharAt(5,'1');
+                    levelCondition.setCharAt(6,'1');
+                    levelCondition.setCharAt(7,'1');
                     conditionArray.add(mCheckBoxLevelAll.getText().toString());
                 }
-                if (toolCondition.equals("00000000")) {
-                    toolCondition = "00001111";
+                if (mCheckBoxToolAll.isChecked()||toolCondition.toString().equals("00000000")) {
+                    toolCondition.setCharAt(4,'1');
+                    toolCondition.setCharAt(5,'1');
+                    toolCondition.setCharAt(6,'1');
+                    toolCondition.setCharAt(7,'1');
                     conditionArray.add(mCheckBoxToolAll.getText().toString());
                 }
-                if (timeCondition.equals("00000000")) {
-                    timeCondition = "00001111";
+                if (mCheckBoxTimeAll.isChecked()||timeCondition.toString().equals("00000000")) {
+                    timeCondition.setCharAt(4,'1');
+                    timeCondition.setCharAt(5,'1');
+                    timeCondition.setCharAt(6,'1');
+                    timeCondition.setCharAt(7,'1');
                     conditionArray.add(mCheckBoxTimeAll.getText().toString());
                 }
 
@@ -345,7 +312,10 @@ public class SearchFragment extends Fragment {
                     ++i;
                 }
                 NavDirections navDirections =
-                        SearchFragmentDirections.actionSearchFragmentToResultFragment(recipeName, kindCondition, levelCondition, toolCondition, timeCondition, conditions);
+                        SearchFragmentDirections
+                                .actionSearchFragmentToResultFragment(recipeName,
+                                        kindCondition.toString(), levelCondition.toString(),
+                                        toolCondition.toString(), timeCondition.toString(), conditions);
                 Navigation.findNavController(view).navigate(navDirections);
 
             }

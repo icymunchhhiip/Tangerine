@@ -110,7 +110,6 @@ public class RecipeInRecipeAdapter extends RecyclerView.Adapter<RecipeInRecipeAd
             mTextDetail = view.findViewById(R.id.desc_detail);
             mButtonTime = view.findViewById(R.id.cooking_time);
             mButtonReset = view.findViewById(R.id.reset_time);
-
         }
 
     }
