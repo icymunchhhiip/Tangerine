@@ -15,7 +15,7 @@ import java.net.URL;
 public class DownloadFilesTask extends AsyncTask<String,Void, Bitmap> {
     private static final String TAG = "DownloadFileTask";
 
-    private String serverUrl = "http://ec2-18-214-88-248.compute-1.amazonaws.com/";
+    private String serverUrl = "http://ec2-34-203-38-62.compute-1.amazonaws.com/";
     private OnTaskCompletedListener listener;
     private ImageView imageView; //적용할 이미지뷰
     private int pathForm;//절대경로인지 상대경로인지

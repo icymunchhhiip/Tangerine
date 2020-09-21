@@ -7,6 +7,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +19,13 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayout;
 import com.sixsense.tangerine.R;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class ResultFragment extends Fragment {
 
@@ -37,45 +44,32 @@ public class ResultFragment extends Fragment {
 
         if (getArguments() != null) {
             ResultFragmentArgs args = ResultFragmentArgs.fromBundle(getArguments());
-            String recipeName = args.getRecipeName();
+            String[] byteString = new String[5];
+            //name, kind, level, tool, time
+
+            byteString[0] = args.getRecipeName();
             final SearchView searchView = view.findViewById(R.id.recipe_search);
-            searchView.setQuery(recipeName,false);
-//            searchView.setFocusableInTouchMode();
+            searchView.setQuery(byteString[0],false);
             searchView.setSubmitButtonEnabled(false);
             searchView.setInputType(InputType.TYPE_NULL);
             searchView.setEnabled(false);
             searchView.clearFocus();
-//            searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-//                @Override
-//                public boolean onClose() {
-//                    Toast.makeText(getContext(),"d",Toast.LENGTH_SHORT);
-//                    getActivity().onBackPressed();
-//                    return false;
-//                }
-//            });
-            String kindString = args.getKindByte();
-            if (kindString == null || kindString.equals("000000")) {
-                kindString = "00000011";
-            }
-            Byte kindByte = binaryStringToByte(kindString);
-            Byte levelByte = binaryStringToByte(args.getLevelByte());
-            Byte toolByte = binaryStringToByte(args.getToolByte());
-            Byte timeByte = binaryStringToByte(args.getTimeByte());
 
-            FlowLayout flowLayout = view.findViewById(R.id.search_tag_layout);
+            byteString[1] = args.getKindByte();
+            if (byteString[1] == null || byteString[1].equals("000000")) {
+                byteString[1] = "00000011";
+            }
+
+            byteString[2] = args.getLevelByte();
+            byteString[3] = args.getToolByte();
+            byteString[4] = args.getTimeByte();
+
+            FlexboxLayout flexboxLayout = view.findViewById(R.id.search_tag_layout);
+            flexboxLayout.setFlexDirection(FlexDirection.ROW);
+            flexboxLayout.setFlexWrap(FlexWrap.WRAP);
             String[] conditions = args.getConditions();
             Typeface typeface = ResourcesCompat.getFont(view.getContext(), R.font.roboto_medium);
             if (conditions != null) {
-                TextView textNew = new TextView(view.getContext());
-                textNew.setText("검색된 태그");
-                textNew.setTypeface(typeface);
-                textNew.setTextSize(14);
-                textNew.setTextColor(getResources().getColor(R.color.colorFontDark));
-                textNew.setIncludeFontPadding(false);
-                textNew.setPadding(20, 20, 20, 20);
-                FlowLayout.LayoutParams param = new FlowLayout.LayoutParams(20, 20);
-                textNew.setLayoutParams(param);
-                flowLayout.addView(textNew);
                 for (String str : conditions) {
                     TextView textView = new TextView(view.getContext());
                     textView.setText(str);
@@ -85,30 +79,21 @@ public class ResultFragment extends Fragment {
                     textView.setBackgroundResource(R.drawable.condition_full);
                     textView.setIncludeFontPadding(false);
                     textView.setPadding(20, 20, 20, 20);
-                    FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(10, 10);
+                    FlexboxLayout.LayoutParams params = new FlexboxLayout.LayoutParams(WRAP_CONTENT,WRAP_CONTENT);
+                    params.setMargins(8,8,8,8);
                     textView.setLayoutParams(params);
-                    flowLayout.addView(textView);
+                    flexboxLayout.addView(textView);
                 }
             }
-            ResultRecipeListFragment resultRecipeListFragment = new ResultRecipeListFragment(recipeName, kindByte, levelByte, toolByte, timeByte);
+            RecipeListFragment recipeListFragment = new RecipeListFragment("result",byteString);
 
             FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-            fragmentTransaction.add(R.id.grid_search_recipe_frame, resultRecipeListFragment).commit();
+            fragmentTransaction.add(R.id.grid_search_recipe_frame, recipeListFragment).commit();
         }
 
         return view;
     }
 
-    private byte binaryStringToByte(String s) {
-        if (s == null || s.equals("0000")) {
-            s = "00001111";
-        }
-        byte ret = 0, total = 0;
-        for (int i = 0; i < 8; ++i) {
-            ret = (s.charAt(7 - i) == '1') ? (byte) (1 << i) : 0;
-            total = (byte) (ret | total);
-        }
-        return total;
-    }
+
 
 }

@@ -60,7 +60,7 @@ public class SplashFragment extends Fragment implements OnTaskCompletedListener 
                         @Override
                         public void onSuccess(MeV2Response result) {
                             MainActivity.sMyAccount = result;
-
+                            MainActivity.sMyId = (int)result.getId();
                             getMemberDB();
 
                             NavDirections navDirections = SplashFragmentDirections.actionSplashFragmentToMainPagerFragment();

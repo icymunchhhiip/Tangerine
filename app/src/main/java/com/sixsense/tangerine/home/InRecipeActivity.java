@@ -70,26 +70,36 @@ public class InRecipeActivity extends AppCompatActivity {
         if(bundle!=null){
             mCurrentInfo = (RecipeIntroList.RecipeIntro) bundle.getSerializable("EXTRA_CURRENT_INFO");
 
-//            ConstraintLayout layout = getActivity().findViewById(R.id.main_layout);
-//            Toolbar toolbar = layout.findViewById(R.id.toolbar_show_title);
-
             TextView textTitle = findViewById(R.id.toolbar_recipe_title);
+            ImageView imageMain = findViewById(R.id.mainImg);
+            ImageView imageProfile = findViewById(R.id.profileImg);
+            TextView textName = findViewById(R.id.uname);
+            mToggleButtonLike = findViewById(R.id.like);
+            mTextLevel = findViewById(R.id.level);
+            mTextFoodType = findViewById(R.id.foodType);
+            mTextTime = findViewById(R.id.rtime);
+            mTextLikeNum = findViewById(R.id.likes);
+            mTextTool = findViewById(R.id.rtool);
+            mTextKcal = findViewById(R.id.rkcal);
+            mRecyclerIngr = findViewById(R.id.ingrLV);
+            mRecyclerIngr.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            mTextTotalKcal = findViewById(R.id.totalKcal);
+            mRecyclerRecipe = findViewById(R.id.recipeLV);
+            mRecyclerRecipe.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
             textTitle.setText(mCurrentInfo.recipeName);
 
-            ImageView imageMain = findViewById(R.id.mainImg);
             String baseUrl = HttpClient.BASE_URL + "recipe/imgs/";
             Glide.with(getApplicationContext())
                     .load(baseUrl + mCurrentInfo.recipeImg)
                     .into(imageMain);
 
-            ImageView imageProfile = findViewById(R.id.profileImg);
             Glide.with(getApplicationContext())
                     .load(mCurrentInfo.memProfile)
                     .into(imageProfile);
             imageProfile.setBackground(new ShapeDrawable(new OvalShape()));
             imageProfile.setClipToOutline(true);
 
-            mToggleButtonLike = findViewById(R.id.like);
             if (mCurrentInfo.recipeFav == 1) {
                 mToggleButtonLike.setChecked(true);
             } else {
@@ -118,20 +128,7 @@ public class InRecipeActivity extends AppCompatActivity {
                 }
             });
 
-            TextView textName = findViewById(R.id.uname);
             textName.setText(mCurrentInfo.memName);
-
-            mTextLevel = findViewById(R.id.level);
-            mTextFoodType = findViewById(R.id.foodType);
-            mTextTime = findViewById(R.id.rtime);
-            mTextLikeNum = findViewById(R.id.likes);
-            mTextTool = findViewById(R.id.rtool);
-            mTextKcal = findViewById(R.id.rkcal);
-            mRecyclerIngr = findViewById(R.id.ingrLV);
-            mRecyclerIngr.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            mTextTotalKcal = findViewById(R.id.totalKcal);
-            mRecyclerRecipe = findViewById(R.id.recipeLV);
-            mRecyclerRecipe.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
             try {
                 mMoreInfo = new MoreInfoCall().execute(mCurrentInfo.recipeId).get();
@@ -179,135 +176,6 @@ public class InRecipeActivity extends AppCompatActivity {
 
         }
     }
-
-//    @Nullable
-//    @Override
-//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.home_in_recipe, container, false);
-//
-//        Toolbar toolbar = view.findViewById(R.id.toolbar_show_title);
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                getActivity().onBackPressed();
-//            }
-//        });
-//
-//        if (getArguments() != null) {
-//            InRecipeFragmentArgs args = InRecipeFragmentArgs.fromBundle(getArguments());
-//            mCurrentInfo = args.getRecipeIntroItem();
-//
-////            ConstraintLayout layout = getActivity().findViewById(R.id.main_layout);
-////            Toolbar toolbar = layout.findViewById(R.id.toolbar_show_title);
-//
-//            TextView textTitle = view.findViewById(R.id.toolbar_recipe_title);
-//            textTitle.setText(mCurrentInfo.recipeName);
-//
-//            ImageView imageMain = view.findViewById(R.id.mainImg);
-//            String baseUrl = HttpClient.BASE_URL + "recipe/imgs/";
-//            Glide.with(view.getContext())
-//                    .load(baseUrl + mCurrentInfo.recipeImg)
-//                    .into(imageMain);
-//
-//            ImageView imageProfile = view.findViewById(R.id.profileImg);
-//            Glide.with(view.getContext())
-//                    .load(mCurrentInfo.memProfile)
-//                    .into(imageProfile);
-//            imageProfile.setBackground(new ShapeDrawable(new OvalShape()));
-//            imageProfile.setClipToOutline(true);
-//
-//            mToggleButtonLike = view.findViewById(R.id.like);
-//            if (mCurrentInfo.recipeFav == 1) {
-//                mToggleButtonLike.setChecked(true);
-//            } else {
-//                mToggleButtonLike.setChecked(false);
-//            }
-//
-//            mToggleButtonLike.setOnClickListener(new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(View v) {
-//                    if (mCurrentInfo.recipeFav == 0) {
-//                        mCheckedState = "save";
-//                        new LikeCall().execute(mCurrentInfo.recipeId);
-//                        if (mCheckedState.equals("saved") || mCheckedState.equals("deleted_fail") || mCheckedState.equals("already_save")) {
-//                            mCurrentInfo.recipeFav = 1;
-//                            mToggleButtonLike.setChecked(true);
-//                        }
-//                    } else {
-//                        mCheckedState = "del";
-//                        new LikeCall().execute(mCurrentInfo.recipeId);
-//                        if (mCheckedState.equals("deleted") || mCheckedState.equals("saved_fail") || mCheckedState.equals("already_del")) {
-//                            mCurrentInfo.recipeFav = 0;
-//                            mToggleButtonLike.setChecked(false);
-//                        }
-//                    }
-//                }
-//            });
-//
-//            TextView textName = view.findViewById(R.id.uname);
-//            textName.setText(mCurrentInfo.memName);
-//
-//            mTextLevel = view.findViewById(R.id.level);
-//            mTextFoodType = view.findViewById(R.id.foodType);
-//            mTextTime = view.findViewById(R.id.rtime);
-//            mTextLikeNum = view.findViewById(R.id.likes);
-//            mTextTool = view.findViewById(R.id.rtool);
-//            mTextKcal = view.findViewById(R.id.rkcal);
-//            mRecyclerIngr = view.findViewById(R.id.ingrLV);
-//            mRecyclerIngr.setLayoutManager(new LinearLayoutManager(getContext()));
-//            mTextTotalKcal = view.findViewById(R.id.totalKcal);
-//            mRecyclerRecipe = view.findViewById(R.id.recipeLV);
-//            mRecyclerRecipe.setLayoutManager(new LinearLayoutManager(getContext()));
-//
-//            try {
-//                mMoreInfo = new MoreInfoCall().execute(mCurrentInfo.recipeId).get();
-//            } catch (Exception e) {
-//                Log.e(TAG, Objects.requireNonNull(e.getMessage()));
-//            }
-//
-//            Button buttonEdit = view.findViewById(R.id.edit_recipe);
-//            Button buttonDel = view.findViewById(R.id.del_recipe);
-//            if (mCurrentInfo.memId == MainActivity.sMyId) {
-//                buttonEdit.setVisibility(View.VISIBLE);
-//                buttonDel.setVisibility(View.VISIBLE);
-//            } else {
-//                buttonEdit.setVisibility(View.INVISIBLE);
-//                buttonDel.setVisibility(View.INVISIBLE);
-//            }
-//
-//            if (buttonEdit.getVisibility() == View.VISIBLE) {
-//                buttonEdit.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Intent intent = new Intent(getActivity(), WriteRecipeActivity.class);
-//                        intent.putExtra("EXTRA_CURRENT_INFO", mCurrentInfo);
-//                        intent.putExtra("EXTRA_CURRENT_DETAIL", mMoreInfo);
-//                        startActivity(intent);
-//                    }
-//                });
-//            }
-//            if (buttonDel.getVisibility() == View.VISIBLE) {
-//                buttonDel.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        String state = "fail";
-//                        try {
-//                            state = new DeleteCall().execute().get();
-//                            if (state.equals("success")) {
-//                                getActivity().onBackPressed();
-//                            }
-//                        } catch (Exception e) {
-//                            Log.e(TAG, Objects.requireNonNull(e.getMessage()));
-//                        }
-//                    }
-//                });
-//            }
-//
-//        }
-//
-//        return view;
-//    }
 
     @SuppressLint("StaticFieldLeak")
     private class MoreInfoCall extends AsyncTask<Integer, Void, InRecipe> {

@@ -94,8 +94,6 @@ public class FlowLayout extends ViewGroup {
     @Override
     protected ViewGroup.LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) {
         return new LayoutParams(1, 1);
-
-
     }
 
     @Override

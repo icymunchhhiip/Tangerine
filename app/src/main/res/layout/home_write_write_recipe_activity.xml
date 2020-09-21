@@ -111,16 +111,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:text="종류" />
+            android:text="@string/kinds" />
 
-        <LinearLayout
+        <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:flexWrap="wrap">
 
             <ToggleButton
                 android:id="@+id/foodtype_all"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/condition"
@@ -128,48 +130,53 @@
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="종류 전체"
-                android:textOn="종류 전체" />
+                android:textOff="@string/kinds_all"
+                android:textOn="@string/kinds_all" />
 
             <ToggleButton
                 android:id="@+id/foodtype_meal"
                 android:layout_width="wrap_content"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
                 android:layout_height="wrap_content"
                 android:background="@drawable/condition"
                 android:gravity="center"
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="한끼"
-                android:textOn="한끼" />
+                android:textOff="@string/kinds_meal"
+                android:textOn="@string/kinds_meal" />
 
             <ToggleButton
                 android:id="@+id/foodtype_snack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/condition"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
                 android:gravity="center"
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="간식"
-                android:textOn="간식" />
-        </LinearLayout>
+                android:textOff="@string/kinds_snack"
+                android:textOn="@string/kinds_snack" />
+        </com.google.android.flexbox.FlexboxLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:text="난이도" />
+            android:text="@string/level" />
 
-        <com.sixsense.tangerine.home.FlowLayout
+        <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:flexWrap="wrap">
 
             <ToggleButton
                 android:id="@+id/foodlevel_all"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+                android:layout_marginVertical="@dimen/condition_button_margin_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/condition"
@@ -177,96 +184,106 @@
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="난이도 전체"
-                android:textOn="난이도 전체" />
+                android:textOff="@string/level_all"
+                android:textOn="@string/level_all" />
 
             <ToggleButton
                 android:id="@+id/foodlevel_veryeasy"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+                android:layout_marginVertical="@dimen/condition_button_margin_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
                 android:background="@drawable/condition"
                 android:gravity="center"
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="초간단"
-                android:textOn="초간단" />
+                android:textOff="@string/level_very_easy"
+                android:textOn="@string/level_very_easy" />
 
             <ToggleButton
                 android:id="@+id/foodlevel_easy"
                 android:layout_width="wrap_content"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+                android:layout_marginVertical="@dimen/condition_button_margin_vertical"
                 android:layout_height="wrap_content"
                 android:background="@drawable/condition"
                 android:gravity="center"
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="초급"
-                android:textOn="초급" />
+                android:textOff="@string/level_easy"
+                android:textOn="@string/level_easy" />
 
             <ToggleButton
                 android:id="@+id/foodlevel_normal"
                 android:layout_width="wrap_content"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+                android:layout_marginVertical="@dimen/condition_button_margin_vertical"
                 android:layout_height="wrap_content"
                 android:background="@drawable/condition"
                 android:gravity="center"
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="중급"
-                android:textOn="중급" />
+                android:textOff="@string/level_middle"
+                android:textOn="@string/level_middle" />
 
             <ToggleButton
                 android:id="@+id/foodlevel_hard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+                android:layout_marginVertical="@dimen/condition_button_margin_vertical"
                 android:background="@drawable/condition"
                 android:gravity="center"
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="고급"
-                android:textOn="고급" />
-        </com.sixsense.tangerine.home.FlowLayout>
+                android:textOff="@string/level_hard"
+                android:textOn="@string/level_hard" />
+        </com.google.android.flexbox.FlexboxLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:text="조리도구" />
+            android:text="@string/tool" />
 
-        <com.sixsense.tangerine.home.FlowLayout
+        <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:flexWrap="wrap">
 
             <ToggleButton
                 android:id="@+id/foodtool_all"
                 android:layout_width="wrap_content"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+                android:layout_marginVertical="@dimen/condition_button_margin_vertical"
                 android:layout_height="wrap_content"
                 android:background="@drawable/condition"
                 android:gravity="center"
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="도구 전체"
-                android:textOn="도구 전체" />
+                android:textOff="@string/tool_all"
+                android:textOn="@string/tool_all" />
 
             <ToggleButton
                 android:id="@+id/foodtool_fire"
                 android:layout_width="wrap_content"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+                android:layout_marginVertical="@dimen/condition_button_margin_vertical"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
                 android:background="@drawable/condition"
                 android:gravity="center"
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="불"
-                android:textOn="불" />
+                android:textOff="@string/tool_fire"
+                android:textOn="@string/tool_fire" />
 
             <ToggleButton
                 android:id="@+id/foodtool_microwave"
@@ -274,11 +291,13 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/condition"
                 android:gravity="center"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+                android:layout_marginVertical="@dimen/condition_button_margin_vertical"
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="전자레인지"
-                android:textOn="전자레인지" />
+                android:textOff="@string/tool_microwave"
+                android:textOn="@string/tool_microwave" />
 
             <ToggleButton
                 android:id="@+id/foodtool_oven"
@@ -288,60 +307,67 @@
                 android:gravity="center"
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+                android:layout_marginVertical="@dimen/condition_button_margin_vertical"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="오븐"
-                android:textOn="오븐" />
+                android:textOff="@string/tool_oven"
+                android:textOn="@string/tool_oven" />
 
             <ToggleButton
                 android:id="@+id/foodtool_airfryer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
                 android:background="@drawable/condition"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+                android:layout_marginVertical="@dimen/condition_button_margin_vertical"
                 android:gravity="center"
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="에어프라이어"
-                android:textOn="에어프라이어" />
-        </com.sixsense.tangerine.home.FlowLayout>
+                android:textOff="@string/tool_air"
+                android:textOn="@string/tool_air" />
+        </com.google.android.flexbox.FlexboxLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:text="조리시간" />
+            android:text="@string/time" />
 
-        <com.sixsense.tangerine.home.FlowLayout
+        <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:flexWrap="wrap">
 
             <ToggleButton
                 android:id="@+id/foodtime_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/condition"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+                android:layout_marginVertical="@dimen/condition_button_margin_vertical"
                 android:gravity="center"
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="시간 전체"
-                android:textOn="시간 전체" />
+                android:textOff="@string/time_all"
+                android:textOn="@string/time_all" />
 
             <ToggleButton
                 android:id="@+id/foodtime_veryshort"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
                 android:background="@drawable/condition"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+                android:layout_marginVertical="@dimen/condition_button_margin_vertical"
                 android:gravity="center"
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="0-30분"
-                android:textOn="0-30분" />
+                android:textOff="@string/time_until_30m"
+                android:textOn="@string/time_until_30m" />
 
             <ToggleButton
                 android:id="@+id/foodtime_short"
@@ -352,8 +378,10 @@
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="30분-1시간"
-                android:textOn="30분-1시간" />
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+                android:layout_marginVertical="@dimen/condition_button_margin_vertical"
+                android:textOff="@string/time_until_1h"
+                android:textOn="@string/time_until_1h" />
 
             <ToggleButton
                 android:id="@+id/foodtime_medium"
@@ -362,24 +390,27 @@
                 android:background="@drawable/condition"
                 android:gravity="center"
                 android:minWidth="@dimen/checkbox_min_width"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+                android:layout_marginVertical="@dimen/condition_button_margin_vertical"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="1-2시간"
-                android:textOn="1-2시간" />
+                android:textOff="@string/time_until_2h"
+                android:textOn="@string/time_until_2h" />
 
             <ToggleButton
                 android:id="@+id/foodtime_long"
                 android:layout_width="wrap_content"
+                android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+                android:layout_marginVertical="@dimen/condition_button_margin_vertical"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
                 android:background="@drawable/condition"
                 android:gravity="center"
                 android:minWidth="@dimen/checkbox_min_width"
                 android:minHeight="@dimen/no_dp"
                 android:textColor="@color/descradiotexttint"
-                android:textOff="2시간 이상"
-                android:textOn="2시간 이상" />
-        </com.sixsense.tangerine.home.FlowLayout>
+                android:textOff="@string/time_over_2h"
+                android:textOn="@string/time_over_2h" />
+        </com.google.android.flexbox.FlexboxLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

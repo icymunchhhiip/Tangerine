@@ -1,7 +1,7 @@
 package com.sixsense.tangerine;
 
 public class Constant {
-    private static final String BASE_PATH = "http://18.214.88.248/";
+    private static final String BASE_PATH = "http://ec2-34-203-38-62.compute-1.amazonaws.com/";
     public static final String CREATE_INGR_URL = BASE_PATH + "fridge/insert_ingr.php";
     public static final String READ_INGR = BASE_PATH + "fridge/get_ingr.php";
     public static final String UPDATE_INGR = BASE_PATH + "fridge/update_ingr.php";

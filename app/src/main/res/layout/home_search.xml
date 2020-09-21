@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.appcompat.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/toolbar_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,33 +21,33 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
-            app:queryBackground="@android:color/transparent"
-            android:background="@drawable/search_bg"
             android:autofillHints="@string/search_title"
-            app:iconifiedByDefault="false" />
+            android:background="@drawable/search_bg"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@android:color/transparent" />
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
-        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/kinds"
         android:textColor="@color/colorFontLight"
         android:textSize="@dimen/font_middle" />
 
-    <com.sixsense.tangerine.home.FlowLayout
-        android:layout_marginStart="@dimen/condition_start_margin"
+    <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_marginTop="@dimen/conditions_top_margin"
-        android:layout_marginBottom="@dimen/conditions_bottom_margin"
-        android:orientation="horizontal">
+        android:layout_marginBottom="@dimen/conditions_bottom_margin">
 
         <LinearLayout
             android:id="@+id/kinds_all_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal">
 
             <CheckBox
                 android:id="@+id/kinds_all"
@@ -66,7 +66,8 @@
         <LinearLayout
             android:id="@+id/kinds_meal_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal">
 
             <CheckBox
                 android:id="@+id/kinds_meal"
@@ -85,7 +86,8 @@
         <LinearLayout
             android:id="@+id/kinds_snack_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal">
 
             <CheckBox
                 android:id="@+id/kinds_snack"
@@ -100,30 +102,33 @@
                 android:textColor="@color/condition"
                 android:textSize="@dimen/font_middle" />
         </LinearLayout>
-    </com.sixsense.tangerine.home.FlowLayout>
+    </com.google.android.flexbox.FlexboxLayout>
 
     <TextView
-        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:button="@android:color/transparent"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/level"
         android:textColor="@color/colorFontLight"
         android:textSize="@dimen/font_middle" />
 
-    <com.sixsense.tangerine.home.FlowLayout
-        android:layout_marginStart="@dimen/condition_start_margin"
+    <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_marginTop="@dimen/conditions_top_margin"
         android:layout_marginBottom="@dimen/conditions_bottom_margin"
+        app:flexWrap="wrap"
         android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/level_all_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+            android:layout_marginVertical="@dimen/condition_button_margin_vertical">
 
             <CheckBox
                 android:id="@+id/level_all"
@@ -142,7 +147,9 @@
         <LinearLayout
             android:id="@+id/level_very_easy_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+            android:layout_marginVertical="@dimen/condition_button_margin_vertical">
 
             <CheckBox
                 android:id="@+id/level_very_easy"
@@ -161,7 +168,9 @@
         <LinearLayout
             android:id="@+id/level_easy_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+            android:layout_marginVertical="@dimen/condition_button_margin_vertical">
 
             <CheckBox
                 android:id="@+id/level_easy"
@@ -180,7 +189,9 @@
         <LinearLayout
             android:id="@+id/level_middle_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+            android:layout_marginVertical="@dimen/condition_button_margin_vertical">
 
             <CheckBox
                 android:id="@+id/level_middle"
@@ -199,7 +210,9 @@
         <LinearLayout
             android:id="@+id/level_hard_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+            android:layout_marginVertical="@dimen/condition_button_margin_vertical">
 
             <CheckBox
                 android:id="@+id/level_hard"
@@ -214,29 +227,32 @@
                 android:textColor="@color/condition"
                 android:textSize="@dimen/font_middle" />
         </LinearLayout>
-    </com.sixsense.tangerine.home.FlowLayout>
+    </com.google.android.flexbox.FlexboxLayout>
 
     <TextView
-        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/tool"
         android:textColor="@color/colorFontLight"
         android:textSize="@dimen/font_middle" />
 
-    <com.sixsense.tangerine.home.FlowLayout
-        android:layout_marginStart="@dimen/condition_start_margin"
+    <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_marginTop="@dimen/conditions_top_margin"
+        app:flexWrap="wrap"
         android:layout_marginBottom="@dimen/conditions_bottom_margin"
         android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/tool_all_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+            android:layout_marginVertical="@dimen/condition_button_margin_vertical">
 
             <CheckBox
                 android:id="@+id/tool_all"
@@ -255,7 +271,9 @@
         <LinearLayout
             android:id="@+id/tool_fire_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+            android:layout_marginVertical="@dimen/condition_button_margin_vertical">
 
             <CheckBox
                 android:id="@+id/tool_fire"
@@ -274,7 +292,9 @@
         <LinearLayout
             android:id="@+id/tool_microwave_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+            android:layout_marginVertical="@dimen/condition_button_margin_vertical">
 
             <CheckBox
                 android:id="@+id/tool_microwave"
@@ -293,7 +313,9 @@
         <LinearLayout
             android:id="@+id/tool_oven_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+            android:layout_marginVertical="@dimen/condition_button_margin_vertical">
 
             <CheckBox
                 android:id="@+id/tool_oven"
@@ -312,7 +334,9 @@
         <LinearLayout
             android:id="@+id/tool_air_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+            android:layout_marginVertical="@dimen/condition_button_margin_vertical">
 
             <CheckBox
                 android:id="@+id/tool_air"
@@ -327,29 +351,32 @@
                 android:textColor="@color/condition"
                 android:textSize="@dimen/font_middle" />
         </LinearLayout>
-    </com.sixsense.tangerine.home.FlowLayout>
+    </com.google.android.flexbox.FlexboxLayout>
 
     <TextView
-        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/time"
         android:textColor="@color/colorFontLight"
         android:textSize="@dimen/font_middle" />
 
-    <com.sixsense.tangerine.home.FlowLayout
-        android:layout_marginStart="@dimen/condition_start_margin"
+    <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/condition_start_margin"
         android:layout_marginTop="@dimen/conditions_top_margin"
-        android:layout_marginBottom="@dimen/condition_button_margin"
+        app:flexWrap="wrap"
+        android:layout_marginBottom="@dimen/condition_under_buttons_margin"
         android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/time_all_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+            android:layout_marginVertical="@dimen/condition_button_margin_vertical">
 
             <CheckBox
                 android:id="@+id/time_all"
@@ -368,7 +395,9 @@
         <LinearLayout
             android:id="@+id/time_until_30m_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+            android:layout_marginVertical="@dimen/condition_button_margin_vertical">
 
             <CheckBox
                 android:id="@+id/time_until_30m"
@@ -387,7 +416,9 @@
         <LinearLayout
             android:id="@+id/time_until_1h_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+            android:layout_marginVertical="@dimen/condition_button_margin_vertical">
 
             <CheckBox
                 android:id="@+id/time_until_1h"
@@ -406,7 +437,9 @@
         <LinearLayout
             android:id="@+id/time_until_2h_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+            android:layout_marginVertical="@dimen/condition_button_margin_vertical">
 
             <CheckBox
                 android:id="@+id/time_until_2h"
@@ -425,7 +458,9 @@
         <LinearLayout
             android:id="@+id/time_over_2h_lay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/condition_button_margin_horizontal"
+            android:layout_marginVertical="@dimen/condition_button_margin_vertical">
 
             <CheckBox
                 android:id="@+id/time_over_2h"
@@ -440,7 +475,7 @@
                 android:textColor="@color/condition"
                 android:textSize="@dimen/font_middle" />
         </LinearLayout>
-    </com.sixsense.tangerine.home.FlowLayout>
+    </com.google.android.flexbox.FlexboxLayout>
 
     <Button
         android:id="@+id/search_ok"

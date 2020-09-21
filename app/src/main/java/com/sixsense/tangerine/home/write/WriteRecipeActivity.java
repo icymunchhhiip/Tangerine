@@ -109,7 +109,7 @@ public class WriteRecipeActivity extends AppCompatActivity {
     SelectedRecipe selectedRecipe = new SelectedRecipe();
 
     final int CODE_GALLERY_REQUEST = 999;
-    String url =  "http://ec2-18-214-88-248.compute-1.amazonaws.com/recipe/upload.php";
+    String url =  "http://ec2-34-203-38-62.compute-1.amazonaws.com/recipe/upload.php";
     Bitmap bitmap;
     private int CLICKPOSITION;
 

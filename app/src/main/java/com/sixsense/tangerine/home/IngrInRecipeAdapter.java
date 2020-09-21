@@ -35,7 +35,6 @@ public class IngrInRecipeAdapter extends RecyclerView.Adapter<IngrInRecipeAdapte
         String cnt = mIngrInfoList.get(position).ingrCount + mIngrInfoList.get(position).ingrUnit;
         holder.mTextCnt.setText(cnt);
         holder.mTextKcal.setText(mIngrInfoList.get(position).ingrKcal);
-
     }
 
     public class IngrViewHolder extends RecyclerView.ViewHolder {

@@ -23,7 +23,10 @@
     <dimen name="condition_start_margin">16dp</dimen>
     <dimen name="conditions_top_margin">4dp</dimen>
     <dimen name="conditions_bottom_margin">8dp</dimen>
-    <dimen name="condition_button_margin">16dp</dimen>
+    <dimen name="condition_under_buttons_margin">16dp</dimen>
+    <dimen name="condition_button_margin_horizontal">2dp</dimen>
+    <dimen name="condition_button_margin_vertical">2dp</dimen>
     <dimen name="searched_title_margin">8dp</dimen>
+    <dimen name="result_tag_margin">8dp</dimen>
 
 </resources>

@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class HttpClient {
-    public static final String BASE_URL = "http://ec2-18-214-88-248.compute-1.amazonaws.com/";
+    public static final String BASE_URL = "http://ec2-34-203-38-62.compute-1.amazonaws.com/";
     private static Retrofit retrofit = null;
 
     private static Gson gson = new GsonBuilder()
