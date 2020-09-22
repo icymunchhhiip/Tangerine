@@ -5,6 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:id="@+id/edit_profile_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/edit_profile_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBackground">
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/edit_profile_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:text="나의 프로필"
+            android:textSize="20sp"/>
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +41,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_setting" />
+            android:src="@drawable/default_profile" />
 
         <TextView
             android:id="@+id/user_name"
@@ -69,7 +93,7 @@
                 android:layout_marginTop="5dp"
                 android:background="#00FFFFFF"
                 android:minHeight="40dip"
-                android:text="내가 쓴 레시피" />
+                android:text="내가 작성한 레시피" />
 
             <Button
                 android:id="@+id/mylikeRecipeBT"
@@ -96,7 +120,7 @@
                 android:background="#00FFFFFF"
                 android:gravity="fill"
                 android:minHeight="40dip"
-                android:text="내가 쓴 마켓글" />
+                android:text="내가 작성한 마켓글" />
         </LinearLayout>
 
     </LinearLayout>

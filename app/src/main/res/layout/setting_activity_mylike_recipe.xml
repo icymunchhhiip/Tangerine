@@ -18,8 +18,7 @@
             android:id="@+id/titleText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="찜한 레시피"
-            android:textStyle="bold"
+            android:text="좋아요한 레시피"
             android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
             android:textColor="#4C4C4C"/>
 

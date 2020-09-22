@@ -8,42 +8,41 @@
 
     android:background="@drawable/ref" >
     />
-
     <RelativeLayout
         android:id="@+id/edit_profile_rel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/edit_profile_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:background="@color/colorBackground">
-
-            <TextView
-                android:id="@+id/edit_profile_title"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="나의 냉장고"
-                android:textColor="@color/colorFontDark"
-                android:textSize="15dp" />
-            <Button
-                android:id="@+id/addbutton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:background="@android:color/transparent"
-                android:text="추가"
-                android:textSize="15dp"
-                />
         </androidx.appcompat.widget.Toolbar>
 
-
-
-
-
+        <TextView
+            android:id="@+id/edit_profile_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:text="나의 냉장고"
+            android:textSize="20sp"/>
+        <Button
+            android:id="@+id/addbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/card_content_margin"
+            android:minHeight="0dp"
+            android:minWidth="50dp"
+            android:background="@android:color/transparent"
+            android:text="추가"
+            android:textSize="18sp"
+            />
     </RelativeLayout>
 
     <LinearLayout

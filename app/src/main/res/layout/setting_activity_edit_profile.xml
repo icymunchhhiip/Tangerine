@@ -51,14 +51,14 @@
         android:layout_height="100dp"
         android:layout_marginTop="180dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_setting" />
+        android:src="@drawable/default_profile" />
 
     <TextView
         android:id="@+id/changeProfileTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:text="이미지 변경"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"/>
@@ -69,16 +69,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
+        android:maxLines="1"
         android:textSize="20sp"
         android:privateImeOptions="defaultInputmode=korean"/>
-
-    <Button
-    android:id="@+id/completeBT"
-    android:layout_width="60dp"
-    android:layout_height="22dp"
-    android:layout_gravity="center"
-    android:layout_marginTop="2dp"
-    android:background="@drawable/select_button"
-    android:text="완료" />
 
 </LinearLayout>

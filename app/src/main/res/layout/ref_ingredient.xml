@@ -16,6 +16,7 @@
         android:layout_height="30dp"
         android:gravity="center"
         android:text="재료이름"
+        android:maxLines="1"
         android:textSize="15sp" />
 
 

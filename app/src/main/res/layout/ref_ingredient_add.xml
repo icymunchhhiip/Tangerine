@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    
+
     <RadioGroup
         android:id="@+id/radioStorage"
         android:layout_width="match_parent"
@@ -76,7 +76,8 @@
         android:layout_marginRight="30dp"
         android:layout_marginBottom="30dp"
         android:ems="10"
-        android:inputType="date" />
+        android:inputType="date"
+        android:hint="yyyymmdd 형태로 입력해주세요."/>
 
 
     <TextView

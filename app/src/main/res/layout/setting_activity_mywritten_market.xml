@@ -18,7 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="내가 작성한 마켓글"
-            android:textStyle="bold"
             android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
             android:textColor="#4C4C4C"/>
 

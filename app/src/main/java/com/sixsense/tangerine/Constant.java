@@ -9,7 +9,7 @@ public class Constant {
 
     //public static final String CREATE_INGR_URL = BASE_PATH + "insert_ingr.php";
     public static final String READ_MEMBER = BASE_PATH + "profile_edit/get_mem.php";
-    public static final String UPDATE_MEMBER = BASE_PATH + "profile_edit/update_mem3.php";
+    public static final String UPDATE_MEMBER = "profile_edit/update_mem3.php";
     //public static final String DELETE_INGR = BASE_PATH + "delete_ingr.php";
 
 

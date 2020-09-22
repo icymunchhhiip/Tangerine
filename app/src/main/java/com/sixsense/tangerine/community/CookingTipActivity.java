@@ -18,9 +18,7 @@ public class CookingTipActivity extends BaseActivity {
     TextView tv_upload_date;
     TextView tv_title;
     TextView tv_content;
-    TextView textView4;
-    Button button2;
-    Button button3;
+
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -35,24 +33,7 @@ public class CookingTipActivity extends BaseActivity {
         tv_upload_date = findViewById(R.id.tv_upload_date);
         tv_title = findViewById(R.id.tv_title);
         tv_content = findViewById(R.id.tv_content);
-        textView4 = findViewById(R.id.textView4);
-        button2 = findViewById(R.id.button2);
-        button3 = findViewById(R.id.button3);
 
-        //유용한가요는 너무 허전해서 걍 넣은거.. 별 기능 없음 보고서쓸때 뺄수도 있음
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(CookingTipActivity.this, "감사합니다:)", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(CookingTipActivity.this, "분발하겠습니다", Toast.LENGTH_SHORT).show();
-            }
-        });
 
     }
 
