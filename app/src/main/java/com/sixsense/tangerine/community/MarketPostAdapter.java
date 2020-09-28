@@ -56,7 +56,7 @@ public class MarketPostAdapter extends RecyclerView.Adapter<MarketPostAdapter.Vi
         }
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder implements OnTaskCompletedListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements OnTaskCompletedListener {
         TextView mkTextViewTitle;
         TextView mkTextViewPrice;
         ImageView mkImageViewProfile;

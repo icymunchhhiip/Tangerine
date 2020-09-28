@@ -43,9 +43,8 @@
         <activity android:name=".community.BaseActivity" />
         <activity android:name=".community.CookingTipActivity" />
 
-        <activity android:name=".community.MyInfoActivity" />
         <activity android:name=".setting.EditProfileActivity" />
-        <activity android:name=".community.MyPostsActivity" />
+        <activity android:name=".setting.MyMarketPostActivity" />
         <activity android:name=".setting.MylikeRecipeActivity" />
         <activity android:name=".setting.MywrittenRecipeActivity" />
 

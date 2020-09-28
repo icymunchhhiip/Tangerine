@@ -1,23 +1,27 @@
-package com.sixsense.tangerine.community;
+package com.sixsense.tangerine.setting;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.tabs.TabLayout;
 import com.sixsense.tangerine.OnTaskCompletedListener;
 import com.sixsense.tangerine.R;
+import com.sixsense.tangerine.community.AppConstants;
+import com.sixsense.tangerine.community.GetDataTask;
+import com.sixsense.tangerine.community.MarketPostAdapter;
+import com.sixsense.tangerine.community.MarketReadingActivity;
+import com.sixsense.tangerine.community.OnMarketPostItemClickListener;
 import com.sixsense.tangerine.community.item.MarketPost;
 import com.sixsense.tangerine.community.item.Member;
 
@@ -27,35 +31,22 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MyMarketListFragment extends Fragment implements OnTaskCompletedListener {
-    private static final String TAG = "MyMarketListFragment";
+public class MyMarketPostActivity extends AppCompatActivity implements OnTaskCompletedListener {
+    private static final String TAG = "MyPostActivity";
 
-    private MyPostsListener myPostsListener;
     private Member member;
     private MarketPostAdapter adapter;
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (getActivity() != null && getActivity() instanceof MyPostsActivity) {
-            myPostsListener = (MyPostsListener) getActivity();
-        }
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (myPostsListener != null) {
-            this.member = myPostsListener.getMember();
-        }
-    }
+        setContentView(R.layout.setting_activity_mypost_list);
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,@Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.community_fragment_mymarket_list, container, false);
+        Intent intent = getIntent();
+        this.member = (Member) intent.getSerializableExtra("member");
 
-        Context context = rootView.getContext();
-        RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView_mymarket);
+        Context context = getApplicationContext();
+        RecyclerView recyclerView = findViewById(R.id.recyclerView_mymarket);
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
@@ -66,7 +57,7 @@ public class MyMarketListFragment extends Fragment implements OnTaskCompletedLis
 
         String[] paramNames ={"m_id"};
         String[] values = {Integer.toString(member.getId())};
-        GetDataTask task = new GetDataTask(this,paramNames,values,AppConstants.MODE_READ);
+        GetDataTask task = new GetDataTask(this,paramNames,values, AppConstants.MODE_READ);
         task.execute("community/read_mymarket.php");
         adapter.notifyDataSetChanged();
 
@@ -78,7 +69,7 @@ public class MyMarketListFragment extends Fragment implements OnTaskCompletedLis
 //                    myUpdateListener.onReceivedMarketPost(item);
 //                }
 
-                Intent intent = new Intent(getContext(),MarketReadingActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MarketReadingActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("marketItem",item);
                 bundle.putSerializable("member", member);
@@ -86,19 +77,6 @@ public class MyMarketListFragment extends Fragment implements OnTaskCompletedLis
                 startActivityForResult(intent, AppConstants.DELETE_OK);
             }
         });
-
-        return rootView;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == AppConstants.DELETE_OK || requestCode == AppConstants.EDIT_OK){
-            if(myPostsListener != null){
-                myPostsListener.showMyMarketListFragment(); //프래그먼트 갱신
-            }
-        }
     }
 
     @Override

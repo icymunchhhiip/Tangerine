@@ -27,7 +27,7 @@ import com.sixsense.tangerine.JsonParser;
 import com.sixsense.tangerine.MainActivity;
 import com.sixsense.tangerine.OnTaskCompletedListener;
 import com.sixsense.tangerine.R;
-import com.sixsense.tangerine.community.MyPostsActivity;
+import com.sixsense.tangerine.community.item.Member;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -119,7 +119,10 @@ public class MyinfoFragment extends Fragment {
         myMarketBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MyPostsActivity.class);
+                Intent intent = new Intent(getContext(), MyMarketPostActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("member", member);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
