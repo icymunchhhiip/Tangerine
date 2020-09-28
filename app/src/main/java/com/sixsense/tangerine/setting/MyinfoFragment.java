@@ -26,8 +26,8 @@ import com.sixsense.tangerine.Constant;
 import com.sixsense.tangerine.JsonParser;
 import com.sixsense.tangerine.MainActivity;
 import com.sixsense.tangerine.OnTaskCompletedListener;
-import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.community.item.Member;
+import com.sixsense.tangerine.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

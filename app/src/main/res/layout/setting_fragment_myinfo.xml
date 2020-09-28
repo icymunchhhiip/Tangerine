@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="마켓"
+                android:text="장터"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -120,7 +120,7 @@
                 android:background="#00FFFFFF"
                 android:gravity="fill"
                 android:minHeight="40dip"
-                android:text="내가 작성한 마켓글" />
+                android:text="내가 작성한 장터글" />
         </LinearLayout>
 
     </LinearLayout>

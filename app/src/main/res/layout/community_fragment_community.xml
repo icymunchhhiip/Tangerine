@@ -18,7 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="커뮤니티" />
+            android:text="커뮤니티"
+            android:textColor="#757575" />
 
     </androidx.appcompat.widget.Toolbar>
 

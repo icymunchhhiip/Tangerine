@@ -29,6 +29,7 @@ import com.sixsense.tangerine.AppConstants;
 import com.sixsense.tangerine.Constant;
 import com.sixsense.tangerine.InsertDataTask;
 import com.sixsense.tangerine.OnTaskCompletedListener;
+import com.sixsense.tangerine.community.item.Member;
 import com.sixsense.tangerine.R;
 
 import java.io.File;
