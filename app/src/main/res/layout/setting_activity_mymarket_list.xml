@@ -34,11 +34,12 @@
     <!--    </LinearLayout>-->
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/mymarket_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@android:color/white"
-        app:titleTextColor="@android:color/black">
+        app:navigationIcon="@drawable/ic_arrow_back_24dp"
+        app:titleTextColor="#757575">
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -46,7 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="내가 작성한 장터글" />
+            android:text="내가 작성한 장터글"
+            android:textColor="#757575" />
 
     </androidx.appcompat.widget.Toolbar>
 
