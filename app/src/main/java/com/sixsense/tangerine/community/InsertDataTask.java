@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.sixsense.tangerine.OnTaskCompletedListener;
+import com.sixsense.tangerine.login.LoginFragment;
 
 public class InsertDataTask extends AsyncTask<String, Void, String> {
     private static final String TAG = "InsertTask";
