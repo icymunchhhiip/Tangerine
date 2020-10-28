@@ -205,7 +205,7 @@ public class RecipeListFragment extends Fragment implements SwipeRefreshLayout.O
             Call<RecipeIntroList> call = httpInterface.getRecipeCondition(mRecipeName, mKindByte, mLevelByte, mToolByte, mTimeByte, mPageNo, pageSize);
             try {
                 RecipeIntroList resource = call.execute().body();
-                mRecipeIntroList = resource.data;
+                mRecipeIntroList.addAll(resource.data);
                 mHasMore = resource.hasMore;
             } catch (Exception e) {
                 Log.e(TAG, Objects.requireNonNull(e.getMessage()));
