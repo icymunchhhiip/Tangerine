@@ -17,31 +17,12 @@ public class ingr_list_item {
         return ingr_list_name;
     }
 
-    public void setIngr_list_name(String ingr_list_name) {
-        this.ingr_list_name = ingr_list_name;
-    }
-
-    public String getIngr_list_num() {
-        return ingr_list_num;
-    }
-
-    public void setIngr_list_num(String ingr_list_num) {
-        this.ingr_list_num = ingr_list_num;
-    }
-
     public String getIngt_list_kcal() {
         return ingr_list_kcal;
-    }
-
-    public void setIngt_list_kcal(String ingr_list_kcal) {
-        this.ingr_list_kcal = ingr_list_kcal;
     }
 
     public String getIngr_list_unit() {
         return ingr_list_unit;
     }
 
-    public void setIngr_list_unit(String ingr_list_unit) {
-        this.ingr_list_unit = ingr_list_unit;
-    }
 }

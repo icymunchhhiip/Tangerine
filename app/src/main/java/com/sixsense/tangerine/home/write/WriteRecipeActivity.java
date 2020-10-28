@@ -68,9 +68,6 @@ import retrofit2.Call;
 import static com.sixsense.tangerine.MainActivity.sMyAccount;
 
 public class WriteRecipeActivity extends AppCompatActivity {
-    private RsettingPrivate storeRsetting = new RsettingPrivate();
-    private RecipeDescItem[] storeRecipe;
-    private RecipeIngrPrivate[] recipeIngrPrivate;
     Button write_recipe_cancle_bt, write_recipe_finished_bt;
     RecyclerView rv_ingr; //추가된 재료들 보여줄 리스트
     AddedListAdapter rv_ingr_Adapter; //팝업창에서 받은 재료 추가할 리스트

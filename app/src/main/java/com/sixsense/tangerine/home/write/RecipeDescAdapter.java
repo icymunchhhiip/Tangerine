@@ -131,9 +131,6 @@ public class RecipeDescAdapter extends RecyclerView.Adapter<RecipeDescAdapter.Vi
         });
     }
 
-    public ArrayList<RecipeDescItem> getArrayList() {
-        return arrayList;
-    }
 
     @Override
     public int getItemCount() {

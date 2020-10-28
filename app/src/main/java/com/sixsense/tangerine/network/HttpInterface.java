@@ -15,9 +15,6 @@ import retrofit2.http.Query;
 
 public interface HttpInterface {
 
-    @POST("/member.php")
-    Call<Member> setMember(@Body Member member);
-
     @GET("/main-event/main-event.php")
     Call<MainEventList> getMainEvent();
 
