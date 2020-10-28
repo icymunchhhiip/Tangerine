@@ -94,7 +94,6 @@ public class WriteRecipeActivity extends AppCompatActivity {
     ArrayList<RecipeDescItem> recipe_desc_AL;
     RecipeDescAdapter recipe_desc_AD;
 
-    int checkclicknum = 0;
 
     RecipeIntroList.RecipeIntro currentInfo;
     InRecipe currentDetail;
@@ -176,8 +175,9 @@ public class WriteRecipeActivity extends AppCompatActivity {
                         state = new InsertCall().execute(selectedRecipe).get();
                         if (state.equals("success")) {
                             onBackPressed();
+                            Toast.makeText(getApplicationContext(),"메인화면에서 아래로 당겨서 새로고침 해주세요.",Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(getApplicationContext(),"등록을 실패했습니다.",Toast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(),"등록을 실패했습니다.",Toast.LENGTH_SHORT).show();
                         }
                     }
                 } catch (Exception e) {
@@ -429,6 +429,13 @@ public class WriteRecipeActivity extends AppCompatActivity {
         rv_ingr_Adapter.notifyItemInserted(rv_ingr_itemArrayList.size() + 1);
         rv_ingr.setAdapter(rv_ingr_Adapter);
 
+        rv_ingr_Adapter.setOnItemClickListener(new AddedListAdapter.OnItemClickListener() {
+            @Override
+            public void onDeleteClick(int position) {
+                rv_ingr_itemArrayList.remove(position);
+                rv_ingr_Adapter.notifyItemRemoved(position);
+            }
+        });
         ingr_add_bt.setOnClickListener(new View.OnClickListener() {
             int num = 0;
 
@@ -737,15 +744,16 @@ public class WriteRecipeActivity extends AppCompatActivity {
         showSearchList.addAll(exampleList);
 
         // 리스트에 연동될 아답터를 생성한다.
-        searchAdapter = new SearchAdapter(mContext, exampleList);
+        searchAdapter = new SearchAdapter(mContext, showSearchList);
         searchLV.setAdapter(searchAdapter);
 
         searchLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                editSearch.setText(showSearchList.get(position).getIngr_list_name());
-                write_ingr_kcal_id.setText(showSearchList.get(position).getIngt_list_kcal());
-                write_ingr_unit_id.setText(showSearchList.get(position).getIngr_list_unit());
+                ingr_list_item ili=showSearchList.get(position);
+                editSearch.setText(ili.getIngr_list_name());
+                write_ingr_kcal_id.setText(ili.getIngt_list_kcal());
+                write_ingr_unit_id.setText(ili.getIngr_list_unit());
 
             }
         });
@@ -782,20 +790,20 @@ public class WriteRecipeActivity extends AppCompatActivity {
     public void search(String charText) {
 
         // 문자 입력시마다 리스트를 지우고 새로 뿌려준다.
-        exampleList.clear();
+        showSearchList.clear();
 
         // 문자 입력이 없을때는 모든 데이터를 보여준다.
         if (charText.length() == 0) {
-            exampleList.addAll(showSearchList);
+            showSearchList.addAll(exampleList);
         }
         // 문자 입력을 할때..
         else {
             // 리스트의 모든 데이터를 검색한다.
-            for (int i = 0; i < showSearchList.size(); i++) {
+            for (int i = 0; i < exampleList.size(); i++) {
                 // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
-                if (showSearchList.get(i).getIngr_list_name().toLowerCase().contains(charText)) {
+                if (exampleList.get(i).getIngr_list_name().toLowerCase().contains(charText)) {
                     // 검색된 데이터를 리스트에 추가한다.
-                    exampleList.add(showSearchList.get(i));
+                    showSearchList.add(exampleList.get(i));
                 }
             }
         }

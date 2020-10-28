@@ -177,6 +177,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
         public RecipeViewHolder(View view) {
             super(view);
+            setIsRecyclable(false);
             this.view = view;
             recipeImg = view.findViewById(R.id.recipe_img);
             recipeName = view.findViewById(R.id.recipe_name);

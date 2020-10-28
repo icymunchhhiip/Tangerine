@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.sixsense.tangerine.MainActivity;
 import com.sixsense.tangerine.R;
@@ -26,7 +27,7 @@ import java.util.Objects;
 
 import retrofit2.Call;
 
-public class RecipeListFragment extends Fragment {
+public class RecipeListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private RecyclerView mRecyclerView;
     private GridLayoutManager mLayoutManager;
@@ -41,6 +42,7 @@ public class RecipeListFragment extends Fragment {
     private Byte mLevelByte;
     private Byte mToolByte;
     private Byte mTimeByte;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public RecipeListFragment(String mAction, @Nullable String[] conditions) {
         this.mAction = mAction; //like //written //recent //result
@@ -62,6 +64,12 @@ public class RecipeListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_recipe_recycler, container, false);
+
+        mSwipeRefreshLayout = view.findViewById(R.id.swipe_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setColorSchemeResources(
+                R.color.colorPrimary
+        );
 
         mRecyclerView = view.findViewById(R.id.recipe_recycler);
 
@@ -86,6 +94,20 @@ public class RecipeListFragment extends Fragment {
 //            new MyRecipeCall().execute();
 //        }
         return view;
+    }
+
+    @Override
+    public void onRefresh() {
+        mRecipeIntroList.clear();
+        mPageNo = 1;
+        if (mAction.equals("recent")) {
+            new RecentRecipeCall().execute();
+        } else if (mAction.equals("result")) {
+            new ConditionRecipeCall().execute();
+        } else {
+            new MyRecipeCall().execute();
+        }
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @SuppressLint("StaticFieldLeak")
