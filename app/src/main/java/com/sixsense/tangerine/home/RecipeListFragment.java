@@ -80,6 +80,7 @@ public class RecipeListFragment extends Fragment implements SwipeRefreshLayout.O
         if (mRecipeIntroList.isEmpty()) {
             if(mAction.equals("recent")){
                 new RecentRecipeCall().execute();
+
             }
             else if(mAction.equals("result")){
                 new ConditionRecipeCall().execute();

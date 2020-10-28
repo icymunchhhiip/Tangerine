@@ -40,4 +40,6 @@
     <string name="tmp_recipe_min">10분</string>
     <string name="tmp_recipe_tags">간식*초간단</string>
     <string name="tmp_usr_name">냠냠공주</string>
+
+    <string name="need_refresh_message">"메인화면에서 아래로 당겨서 새로고침 해주세요."</string>
 </resources>

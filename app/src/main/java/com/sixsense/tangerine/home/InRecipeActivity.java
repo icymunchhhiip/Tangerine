@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
@@ -231,10 +232,10 @@ public class InRecipeActivity extends AppCompatActivity {
         protected void onPostExecute(String string) {
             switch (string) {
                 case "saved":
+                case "deleted":
+                    Toast.makeText(getApplicationContext(),R.string.need_refresh_message,Toast.LENGTH_SHORT).show();
                 case "deleted_fail":
                 case "already_save":
-                    break;
-                case "deleted":
                 case "saved_fail":
                 case "already_del":
                     break;

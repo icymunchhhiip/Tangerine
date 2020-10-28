@@ -21,12 +21,16 @@
         android:textSize="15dp"
         android:layout_marginLeft="5dp"/>
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" X "/>
+    <TextView
         android:id="@+id/ingr_list_unit"
         android:textSize="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="단위"
-        android:layout_marginHorizontal="5dp"/>
+        android:layout_marginEnd="5dp"/>
     <TextView
         android:id="@+id/ingr_list_kcal"
         android:textSize="15dp"

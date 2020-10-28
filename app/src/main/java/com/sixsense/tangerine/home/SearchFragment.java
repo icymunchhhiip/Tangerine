@@ -132,48 +132,48 @@ public class SearchFragment extends Fragment {
                 if (isChecked) {
                     switch (buttonView.getId()) {
                         case R.id.kinds_all:
-                            mCheckBoxKindsMeal.setChecked(false);
-                            mCheckBoxKindsSnack.setChecked(false);
-                            break;
                         case R.id.kinds_meal:
                         case R.id.kinds_snack:
+                            mCheckBoxKindsMeal.setChecked(false);
+                            mCheckBoxKindsSnack.setChecked(false);
                             mCheckBoxKindsAll.setChecked(false);
+                            buttonView.setChecked(true);
                             break;
                         case R.id.level_all:
-                            mCheckBoxLevelVeryEasy.setChecked(false);
-                            mCheckBoxLevelEasy.setChecked(false);
-                            mCheckBoxLevelMiddle.setChecked(false);
-                            mCheckBoxLevelHard.setChecked(false);
-                            break;
                         case R.id.level_very_easy:
                         case R.id.level_easy:
                         case R.id.level_middle:
                         case R.id.level_hard:
                             mCheckBoxLevelAll.setChecked(false);
+                            mCheckBoxLevelVeryEasy.setChecked(false);
+                            mCheckBoxLevelEasy.setChecked(false);
+                            mCheckBoxLevelMiddle.setChecked(false);
+                            mCheckBoxLevelHard.setChecked(false);
+                            buttonView.setChecked(true);
                             break;
                         case R.id.tool_all:
-                            mCheckBoxToolFire.setChecked(false);
-                            mCheckBoxToolMicrowave.setChecked(false);
-                            mCheckBoxToolOven.setChecked(false);
-                            mCheckBoxToolAir.setChecked(false);
-                            break;
                         case R.id.tool_fire:
                         case R.id.tool_microwave:
                         case R.id.tool_oven:
                         case R.id.tool_air:
                             mCheckBoxToolAll.setChecked(false);
+                            mCheckBoxToolFire.setChecked(false);
+                            mCheckBoxToolMicrowave.setChecked(false);
+                            mCheckBoxToolOven.setChecked(false);
+                            mCheckBoxToolAir.setChecked(false);
+                            buttonView.setChecked(true);
                             break;
                         case R.id.time_all:
-                            mCheckBoxTimeUntil30m.setChecked(false);
-                            mCheckBoxTimeUntil1h.setChecked(false);
-                            mCheckBoxTimeUntil2h.setChecked(false);
-                            mCheckBoxTimeOver2h.setChecked(false);
-                            break;
                         case R.id.time_until_30m:
                         case R.id.time_until_1h:
                         case R.id.time_until_2h:
                         case R.id.time_over_2h:
                             mCheckBoxTimeAll.setChecked(false);
+                            mCheckBoxTimeUntil30m.setChecked(false);
+                            mCheckBoxTimeUntil1h.setChecked(false);
+                            mCheckBoxTimeUntil2h.setChecked(false);
+                            mCheckBoxTimeOver2h.setChecked(false);
+                            buttonView.setChecked(true);
                             break;
                     }
                 }

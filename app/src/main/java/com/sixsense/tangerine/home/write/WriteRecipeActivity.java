@@ -175,7 +175,7 @@ public class WriteRecipeActivity extends AppCompatActivity {
                         state = new InsertCall().execute(selectedRecipe).get();
                         if (state.equals("success")) {
                             onBackPressed();
-                            Toast.makeText(getApplicationContext(),"메인화면에서 아래로 당겨서 새로고침 해주세요.",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),R.string.need_refresh_message,Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(),"등록을 실패했습니다.",Toast.LENGTH_SHORT).show();
                         }

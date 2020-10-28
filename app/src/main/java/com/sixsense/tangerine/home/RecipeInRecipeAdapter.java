@@ -22,7 +22,6 @@ public class RecipeInRecipeAdapter extends RecyclerView.Adapter<RecipeInRecipeAd
     private View mView;
     private List<InRecipe.RecipeContent> mRecipeContentList;
     private String mOriginTime;
-    private CountDownTimer mCountDownTimer;
 
     public RecipeInRecipeAdapter(List<InRecipe.RecipeContent> recipeContentList) {
         this.mRecipeContentList = recipeContentList;
@@ -38,7 +37,7 @@ public class RecipeInRecipeAdapter extends RecyclerView.Adapter<RecipeInRecipeAd
     }
 
     @Override
-    public void onBindViewHolder(final RecipeInRecipeAdapter.RecipeViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecipeViewHolder holder, final int position) {
 
         if (mRecipeContentList.get(position).recipeImg != null && mRecipeContentList.get(position).recipeImg.length() > 0) {
             String baseUrl = HttpClient.BASE_URL + "recipe/imgs/";
@@ -65,7 +64,7 @@ public class RecipeInRecipeAdapter extends RecyclerView.Adapter<RecipeInRecipeAd
             second *= 1000;
             long timeMilli = hour + minute + second;
 
-            mCountDownTimer = new CountDownTimer(timeMilli, 1000) {
+            final CountDownTimer countDownTimer = new CountDownTimer(timeMilli, 1000) {
                 public void onTick(long millisUntilFinished) {
                     long seconds = millisUntilFinished / 1000;
                     String countdown =
@@ -81,14 +80,14 @@ public class RecipeInRecipeAdapter extends RecyclerView.Adapter<RecipeInRecipeAd
             holder.mButtonTime.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mCountDownTimer.start();
+                    countDownTimer.start();
                 }
             });
             holder.mButtonReset.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     holder.mButtonTime.setText(mOriginTime);
-                    mCountDownTimer.cancel();
+                    countDownTimer.cancel();
                 }
             });
         } else {

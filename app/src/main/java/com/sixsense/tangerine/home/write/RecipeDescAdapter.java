@@ -52,6 +52,16 @@ public class RecipeDescAdapter extends RecyclerView.Adapter<RecipeDescAdapter.Vi
         this.context = context;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -59,6 +69,11 @@ public class RecipeDescAdapter extends RecyclerView.Adapter<RecipeDescAdapter.Vi
         ViewHolder evh = new ViewHolder(v, onItemClickListener);
         return evh;
 
+    }
+
+    @Override
+    public void setHasStableIds(boolean hasStableIds) {
+        super.setHasStableIds(true);
     }
 
     @Override
