@@ -1,7 +1,6 @@
 package com.sixsense.tangerine.login;
 
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,9 +24,7 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
-import com.sixsense.tangerine.community.AppConstants;
-import com.sixsense.tangerine.community.GetDataTask;
-import com.sixsense.tangerine.community.InsertDataTask;
+import com.sixsense.tangerine.InsertDataTask;
 import com.sixsense.tangerine.community.item.Member;
 
 public class LoginFragment extends Fragment implements OnTaskCompletedListener {

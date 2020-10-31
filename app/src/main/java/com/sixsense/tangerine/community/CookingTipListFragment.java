@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sixsense.tangerine.AppConstants;
 import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.community.item.CookingTip;
 import com.sixsense.tangerine.network.HttpClient;

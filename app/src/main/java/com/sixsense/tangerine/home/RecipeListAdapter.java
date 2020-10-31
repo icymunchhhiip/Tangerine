@@ -6,7 +6,6 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,17 +16,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.sixsense.tangerine.MainActivity;
 import com.sixsense.tangerine.R;
-import com.sixsense.tangerine.community.AppConstants;
-import com.sixsense.tangerine.community.MarketReadingActivity;
-import com.sixsense.tangerine.main.MainPagerFragmentDirections;
 import com.sixsense.tangerine.network.HttpClient;
 import com.sixsense.tangerine.network.HttpInterface;
 import com.sixsense.tangerine.network.RecipeIntroList;

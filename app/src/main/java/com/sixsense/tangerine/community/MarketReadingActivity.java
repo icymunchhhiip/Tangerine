@@ -15,6 +15,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sixsense.tangerine.AppConstants;
+import com.sixsense.tangerine.DownloadFilesTask;
+import com.sixsense.tangerine.InsertDataTask;
 import com.sixsense.tangerine.OnTaskCompletedListener;
 import com.sixsense.tangerine.R;
 import com.sixsense.tangerine.community.item.Comment;

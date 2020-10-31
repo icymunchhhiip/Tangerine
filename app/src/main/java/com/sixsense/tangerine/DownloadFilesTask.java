@@ -1,4 +1,4 @@
-package com.sixsense.tangerine.setting;
+package com.sixsense.tangerine;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -6,14 +6,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.sixsense.tangerine.AppConstants;
-import com.sixsense.tangerine.OnTaskCompletedListener;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-class DownloadFilesTask extends AsyncTask<String,Void, Bitmap> {
+public class DownloadFilesTask extends AsyncTask<String,Void, Bitmap> {
     private static final String TAG = "DownloadFileTask";
 
     private String serverUrl = "http://ec2-34-203-38-62.compute-1.amazonaws.com/";
@@ -38,7 +35,7 @@ class DownloadFilesTask extends AsyncTask<String,Void, Bitmap> {
                 url = new URL(img_url);
             }
             else if(pathForm == AppConstants.RELATIVE_PATH) {
-                url = new URL(serverUrl + img_url );
+                url = new URL(serverUrl + img_url);
             }
             else{
                 Log.e(TAG,"ERROR get download url");

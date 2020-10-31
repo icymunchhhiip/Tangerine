@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.sixsense.tangerine.AppConstants;
+import com.sixsense.tangerine.HttpClient;
 import com.sixsense.tangerine.OnTaskCompletedListener;
 
 import org.json.JSONException;

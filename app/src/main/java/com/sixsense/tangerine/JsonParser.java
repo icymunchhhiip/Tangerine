@@ -61,7 +61,7 @@ public class JsonParser {
 
             conn.setConnectTimeout(10000);
             conn.setReadTimeout(10000);
-            conn.setRequestMethod(Constant.POST_METHOD);
+            conn.setRequestMethod(AppConstants.POST_METHOD);
             conn.connect();
 
 
@@ -112,7 +112,7 @@ public class JsonParser {
 
             conn.setConnectTimeout(10000);
             conn.setReadTimeout(10000);
-            conn.setRequestMethod(Constant.POST_METHOD);
+            conn.setRequestMethod(AppConstants.POST_METHOD);
             conn.connect();
 
 

@@ -1,7 +1,6 @@
 package com.sixsense.tangerine.ref;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -29,7 +28,7 @@ import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
-import com.sixsense.tangerine.Constant;
+import com.sixsense.tangerine.AppConstants;
 import com.sixsense.tangerine.JsonParser;
 import com.sixsense.tangerine.R;
 
@@ -38,16 +37,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class MyrefridgeratorFragment extends Fragment {
-    private static String IP_ADDRESS = "18.214.88.248";
-    private static String TAG = "sixsense (6)";
 
-    private Context mContext;
+    private static String TAG = "MyrefridgeratorFragment";
+
     private TextView mTextViewResult;
-    private String mJsonString;
     private String strVal;
     private int counter = 1;
 
@@ -102,7 +102,9 @@ public class MyrefridgeratorFragment extends Fragment {
         //고유아이디 불러오기
         UserManagement.getInstance().me(new MeV2ResponseCallback() {
             @Override
-            public void onSessionClosed(ErrorResult errorResult) {}
+            public void onSessionClosed(ErrorResult errorResult) {
+            }
+
             @Override
             public void onSuccess(MeV2Response result) {
                 MeV2Response myAccount = result;
@@ -148,7 +150,7 @@ public class MyrefridgeratorFragment extends Fragment {
                 downbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(counter>1){
+                        if (counter > 1) {
                             counter--;
                             strVal = Integer.toString(counter);
                             remainingEditText.setText(strVal);
@@ -186,10 +188,6 @@ public class MyrefridgeratorFragment extends Fragment {
                                 break;
 
 
-                            case R.id.radioBTroom:
-                                storage = "11";
-                                break;
-
                         }
 
                         if (nameEditText.getText().toString().equals("") || nameEditText.getText().toString() == null) {
@@ -198,7 +196,7 @@ public class MyrefridgeratorFragment extends Fragment {
                             setMessage("보관장소");
                         } else {
                             Myingredient myingredient = new Myingredient(mid, name, date, memo, remaining, storage);
-                            PostRequestHandler postRequestHandler = new PostRequestHandler(Constant.CREATE_INGR_URL, myingredient);   //계속 freezeList를 파라미터로 넣으려고 해서 오류.....
+                            PostRequestHandler postRequestHandler = new PostRequestHandler(AppConstants.CREATE_INGR_URL, myingredient);   //계속 freezeList를 파라미터로 넣으려고 해서 오류.....
                             postRequestHandler.execute();
 
                             dialog.dismiss();
@@ -264,7 +262,7 @@ public class MyrefridgeratorFragment extends Fragment {
 
             JsonParser sh = new JsonParser();
             // Making a request to url and getting response
-            String jsonStr = sh.convertJson(Constant.READ_INGR, USERID);
+            String jsonStr = sh.convertJson(AppConstants.READ_INGR, USERID);
 
             Log.e(TAG, "Response from url: " + jsonStr);
 
@@ -291,24 +289,36 @@ public class MyrefridgeratorFragment extends Fragment {
                         String memo = item.getString(TAG_MEMO);
                         String remaining = item.getString(TAG_REMAINING);
                         String storage = item.getString(TAG_STORAGE);
+                        int int_date;
 
 
                         //데이터를 새로 생성한 Myingredient 클래스의 멤버변수에 입력하고 ArrayList에 추가합니다.
                         Myingredient myingredient = new Myingredient(mid, ingr, date, memo, remaining, storage);
                         myingredient.setF_id(fid);
 
-                        if (storage.equals("01")) {
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+                        Date cdate = new Date();
+                        String currentDate = formatter.format(cdate);
+                        int int_currentDate = Integer.parseInt(currentDate);
 
-                            freezerList.add(myingredient);
+                        if (date != null && date.length() != 0) {
+                            int_date = Integer.parseInt(date);
 
-                        } else if (storage.equals("10")) {
-
-                            fridgeList.add(myingredient);
-
+                            if (int_date < (int_currentDate)) {
+                                roomList.add(myingredient);
+                            } else {
+                                if (storage.equals("01")) {
+                                    freezerList.add(myingredient);
+                                } else if (storage.equals("10") || storage.equals("11")) {
+                                    fridgeList.add(myingredient);
+                                }
+                            }
                         } else {
-
-                            roomList.add(myingredient);
-
+                            if (storage.equals("01")) {
+                                freezerList.add(myingredient);
+                            } else if (storage.equals("10") || storage.equals("11")) {
+                                fridgeList.add(myingredient);
+                            }
                         }
                     }
 
@@ -316,23 +326,12 @@ public class MyrefridgeratorFragment extends Fragment {
                 } catch (final JSONException e) {
 
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Toast.makeText(getContext(),
-//                                    "Json parsing error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-//                        }
-//                    });
+
 
                 }
             } else {
                 Log.e(TAG, "Couldn't get json from server.");
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Toast.makeText(getContext(), "Couldn't get json from server. Check LogCat for possible errors!", Toast.LENGTH_LONG).show();
-//                    }
-//                });
+
             }
 
             return null;

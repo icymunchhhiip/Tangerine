@@ -3,18 +3,8 @@ package com.sixsense.tangerine;
 import java.text.SimpleDateFormat;
 
 public class AppConstants {
-    public static int MARKET_SIG = 0; //장터 게시판
-    public static int BOARD_SIG = 2; //게시판
-
-    //카테고리 바이너리값
-    public static String CATEGORY_1 = "01"; //잡담 01
-    public static String CATEGORY_2 = "10"; //꿀팁 10
-    public static String CATEGORY_3 = "11"; //질문 11
-
-    //게시판 바이너리값
-    public static String MARKET_BINARY = "01";
-    public static String BOARD_BINARY = "10";
-
+    public static int MARKET_SIG = 0; //장터 게시물
+    public static int TIPS_SIG = 1; //꿀팁 게시물
 
     public static int MODE_READ = 10; //읽기
     public static int MODE_WRITE = 11; //새로작성
@@ -38,4 +28,19 @@ public class AppConstants {
 
     public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     public static SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
+
+    private static final String BASE_PATH = "http://ec2-34-203-38-62.compute-1.amazonaws.com/";
+    public static final String CREATE_INGR_URL = BASE_PATH + "fridge/insert_ingr.php";
+    public static final String READ_INGR = BASE_PATH + "fridge/get_ingr.php";
+    public static final String UPDATE_INGR = BASE_PATH + "fridge/update_ingr.php";
+    public static final String DELETE_INGR = BASE_PATH + "fridge/delete_ingr.php";
+
+
+    public static final String READ_MEMBER = BASE_PATH + "profile_edit/get_mem.php";
+    public static final String UPDATE_MEMBER = "profile_edit/update_mem3.php";
+
+
+
+    public static final String GET_METHOD = "GET";
+    public static final String POST_METHOD = "POST";
 }

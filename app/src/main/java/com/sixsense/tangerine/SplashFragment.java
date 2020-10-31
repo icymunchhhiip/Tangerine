@@ -21,7 +21,6 @@ import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
-import com.sixsense.tangerine.community.AppConstants;
 import com.sixsense.tangerine.community.GetDataTask;
 import com.sixsense.tangerine.community.item.Member;
 

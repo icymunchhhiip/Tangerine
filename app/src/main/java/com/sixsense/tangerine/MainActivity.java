@@ -10,12 +10,10 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.kakao.usermgmt.response.MeV2Response;
 import com.sixsense.tangerine.community.CookingTipListFragment;
-import com.sixsense.tangerine.community.InsertDataTask;
 import com.sixsense.tangerine.community.MarketListFragment;
 import com.sixsense.tangerine.community.MarketNoLocationFragment;
 import com.sixsense.tangerine.community.MyCommunityListener;
@@ -82,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements MyCommunityListen
 
         String[] paramNames = {"m_id","m_localstr","m_localcode"};
         String[] values = {String.valueOf(this.member.getId()),localString, String.valueOf(localCode)};
-        com.sixsense.tangerine.community.InsertDataTask insertDataTask = new InsertDataTask(this,paramNames,values);
+        InsertDataTask insertDataTask = new InsertDataTask(this,paramNames,values);
         insertDataTask.execute("community/save_local.php",null,null);
     }
 

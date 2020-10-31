@@ -21,7 +21,7 @@ import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
-import com.sixsense.tangerine.Constant;
+import com.sixsense.tangerine.AppConstants;
 import com.sixsense.tangerine.R;
 
 import java.util.ArrayList;
@@ -174,7 +174,7 @@ public class MyingredientAdapter extends RecyclerView.Adapter<MyingredientAdapte
                                 notifyItemChanged(getAdapterPosition());
 
                                 dialog.dismiss();
-                                PostRequestHandler postRequestHandler = new PostRequestHandler(Constant.UPDATE_INGR, dict);
+                                PostRequestHandler postRequestHandler = new PostRequestHandler(AppConstants.UPDATE_INGR, dict);
                                 postRequestHandler.execute();
                             }
                         });
@@ -197,7 +197,7 @@ public class MyingredientAdapter extends RecyclerView.Adapter<MyingredientAdapte
                         Myingredient dict = new Myingredient(mid, strIngredient, strDate, strMemo, strNum, storage);
                         dict.setF_id(fID);
 
-                        PostRequestHandler postRequestHandler = new PostRequestHandler(Constant.DELETE_INGR, dict);
+                        PostRequestHandler postRequestHandler = new PostRequestHandler(AppConstants.DELETE_INGR, dict);
                         postRequestHandler.execute();
                         break;
 

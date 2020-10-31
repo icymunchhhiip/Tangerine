@@ -22,7 +22,7 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.sixsense.tangerine.AppConstants;
-import com.sixsense.tangerine.Constant;
+import com.sixsense.tangerine.DownloadFilesTask;
 import com.sixsense.tangerine.JsonParser;
 import com.sixsense.tangerine.MainActivity;
 import com.sixsense.tangerine.OnTaskCompletedListener;
@@ -164,7 +164,7 @@ public class MyinfoFragment extends Fragment {
 
             JsonParser sh = new JsonParser();
             // Making a request to url and getting response
-            String jsonStr = sh.convertJson(Constant.READ_MEMBER, USERID);
+            String jsonStr = sh.convertJson(AppConstants.READ_MEMBER, USERID);
 
             Log.e(TAG, "Response from url: " + jsonStr);
 

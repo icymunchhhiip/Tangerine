@@ -26,9 +26,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.loader.content.CursorLoader;
 
 import com.sixsense.tangerine.AppConstants;
-import com.sixsense.tangerine.Constant;
-import com.sixsense.tangerine.InsertDataTask;
+import com.sixsense.tangerine.DownloadFilesTask;
 import com.sixsense.tangerine.OnTaskCompletedListener;
+import com.sixsense.tangerine.InsertDataTask;
 import com.sixsense.tangerine.community.item.Member;
 import com.sixsense.tangerine.R;
 
@@ -127,7 +127,7 @@ public class EditProfileActivity extends AppCompatActivity implements OnTaskComp
         String paramNames[] = {"m_name", "m_id", "img_update"};
         String values[] = {member.getNickname(), String.valueOf(member.getId()), img_update};
         InsertDataTask insertTask = new InsertDataTask(this, paramNames, values);
-        insertTask.execute(Constant.UPDATE_MEMBER, imgPath, imgName);
+        insertTask.execute(AppConstants.UPDATE_MEMBER, imgPath, imgName);
     }
 
     @Override
