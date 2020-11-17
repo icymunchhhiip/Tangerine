@@ -5,33 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        android:layout_marginBottom="20dp"-->
-    <!--        android:orientation="horizontal">-->
-
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/marketTextView"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:gravity="center_horizontal"-->
-    <!--            android:text="장터"-->
-    <!--            android:textSize="22sp" />-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/boardTextView"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:gravity="center_horizontal"-->
-    <!--            android:text="게시판"-->
-    <!--            android:textSize="22sp" />-->
-
-    <!--    </LinearLayout>-->
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/mymarket_toolbar"

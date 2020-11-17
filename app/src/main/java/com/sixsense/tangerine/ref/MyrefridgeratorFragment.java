@@ -182,12 +182,9 @@ public class MyrefridgeratorFragment extends Fragment {
                                 storage = "01";
                                 break;
 
-
                             case R.id.radioBTfridge:
                                 storage = "10";
                                 break;
-
-
                         }
 
                         if (nameEditText.getText().toString().equals("") || nameEditText.getText().toString() == null) {
