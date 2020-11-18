@@ -191,6 +191,12 @@ public class MyrefridgeratorFragment extends Fragment {
                             setMessage("재료이름");
                         } else if (storage == null) {
                             setMessage("보관장소");
+                        } else if (dateEditText.getText().toString().length() != 0 && dateEditText.getText().toString().length() != 8) { //유통기한은 선택사항이지만 입력된 경우에는
+                            //8자리가 아니면 에러메세지
+                            Toast toast = Toast.makeText(getContext(), "유통기한은 8자리의 YYYYMMDD 형태여야 합니다.", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                            toast.show();
+
                         } else {
                             Myingredient myingredient = new Myingredient(mid, name, date, memo, remaining, storage);
                             PostRequestHandler postRequestHandler = new PostRequestHandler(AppConstants.CREATE_INGR_URL, myingredient);   //계속 freezeList를 파라미터로 넣으려고 해서 오류.....
@@ -199,11 +205,9 @@ public class MyrefridgeratorFragment extends Fragment {
                             dialog.dismiss();
                             new Handler().execute(userid); //arraylist를 clear()하니까 성공
 
-
                         }
                     }
                 });
-
 
                 dialog.show();
             }
@@ -217,7 +221,6 @@ public class MyrefridgeratorFragment extends Fragment {
         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         toast.show();
     }
-
 
     //--------------------Async task class to get json by making HTTP call
     private class Handler extends AsyncTask<String, Void, String> {
