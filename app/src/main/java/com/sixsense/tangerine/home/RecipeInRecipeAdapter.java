@@ -21,7 +21,6 @@ import java.util.List;
 public class RecipeInRecipeAdapter extends RecyclerView.Adapter<RecipeInRecipeAdapter.RecipeViewHolder> {
     private View mView;
     private List<InRecipe.RecipeContent> mRecipeContentList;
-    private String mOriginTime;
 
     public RecipeInRecipeAdapter(List<InRecipe.RecipeContent> recipeContentList) {
         this.mRecipeContentList = recipeContentList;
@@ -52,6 +51,7 @@ public class RecipeInRecipeAdapter extends RecyclerView.Adapter<RecipeInRecipeAd
         holder.mTextDetail.setText(mRecipeContentList.get(position).descDetail);
 
         if (mRecipeContentList.get(position).recipeTime != null && mRecipeContentList.get(position).recipeTime.length() > 0) {
+            String mOriginTime = "";
             mOriginTime = holder.mButtonTime.getText().toString();
             holder.mButtonTime.setText(mRecipeContentList.get(position).recipeTime);
 
@@ -64,6 +64,7 @@ public class RecipeInRecipeAdapter extends RecyclerView.Adapter<RecipeInRecipeAd
             second *= 1000;
             long timeMilli = hour + minute + second;
 
+            final String finalOriginTime = mOriginTime;
             final CountDownTimer countDownTimer = new CountDownTimer(timeMilli, 1000) {
                 public void onTick(long millisUntilFinished) {
                     long seconds = millisUntilFinished / 1000;
@@ -73,7 +74,7 @@ public class RecipeInRecipeAdapter extends RecyclerView.Adapter<RecipeInRecipeAd
                 }
 
                 public void onFinish() {
-                    holder.mButtonTime.setText(mOriginTime);
+                    holder.mButtonTime.setText(finalOriginTime);
                 }
             };
 
@@ -86,7 +87,7 @@ public class RecipeInRecipeAdapter extends RecyclerView.Adapter<RecipeInRecipeAd
             holder.mButtonReset.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    holder.mButtonTime.setText(mOriginTime);
+                    holder.mButtonTime.setText(finalOriginTime);
                     countDownTimer.cancel();
                 }
             });
