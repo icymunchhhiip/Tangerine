@@ -22,9 +22,9 @@ public class InsertDataTask extends AsyncTask<String, Void, String> {
     }
 
     @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-        Log.d(TAG, "POST response :" + s);
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+        Log.d(TAG, "POST response :" + result);
     }
 
     @Override

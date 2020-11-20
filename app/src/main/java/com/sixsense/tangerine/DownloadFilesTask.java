@@ -13,7 +13,7 @@ import java.net.URL;
 public class DownloadFilesTask extends AsyncTask<String,Void, Bitmap> {
     private static final String TAG = "DownloadFileTask";
 
-    private String serverUrl = "http://ec2-34-203-38-62.compute-1.amazonaws.com/";
+    private static final String SERVER_URL = "http://ec2-34-203-38-62.compute-1.amazonaws.com/";
     private OnTaskCompletedListener listener;
     private ImageView imageView; //적용할 이미지뷰
     private int pathForm;//절대경로인지 상대경로인지
@@ -35,7 +35,7 @@ public class DownloadFilesTask extends AsyncTask<String,Void, Bitmap> {
                 url = new URL(img_url);
             }
             else if(pathForm == AppConstants.RELATIVE_PATH) {
-                url = new URL(serverUrl + img_url);
+                url = new URL(SERVER_URL + img_url);
             }
             else{
                 Log.e(TAG,"ERROR get download url");

@@ -15,7 +15,7 @@ import java.net.URL;
 public class HttpClient {
     private static final String TAG = "Http connect";
 
-    private static String serverUrl = "http://ec2-34-203-38-62.compute-1.amazonaws.com/";
+    private static final String SERVER_URL = "http://ec2-34-203-38-62.compute-1.amazonaws.com/";
     private HttpURLConnection conn = null;
 
     private final String twoHyphens = "--";
@@ -24,7 +24,7 @@ public class HttpClient {
 
     public String InsertDataRequest(String urlPage, String paramNames[], String params[], String imgPath, String imgName){
         try{
-            URL url = new URL(this.serverUrl +urlPage);
+            URL url = new URL(this.SERVER_URL +urlPage);
 
             conn = (HttpURLConnection) url.openConnection();
 
@@ -116,7 +116,7 @@ public class HttpClient {
 
     public String GetDataRequest(String urlPage, String paramNames[], String params[]) {
         try{
-            URL url = new URL(this.serverUrl +urlPage);
+            URL url = new URL(this.SERVER_URL +urlPage);
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(5000);
             conn.setConnectTimeout(5000);
