@@ -29,7 +29,7 @@ public class AppConstants {
     public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     public static SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
 
-    private static final String BASE_PATH = "http://ec2-34-203-38-62.compute-1.amazonaws.com/";
+    private static final String BASE_PATH = "http://115.85.183.191/";
     public static final String CREATE_INGR_URL = BASE_PATH + "fridge/insert_ingr.php";
     public static final String READ_INGR = BASE_PATH + "fridge/get_ingr.php";
     public static final String UPDATE_INGR = BASE_PATH + "fridge/update_ingr.php";

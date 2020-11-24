@@ -70,7 +70,7 @@ public class CookingTipListFragment extends Fragment {
                 ArrayList<CookingTip> list = call.execute().body();
                 adapter.addItems(list);
             } catch (Exception e) {
-                Log.e("CookingTipFragment", Objects.requireNonNull(e.getMessage()));
+                Log.e("CookingTipListFragment", Objects.requireNonNull(e.getMessage()));
             }
 
             return null;

@@ -15,7 +15,7 @@ import java.net.URL;
 public class HttpClient {
     private static final String TAG = "Http connect";
 
-    private static final String SERVER_URL = "http://ec2-34-203-38-62.compute-1.amazonaws.com/";
+    private static final String SERVER_URL = "http://115.85.183.191/";
     private HttpURLConnection conn = null;
 
     private final String twoHyphens = "--";
