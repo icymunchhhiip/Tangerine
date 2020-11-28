@@ -27,6 +27,7 @@ public interface HttpInterface {
 
     @GET("/recipe/condition.php")
     Call<RecipeIntroList> getRecipeCondition(
+            @Query("m_id") int mId,
             @Query("r_name") String rName,
             @Query("r_kinds") byte rKinds,
             @Query("r_level") byte rLevel,

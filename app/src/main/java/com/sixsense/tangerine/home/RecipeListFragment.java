@@ -203,7 +203,7 @@ public class RecipeListFragment extends Fragment implements SwipeRefreshLayout.O
         protected Void doInBackground(Void... voids) {
             HttpInterface httpInterface = HttpClient.getClient().create(HttpInterface.class);
             int pageSize = 10;
-            Call<RecipeIntroList> call = httpInterface.getRecipeCondition(mRecipeName, mKindByte, mLevelByte, mToolByte, mTimeByte, mPageNo, pageSize);
+            Call<RecipeIntroList> call = httpInterface.getRecipeCondition(MainActivity.sMyId,mRecipeName, mKindByte, mLevelByte, mToolByte, mTimeByte, mPageNo, pageSize);
             try {
                 RecipeIntroList resource = call.execute().body();
                 mRecipeIntroList.addAll(resource.data);
