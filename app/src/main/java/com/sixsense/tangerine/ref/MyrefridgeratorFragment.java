@@ -49,7 +49,7 @@ public class MyrefridgeratorFragment extends Fragment {
 
     private TextView mTextViewResult;
     private String strVal;
-    private int counter = 1;
+    private int counter;
 
     private ArrayList<Myingredient> freezerList;
     private ArrayList<Myingredient> fridgeList;
@@ -138,6 +138,7 @@ public class MyrefridgeratorFragment extends Fragment {
                 final EditText remainingEditText = (EditText) view.findViewById(R.id.remainingEditText);
                 final AlertDialog dialog = builder.create();
 
+                counter = 1;
                 upbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
